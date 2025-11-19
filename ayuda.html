@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ayuda - Clasificador de Movimiento Oscilatorio</title>
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922"
+                    },
+                    fontFamily: {
+                        display: ["Space Grotesk", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24;
+        }
+        /* Animación para el detalle del acordeón */
+        details > summary {
+            list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+        details[open] summary ~ * {
+            animation: sweep .3s ease-in-out;
+        }
+        @keyframes sweep {
+            0%    {opacity: 0; transform: translateY(-10px)}
+            100%  {opacity: 1; transform: translateY(0)}
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-[#343A40] dark:text-white flex flex-col min-h-screen">
+
+    <header class="w-full px-4 sm:px-6 lg:px-8 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm sticky top-0 z-50">
+        <div class="container mx-auto flex items-center justify-between whitespace-nowrap border-b border-gray-200 dark:border-white/10 py-3">
+            
+            <div class="flex items-center gap-4 text-gray-900 dark:text-white z-20">
+                <div class="size-6 text-primary">
+                    <svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M24 45.8096C19.6865 45.8096 15.4698 44.5305 11.8832 42.134C8.29667 39.7376 5.50128 36.3314 3.85056 32.3462C2.19985 28.361 1.76794 23.9758 2.60947 19.7452C3.451 15.5145 5.52816 11.6284 8.57829 8.5783C11.6284 5.52817 15.5145 3.45101 19.7452 2.60948C23.9758 1.76795 28.361 2.19986 32.3462 3.85057C36.3314 5.50129 39.7376 8.29668 42.134 11.8833C44.5305 15.4698 45.8096 19.6865 45.8096 24L24 24L24 45.8096Z" fill="currentColor"></path>
+                    </svg>
+                </div>
+                <h2 class="text-lg font-bold tracking-[-0.015em]"><a href="index.html">Clasificador Oscilatorio</a></h2>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-8">
+                <nav class="flex items-center gap-9">
+                    <a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors" href="index.html">Inicio</a>
+                    <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors" href="clasificador.html">Clasificador</a>
+                    <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors" href="galeria.html">Galería</a>
+                    <a class="text-sm font-bold text-primary dark:text-primary transition-colors" href="ayuda.html" aria-current="page">Ayuda</a>
+                </nav>
+            </div>
+            
+            <button id="menu-toggle" class="md:hidden text-gray-900 dark:text-white z-20">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+        </div>
+        
+        <nav id="mobile-menu" class="hidden md:hidden absolute w-full left-0 bg-background-light dark:bg-background-dark border-b border-gray-200 dark:border-white/10 z-10">
+            <div class="px-4 pb-4 pt-2 space-y-2">
+                <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary" href="index.html">Inicio</a>
+                <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary" href="clasificador.html">Clasificador</a>
+                <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary" href="galeria.html">Galería</a>
+                <a class="block text-sm font-bold text-primary dark:text-primary" href="ayuda.html">Ayuda</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="flex-grow px-4 sm:px-6 lg:px-8 py-12">
+        
+        <div class="max-w-3xl mx-auto text-center mb-16">
+            <h1 class="text-4xl font-bold tracking-tighter mb-4">Centro de Soporte</h1>
+            <p class="text-gray-600 dark:text-gray-300 text-lg">
+                Encuentra consejos para mejorar la precisión de la clasificación y respuestas a las preguntas más comunes sobre el sistema.
+            </p>
+        </div>
+
+        <div class="max-w-6xl mx-auto mb-20">
+            <h2 class="text-2xl font-bold mb-8 text-center sm:text-left border-l-4 border-primary pl-4">Guía para mejores resultados</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl p-6 flex flex-col gap-3">
+                    <div class="size-10 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 flex items-center justify-center mb-2">
+                        <span class="material-symbols-outlined">wb_sunny</span>
+                    </div>
+                    <h3 class="font-bold text-lg">Iluminación Clara</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Asegúrate de que el sistema oscilatorio (péndulo, resorte) esté bien iluminado y sin sombras fuertes que confundan a la IA.</p>
+                </div>
+
+                <div class="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl p-6 flex flex-col gap-3">
+                    <div class="size-10 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-2">
+                        <span class="material-symbols-outlined">crop_free</span>
+                    </div>
+                    <h3 class="font-bold text-lg">Fondo Limpio</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Intenta que el fondo sea de un color sólido (preferiblemente blanco o una pared lisa) para evitar ruido visual en la imagen.</p>
+                </div>
+
+                <div class="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl p-6 flex flex-col gap-3">
+                    <div class="size-10 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 flex items-center justify-center mb-2">
+                        <span class="material-symbols-outlined">center_focus_strong</span>
+                    </div>
+                    <h3 class="font-bold text-lg">Enfoque Central</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Toma la foto centrada en el objeto en movimiento. Evita ángulos extremos o que el objeto se vea muy pequeño.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-2xl font-bold mb-8 text-center sm:text-left border-l-4 border-primary pl-4">Preguntas Frecuentes</h2>
+
+            <div class="space-y-4">
+                <details class="group bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl overflow-hidden">
+                    <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-4 text-gray-900 dark:text-white font-medium hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+                        <span>¿Qué tipos de archivos puedo subir?</span>
+                        <span class="transition group-open:rotate-180">
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </span>
+                    </summary>
+                    <div class="px-4 pb-4 text-gray-600 dark:text-gray-300 text-sm leading-relaxed border-t border-gray-100 dark:border-white/5 pt-4">
+                        El clasificador acepta imágenes en formatos estándar como <strong>.JPG, .JPEG y .PNG</strong>. Recomendamos que el tamaño del archivo no exceda los 5MB para un procesamiento rápido.
+                    </div>
+                </details>
+
+                <details class="group bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl overflow-hidden">
+                    <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-4 text-gray-900 dark:text-white font-medium hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+                        <span>¿Por qué la clasificación es incorrecta?</span>
+                        <span class="transition group-open:rotate-180">
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </span>
+                    </summary>
+                    <div class="px-4 pb-4 text-gray-600 dark:text-gray-300 text-sm leading-relaxed border-t border-gray-100 dark:border-white/5 pt-4">
+                        
+                        La IA puede fallar si la imagen está borrosa, muy oscura, o si hay muchos objetos alrededor que confunden al modelo. Revisa nuestra sección de "Guía para mejores resultados" arriba e intenta subir una foto más clara.
+                    </div>
+                </details>
+
+                <details class="group bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl overflow-hidden">
+                    <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-4 text-gray-900 dark:text-white font-medium hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+                        <span>¿Cuál es la diferencia entre movimiento simple y amortiguado?</span>
+                        <span class="transition group-open:rotate-180">
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </span>
+                    </summary>
+                    <div class="px-4 pb-4 text-gray-600 dark:text-gray-300 text-sm leading-relaxed border-t border-gray-100 dark:border-white/5 pt-4">
+                        
+
+[Image of simple vs damped harmonic motion graphs]
+
+                        El <strong>Movimiento Armónico Simple (M.A.S.)</strong> es ideal y perpetuo (sin fricción), manteniendo su amplitud constante. El <strong>Amortiguado</strong> pierde energía con el tiempo debido a la fricción, haciendo que las oscilaciones se reduzcan hasta detenerse.
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <div class="max-w-3xl mx-auto mt-16 text-center">
+            <div class="p-8 bg-primary/5 rounded-2xl border border-primary/20">
+                <h3 class="text-xl font-bold text-primary mb-2">¿Sigues teniendo problemas?</h3>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mb-6">
+                    Si encuentras un error técnico en la plataforma, contacta al equipo de desarrollo.
+                </p>
+                <a href="mailto:cmoreporte@gmail.com" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors font-medium text-sm">
+                    <span class="material-symbols-outlined text-[20px]">mail</span>
+                    Contactar Soporte
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-background-light dark:bg-background-dark border-t border-gray-200/50 dark:border-white/10">
+        <div class="max-w-6xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500 dark:text-gray-400">
+            © 2025 Sistema de Clasificación Automática de Tipos de Movimiento Oscilatorio Simple y Amortiguado Mediante Reconocimiento de Imágenes con Deep Learning, Como Apoyo al Aprendizaje | Por:
+            <a href="mailto:juanfelipe.arbelaez@utp.edu.co" class="hover:text-primary underline decoration-transparent hover:decoration-primary transition-all">Juan Felipe Arbeláez Osorio</a>
+            y
+            <a href="mailto:angel.burbano@utp.edu.co" class="hover:text-primary underline decoration-transparent hover:decoration-primary transition-all">Ángel Gabriel Burbano Rodríguez</a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuButton = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const icon = menuButton.querySelector('.material-symbols-outlined');
+
+            menuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                if (mobileMenu.classList.contains('hidden')) {
+                    icon.textContent = 'menu';
+                } else {
+                    icon.textContent = 'close';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
