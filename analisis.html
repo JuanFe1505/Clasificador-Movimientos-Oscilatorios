@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Resultado del Análisis de Movimiento</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<header class="w-full px-4 sm:px-6 lg:px-8 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm sticky top-0 z-50">
+<div class="container mx-auto flex items-center justify-between whitespace-nowrap border-b border-gray-200 dark:border-white/10 py-3">
+<div class="flex items-center gap-4 text-gray-900 dark:text-white">
+<div class="size-6 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M24 45.8096C19.6865 45.8096 15.4698 44.5305 11.8832 42.134C8.29667 39.7376 5.50128 36.3314 3.85056 32.3462C2.19985 28.361 1.76794 23.9758 2.60947 19.7452C3.451 15.5145 5.52816 11.6284 8.57829 8.5783C11.6284 5.52817 15.5145 3.45101 19.7452 2.60948C23.9758 1.76795 28.361 2.19986 32.3462 3.85057C36.3314 5.50129 39.7376 8.29668 42.134 11.8833C44.5305 15.4698 45.8096 19.6865 45.8096 24L24 24L24 45.8096Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-lg font-bold tracking-[-0.015em]"><a href="index.html">Clasificador Oscilatorio</a></h2>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<nav class="flex items-center gap-9">
+<a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors" href="index.html">Inicio</a>
+<a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors" href="ayuda.html">Ayuda</a>
+</nav>
+</div>
+<button class="md:hidden text-gray-900 dark:text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</header>
+<main class="flex-1 w-full max-w-7xl mx-auto px-6 lg:px-8 py-10">
+<!-- PageHeading -->
+<div class="mb-8">
+<div class="flex flex-wrap justify-between gap-3">
+<div class="flex min-w-72 flex-col gap-2">
+<p class="text-slate-900 dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]">Resultado del Análisis</p>
+<p class="text-slate-500 dark:text-[#92adc9] text-base font-normal leading-normal">La IA ha clasificado el movimiento detectado en el video proporcionado.</p>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<!-- Left Column: Video and Data -->
+<div class="flex flex-col gap-8">
+<!-- MediaPlayer -->
+<div class="relative flex items-center justify-center bg-black bg-cover bg-center aspect-video rounded-xl shadow-lg" data-alt="Video of a pendulum swinging back and forth" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCjPI_RmWcVp4ezN6xrf7zLtDZvWi3Civ7HqPaBDu7XLv6f6NtGU7W4u1PXbJJPa5ScPMKi2hjfUC9qVgmtiS0tgPj6jisynveoxs5TuML7ruvcFwtBpSVYLri0-G4scAPeju6lshzNmW7zX6_vWFMrwqV_-2SRlcd7f_CxInOI8hx8_6Bbzbrg9g3LzTEd0RZzEMMG8iR2qQmgik1IKlv2aUhlpUqtg4S1ytgVwUQ9_EKPkuGRlxtMFrvh76fuU5QxEdLVHZAfBR05");'>
+<button class="flex shrink-0 items-center justify-center rounded-full size-16 bg-black/50 text-white hover:bg-black/70 transition-colors">
+<span class="material-symbols-outlined !text-4xl">play_arrow</span>
+</button>
+<div class="absolute inset-x-0 bottom-0 px-4 py-3 bg-gradient-to-t from-black/50 to-transparent">
+<div class="flex h-4 items-center justify-center">
+<div class="h-1 flex-1 rounded-full bg-white/80"></div>
+<div class="relative"><div class="absolute -left-2 -top-2 size-4 rounded-full bg-white ring-2 ring-black/20"></div></div>
+<div class="h-1 flex-1 rounded-full bg-white/40"></div>
+</div>
+<div class="flex items-center justify-between mt-1">
+<p class="text-white text-xs font-medium leading-normal tracking-[0.015em]">0:37</p>
+<p class="text-white text-xs font-medium leading-normal tracking-[0.015em]">2:23</p>
+</div>
+</div>
+</div>
+<!-- Data Visualization -->
+<div class="bg-white dark:bg-[#192633] rounded-xl p-6 shadow-lg">
+<h3 class="text-slate-900 dark:text-white text-xl font-bold mb-4">Métricas Clave</h3>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+<div class="bg-slate-100 dark:bg-background-dark p-4 rounded-lg">
+<p class="text-sm text-slate-500 dark:text-slate-400">Amplitud vs. Tiempo</p>
+<div class="mt-2 h-24 flex items-end justify-start bg-slate-200 dark:bg-slate-700/50 rounded p-2">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 100 50">
+<path d="M 0 25 C 10 0, 20 50, 30 25 S 50 0, 60 25 S 80 50, 90 25 C 95 12.5, 98 37.5, 100 25" fill="none" stroke="#ffc107" stroke-dasharray="1000" stroke-dashoffset="1000" stroke-width="2">
+<animate attributename="stroke-dashoffset" dur="2s" fill="freeze" from="1000" to="0"></animate>
+</path>
+</svg>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-slate-100 dark:bg-background-dark p-4 rounded-lg flex flex-col justify-center text-center">
+<p class="text-sm text-slate-500 dark:text-slate-400">Período (T)</p>
+<p class="text-2xl font-bold text-slate-900 dark:text-white mt-1">2.01s</p>
+</div>
+<div class="bg-slate-100 dark:bg-background-dark p-4 rounded-lg flex flex-col justify-center text-center">
+<p class="text-sm text-slate-500 dark:text-slate-400">Frecuencia (f)</p>
+<p class="text-2xl font-bold text-slate-900 dark:text-white mt-1">0.50Hz</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Results and Explanation -->
+<div class="flex flex-col gap-6">
+<!-- Result Card -->
+<div class="flex flex-col items-stretch justify-start rounded-xl shadow-lg bg-white dark:bg-[#192633] p-6">
+<div class="flex items-center gap-4 mb-4">
+<div class="flex items-center justify-center size-12 rounded-full bg-[#FFC107]/20 text-[#FFC107]">
+<span class="material-symbols-outlined !text-3xl">show_chart</span>
+</div>
+<div>
+<p class="text-slate-500 dark:text-[#92adc9] text-sm font-normal leading-normal">Tipo de Movimiento Detectado:</p>
+<p class="text-slate-900 dark:text-white text-2xl font-bold leading-tight tracking-[-0.015em]">Movimiento Oscilatorio Amortiguado</p>
+</div>
+</div>
+<p class="text-slate-600 dark:text-slate-300 text-base font-normal leading-normal">
+                           Se ha detectado una disminución progresiva en la amplitud del movimiento, lo que indica disipación de energía, característico de un sistema amortiguado.
+                        </p>
+</div>
+<!-- Explanation Section -->
+<div class="bg-white dark:bg-[#192633] rounded-xl p-6 shadow-lg">
+<h2 class="text-slate-900 dark:text-white text-xl font-bold mb-4">¿Por qué esta clasificación?</h2>
+<ul class="space-y-5">
+<li class="flex items-start gap-4">
+<div class="flex-shrink-0 size-6 text-[#FFC107] mt-1">
+<span class="material-symbols-outlined">trending_down</span>
+</div>
+<div>
+<h4 class="font-bold text-slate-800 dark:text-slate-100">Amplitud Decreciente</h4>
+<p class="text-slate-600 dark:text-slate-300 text-sm mt-1">La distancia máxima desde el punto de equilibrio disminuye en cada oscilación. Esto es causado por fuerzas disipativas como la fricción del aire.</p>
+</div>
+</li>
+<li class="flex items-start gap-4">
+<div class="flex-shrink-0 size-6 text-primary mt-1">
+<span class="material-symbols-outlined">timer</span>
+</div>
+<div>
+<h4 class="font-bold text-slate-800 dark:text-slate-100">Periodicidad Constante</h4>
+<p class="text-slate-600 dark:text-slate-300 text-sm mt-1">A pesar de la disminución de la amplitud, el tiempo que tarda en completar una oscilación (período) se mantiene relativamente constante.</p>
+</div>
+</li>
+<li class="flex items-start gap-4">
+<div class="flex-shrink-0 size-6 text-red-500 mt-1">
+<span class="material-symbols-outlined">battery_alert</span>
+</div>
+<div>
+<h4 class="font-bold text-slate-800 dark:text-slate-100">Disipación de Energía</h4>
+<p class="text-slate-600 dark:text-slate-300 text-sm mt-1">El sistema pierde energía mecánica con el tiempo, convirtiéndola en calor. Por eso el movimiento eventualmente se detiene.</p>
+</div>
+</li>
+</ul>
+</div>
+<div class="mt-4 flex flex-col sm:flex-row gap-4">
+<button class="flex-1 flex min-w-[84px] cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg h-12 px-6 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors">
+<span class="material-symbols-outlined">replay</span>
+<span class="truncate">Analizar de Nuevo</span>
+</button>
+<a class="flex-1 flex min-w-[84px] cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg h-12 px-6 bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-200 text-base font-bold leading-normal tracking-[0.015em] hover:bg-slate-300 dark:hover:bg-slate-600 transition-colors" href="#">
+<span class="truncate">Reportar Clasificación</span>
+<span class="material-symbols-outlined">flag</span>
+</a>
+</div>
+</div>
+</div>
+</main>
+</div>
+
+<!-- Footer -->
+    <footer class="bg-background-light dark:bg-background-dark border-t border-gray-200/50 dark:border-white/10">
+        <div class="max-w-6xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500 dark:text-gray-400">
+            © 2025 Sistema de Clasificación Automática de Tipos de Movimiento Oscilatorio Simple y Amortiguado Mediante Reconocimiento de Imágenes con Deep Learning, Como Apoyo al Aprendizaje | Por:
+<a href="mailto:juanfelipe.arbelaez@utp.edu.co">Juan Felipe Arbeláez Osorio</a>
+y
+<a href="mailto:angel.burbano@utp.edu.co">Ángel Gabriel Burbano Rodríguez</a>
+        </div>
+    </footer>
+
+</body></html>

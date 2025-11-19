@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Oscillation Classifier - Examples Gallery</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+          font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24
+        }
+    </style>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#1380ec",
+              "background-light": "#f6f7f8",
+              "background-dark": "#111a22",
+              "container-light": "#ffffff",
+              "container-dark": "#182534",
+              "border-light": "#e5e7eb",
+              "border-dark": "#233648",
+              "text-primary-light": "#1f2937",
+              "text-primary-dark": "#ffffff",
+              "text-secondary-light": "#6b7280",
+              "text-secondary-dark": "#92adc9",
+            },
+            fontFamily: {
+              "display": ["Space Grotesk", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-text-primary-light dark:text-text-primary-dark">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<div class="flex h-full grow flex-col">
+<!-- Top Navigation Bar -->
+<header class="w-full px-4 sm:px-6 lg:px-8 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm sticky top-0 z-50">
+<div class="container mx-auto flex items-center justify-between whitespace-nowrap border-b border-gray-200 dark:border-white/10 py-3">
+<div class="flex items-center gap-4 text-gray-900 dark:text-white">
+<div class="size-6 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M24 45.8096C19.6865 45.8096 15.4698 44.5305 11.8832 42.134C8.29667 39.7376 5.50128 36.3314 3.85056 32.3462C2.19985 28.361 1.76794 23.9758 2.60947 19.7452C3.451 15.5145 5.52816 11.6284 8.57829 8.5783C11.6284 5.52817 15.5145 3.45101 19.7452 2.60948C23.9758 1.76795 28.361 2.19986 32.3462 3.85057C36.3314 5.50129 39.7376 8.29668 42.134 11.8833C44.5305 15.4698 45.8096 19.6865 45.8096 24L24 24L24 45.8096Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-lg font-bold tracking-[-0.015em]"><a href="index.html">Clasificador Oscilatorio</a></h2>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<nav class="flex items-center gap-9">
+<a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors" href="index.html">Inicio</a>
+<a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors" href="ayuda.html">Ayuda</a>
+</nav>
+</div>
+<button class="md:hidden text-gray-900 dark:text-white">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</header>
+<main class="flex flex-1 justify-center py-5 sm:py-8 lg:py-12">
+<div class="flex w-full max-w-7xl flex-col px-4 sm:px-6 lg:px-8">
+<!-- PageHeading -->
+<div class="flex flex-wrap justify-between gap-4 py-4">
+<div class="flex min-w-72 flex-col gap-3">
+<h1 class="text-4xl font-black leading-tight tracking-[-0.033em] sm:text-5xl">Galería de Ejemplos de Movimiento Oscilatorio</h1>
+<p class="text-base font-normal leading-normal text-text-secondary-light dark:text-text-secondary-dark">Explora videos y animaciones de movimientos preclasificados para entender sus diferencias.</p>
+</div>
+</div>
+<!-- Chips / Filters -->
+<div class="flex flex-wrap gap-3 py-4 border-y border-border-light dark:border-border-dark">
+<button class="flex h-9 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-full bg-primary pl-4 pr-4">
+<p class="text-sm font-medium leading-normal text-white">Todos</p>
+</button>
+<button class="flex h-9 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-full bg-container-light dark:bg-container-dark border border-border-light dark:border-border-dark pl-4 pr-4 hover:bg-primary/10 dark:hover:bg-primary/10 transition-colors">
+<p class="text-sm font-medium leading-normal">Movimiento Armónico Simple</p>
+</button>
+<button class="flex h-9 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-full bg-container-light dark:bg-container-dark border border-border-light dark:border-border-dark pl-4 pr-4 hover:bg-primary/10 dark:hover:bg-primary/10 transition-colors">
+<p class="text-sm font-medium leading-normal">Subamortiguado</p>
+</button>
+<button class="flex h-9 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-full bg-container-light dark:bg-container-dark border border-border-light dark:border-border-dark pl-4 pr-4 hover:bg-primary/10 dark:hover:bg-primary/10 transition-colors">
+<p class="text-sm font-medium leading-normal">Críticamente Amortiguado</p>
+</button>
+<button class="flex h-9 shrink-0 cursor-pointer items-center justify-center gap-x-2 rounded-full bg-container-light dark:bg-container-dark border border-border-light dark:border-border-dark pl-4 pr-4 hover:bg-primary/10 dark:hover:bg-primary/10 transition-colors">
+<p class="text-sm font-medium leading-normal">Sobreamortiguado</p>
+</button>
+</div>
+<!-- ImageGrid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 py-8">
+<div class="flex flex-col gap-3 rounded-lg bg-container-light dark:bg-container-dark p-3 border border-border-light dark:border-border-dark transition-all hover:shadow-lg hover:-translate-y-1">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg" data-alt="Animation of a frictionless pendulum" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDUXj4jTO0Ma6UClIx3RV4jWr1YgbxF734zr3JqZxbwh1KS1eOdbYNU4mB84ob66dJdvWxGk-Lx7U_4iPWewGD-CN1xMG0ccTnFlkzpN_Qx68fIiLkRZZiIS10efrQeLusnBEW_4X0E2-ZYIPq2LA5GNOZldFkcg-9AsHVMyS5ubbA-VSEkmZmVLlB7zftTYbUr7SaxcfPUK45SNKUeTW3JbuirlRafmwx3WWh8lVEcIImItearoajPn1B7hAUeebYCdmNVFgS0g32y');"></div>
+<div class="flex flex-col p-1">
+<span class="text-xs font-bold uppercase tracking-wider text-green-500">Movimiento Armónico Simple</span>
+<p class="text-base font-bold leading-normal mt-1">Péndulo Ideal</p>
+</div>
+</div>
+<div class="flex flex-col gap-3 rounded-lg bg-container-light dark:bg-container-dark p-3 border border-border-light dark:border-border-dark transition-all hover:shadow-lg hover:-translate-y-1">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg" data-alt="Animation of a mass-spring system with friction" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCcgYgqqOGjcbklVB_CcXBS66lS8R1dX0Qzyn-ZkLzoeV0AOyZxitl9ikTnZZXnN06UHByYpcgPxOVcVF5mNmx5tH5VlWqWrUProLpbLwweA2W5FhUjpwMS8_sz72k9lFsZE-bhUaV2CuCiVyGOajmiur_gGkTLm4N_ejMRPQDM8QcNZ4cgWJ7RUfy41e6CoKi3gUQ1fjewW0PofazvISZVc-3PUT3RmvzUNe3MB4eCrkCdP2s3In5tF132yQ0r2g0UwgkYsDx2GbIX');"></div>
+<div class="flex flex-col p-1">
+<span class="text-xs font-bold uppercase tracking-wider text-yellow-500">Movimiento Subamortiguado</span>
+<p class="text-base font-bold leading-normal mt-1">Sistema Masa-Resorte con Fricción</p>
+</div>
+</div>
+<div class="flex flex-col gap-3 rounded-lg bg-container-light dark:bg-container-dark p-3 border border-border-light dark:border-border-dark transition-all hover:shadow-lg hover:-translate-y-1">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg" data-alt="Video of a playground swing slowing down" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCVhOfAsqxtNr8fCM_2P0kuScZFZivwkfdTYFNdtqbyJ6WHxmVcvmUwblmwqrlqnu2YI8dwQ9Tn95LDBV33jzpI1k5d0UU817PRXVOU0EuyGPq8k1IIzs_dVr2fLMD_aAB6nq4lnCAet3GF-0I_IfAVYEnTeHRa7w2Z2q8oFm5M1LcL4v0O6d2bKcuV1z0HdWllhWXzqej0P3B4FYaA97R2G4ktGlrmI4snXmJtOQQtvVlaKmF0MxxIy_qHX6NIPmCtXSFt9_4UxOg7');"></div>
+<div class="flex flex-col p-1">
+<span class="text-xs font-bold uppercase tracking-wider text-yellow-500">Movimiento Subamortiguado</span>
+<p class="text-base font-bold leading-normal mt-1">Columpio en Movimiento</p>
+</div>
+</div>
+<div class="flex flex-col gap-3 rounded-lg bg-container-light dark:bg-container-dark p-3 border border-border-light dark:border-border-dark transition-all hover:shadow-lg hover:-translate-y-1">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg" data-alt="Animation of a car shock absorber" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBOOno2G_N_ZVnejAT5OwJ-7XBsULPQg1Pi1HrzsDyAM7vclbIq1vhURIYaDi7xz6bImqLXIMzcREBAiERJqbhARGhksuok8Agor52tTvRUq8CkaWgZx_RMW_I7Va6agvLO9E9G4RcS_heHquopGWYWxB8P4W84ZjwyYEE678HBpOfDlax7q0glF1aW3MRs8XgUD2s6u0mB946EHu2tKqWsh547TrrkyOySxLjsiQMcIDCnHFi5Mf8GB2TmAOhQAZat1TMhEwSZxg5U');"></div>
+<div class="flex flex-col p-1">
+<span class="text-xs font-bold uppercase tracking-wider text-orange-500">Movimiento Críticamente Amortiguado</span>
+<p class="text-base font-bold leading-normal mt-1">Amortiguador de Coche</p>
+</div>
+</div>
+<div class="flex flex-col gap-3 rounded-lg bg-container-light dark:bg-container-dark p-3 border border-border-light dark:border-border-dark transition-all hover:shadow-lg hover:-translate-y-1">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg" data-alt="Video of a self-closing door" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD1vuNRbBLQQ4FKt72vB6SxzDnLOhl17eLrNsDp4m8auiaSqChYXKpPvNC7h1-f_9kDxDHtDxhhK9aMV0Lbm2QHaiXTaXRmkoEDJR1rPa9yBgoqBgf7s_RWkZ6S2vQpToSiOH5Cs5goTIAtmzNSsh8loOKGW12joVvqL6ayoRMzukiPUKUwlbnEp-1Ptzso1JqdOz5s_4vGzgDcF-m1ITSE9yqAd7dNLSZyF3N5UIAwHjmfSXN3iYmajruOCyAvM8OhO9yPoRyjDh4p');"></div>
+<div class="flex flex-col p-1">
+<span class="text-xs font-bold uppercase tracking-wider text-red-500">Movimiento Sobreamortiguado</span>
+<p class="text-base font-bold leading-normal mt-1">Puerta con Cierre Automático</p>
+</div>
+</div>
+<div class="flex flex-col gap-3 rounded-lg bg-container-light dark:bg-container-dark p-3 border border-border-light dark:border-border-dark transition-all hover:shadow-lg hover:-translate-y-1">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg" data-alt="Animation of a pendulum in a viscous fluid like oil" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBhjddpT-QkTPBC7xqi8Cmg3EkKuap5PRxUtkJ9zGdSCgHE8kICntkQfCd6IL7cfaBkgomquT222MZh881FIp7_PsI9Dl1hRY2uNXGixn6IkflxKmskZa42K0efEpYdDbIfUa5aASZuFio-BKkTGEVeGfLuuVdc8Qa2gJTl-AlbEUn5OWcNB5B343YARxwLZODuvlwZQm9aTLsEtfArOgcTVtBcOwPL0NqHtpXue2xHMjuF94TEyVWQgHxFM53Gp4nbJweTj7Ks-0D3');"></div>
+<div class="flex flex-col p-1">
+<span class="text-xs font-bold uppercase tracking-wider text-red-500">Movimiento Sobreamortiguado</span>
+<p class="text-base font-bold leading-normal mt-1">Péndulo en Aceite</p>
+</div>
+</div>
+<div class="flex flex-col gap-3 rounded-lg bg-container-light dark:bg-container-dark p-3 border border-border-light dark:border-border-dark transition-all hover:shadow-lg hover:-translate-y-1">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg" data-alt="Metronome swinging back and forth" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCODu03GcViepNoyOMw3ZT31s4O8papqi67zxNj9FLYbyBwulN0AMjpzK8UBZ8u1L6g97Sy1QLkVtIXJ2FdJWqaciWGzxrGDAfBQ_iEtO1fMYi1aeX9JgQyXjg6Q-ZPeLEDLn7vBhwUL3K53-dcO477rraCyp4KL4z38U1LD5xxqZrPu5gtWCfQep8QdRyTtKB94wbBdcPli2vaPjgcPHt4XWMIwLUquHvuo5uFxSnW_u2onddao6eo8Wr9HWUraF_VjQ22JYSEtD6Y');"></div>
+<div class="flex flex-col p-1">
+<span class="text-xs font-bold uppercase tracking-wider text-green-500">Movimiento Armónico Simple</span>
+<p class="text-base font-bold leading-normal mt-1">Metrónomo</p>
+</div>
+</div>
+<div class="flex flex-col gap-3 rounded-lg bg-container-light dark:bg-container-dark p-3 border border-border-light dark:border-border-dark transition-all hover:shadow-lg hover:-translate-y-1">
+<div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg" data-alt="Bungee jumper bouncing" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB53__QQOfCX9R3D1Xdk3B2rzEShrp1YaIDWh4vBRk6Yok5bddozdkSx4J4njgEpZTOtpOh2rIBTUXcO2H8h1ZegoQn3B-sHt8smLyAGuPE_sqYtbc3ve8WWP4xLLWeUew8H0R0lCdGlFuiEruiUW6ErZY8RkzWna4Gi34usaNdOVcTqNtoSLYD3-SnuGg1oyz6W05wCpejnR2laokJRyYsWJYCuSQ6p9x4gObvnUtT9canzxvJkmguS8P_48fLuDLjfZ0j4IIWa4ce');"></div>
+<div class="flex flex-col p-1">
+<span class="text-xs font-bold uppercase tracking-wider text-yellow-500">Movimiento Subamortiguado</span>
+<p class="text-base font-bold leading-normal mt-1">Salto en Bungee</p>
+</div>
+</div>
+</div>
+<!-- Pagination -->
+<div class="flex items-center justify-center p-4">
+<a class="flex size-10 items-center justify-center rounded-full hover:bg-container-light dark:hover:bg-container-dark" href="#">
+<span class="material-symbols-outlined !text-xl">chevron_left</span>
+</a>
+<a class="flex size-10 items-center justify-center rounded-full text-sm font-bold tracking-[0.015em] text-white bg-primary" href="#">1</a>
+<a class="flex size-10 items-center justify-center rounded-full text-sm font-normal hover:bg-container-light dark:hover:bg-container-dark" href="#">2</a>
+<a class="flex size-10 items-center justify-center rounded-full text-sm font-normal hover:bg-container-light dark:hover:bg-container-dark" href="#">3</a>
+<span class="flex size-10 items-center justify-center rounded-full text-sm font-normal">...</span>
+<a class="flex size-10 items-center justify-center rounded-full hover:bg-container-light dark:hover:bg-container-dark" href="#">
+<span class="material-symbols-outlined !text-xl">chevron_right</span>
+</a>
+</div>
+</div>
+</main>
+</div>
+</div>
+
+<!-- Footer -->
+    <footer class="bg-background-light dark:bg-background-dark border-t border-gray-200/50 dark:border-white/10">
+        <div class="max-w-6xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500 dark:text-gray-400">
+            © 2025 Sistema de Clasificación Automática de Tipos de Movimiento Oscilatorio Simple y Amortiguado Mediante Reconocimiento de Imágenes con Deep Learning, Como Apoyo al Aprendizaje | Por:
+<a href="mailto:juanfelipe.arbelaez@utp.edu.co">Juan Felipe Arbeláez Osorio</a>
+y
+<a href="mailto:angel.burbano@utp.edu.co">Ángel Gabriel Burbano Rodríguez</a>
+        </div>
+    </footer>
+
+</body></html>
