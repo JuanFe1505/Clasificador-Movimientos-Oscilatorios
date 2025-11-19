@@ -1,126 +1,126 @@
 <!DOCTYPE html>
+<html class="dark" lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Clasificador de Movimientos Oscilatorios</title>
+    
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
 
-<html class="dark" lang="es"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Clasificador de Movimientos Oscilatorios</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              "primary": "#137fec",
-              "background-light": "#f6f7f8",
-              "background-dark": "#101922",
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
             },
-            fontFamily: {
-              "display": ["Space Grotesk", "sans-serif"]
-            },
-            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
-          },
-        },
-      }
+        }
     </script>
 </head>
 <body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-200">
-<div class="relative flex min-h-screen w-full flex-col">
-<!-- Top Navigation Bar -->
-<header class="w-full px-4 sm:px-6 lg:px-8 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm sticky top-0 z-50">
-    <div class="container mx-auto flex items-center justify-between whitespace-nowrap border-b border-gray-200 dark:border-white/10 py-3">
-        
-        <div class="flex items-center gap-4 text-gray-900 dark:text-white z-20">
-            <div class="size-6 text-primary">
-                <svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M24 45.8096C19.6865 45.8096 15.4698 44.5305 11.8832 42.134C8.29667 39.7376 5.50128 36.3314 3.85056 32.3462C2.19985 28.361 1.76794 23.9758 2.60947 19.7452C3.451 15.5145 5.52816 11.6284 8.57829 8.5783C11.6284 5.52817 15.5145 3.45101 19.7452 2.60948C23.9758 1.76795 28.361 2.19986 32.3462 3.85057C36.3314 5.50129 39.7376 8.29668 42.134 11.8833C44.5305 15.4698 45.8096 19.6865 45.8096 24L24 24L24 45.8096Z" fill="currentColor"></path>
-                </svg>
+    <div class="relative flex min-h-screen w-full flex-col">
+        <header class="w-full px-4 sm:px-6 lg:px-8 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm sticky top-0 z-50">
+            <div class="container mx-auto flex items-center justify-between whitespace-nowrap border-b border-gray-200 dark:border-white/10 py-3">
+                
+                <div class="flex items-center gap-4 text-gray-900 dark:text-white z-20">
+                    <div class="size-6 text-primary">
+                        <svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M24 45.8096C19.6865 45.8096 15.4698 44.5305 11.8832 42.134C8.29667 39.7376 5.50128 36.3314 3.85056 32.3462C2.19985 28.361 1.76794 23.9758 2.60947 19.7452C3.451 15.5145 5.52816 11.6284 8.57829 8.5783C11.6284 5.52817 15.5145 3.45101 19.7452 2.60948C23.9758 1.76795 28.361 2.19986 32.3462 3.85057C36.3314 5.50129 39.7376 8.29668 42.134 11.8833C44.5305 15.4698 45.8096 19.6865 45.8096 24L24 24L24 45.8096Z" fill="currentColor"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-lg font-bold tracking-[-0.015em]"><a href="index.html">Clasificador Oscilatorio</a></h2>
+                </div>
+                
+                <div class="hidden md:flex items-center gap-8">
+                    <nav class="flex items-center gap-9">
+                        <a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors" href="index.html">Inicio</a>
+                        <a class="text-sm font-bold text-primary dark:text-primary transition-colors" href="clasificador.html" aria-current="page">Clasificador</a>
+                        <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors" href="galeria.html">Galería</a>
+                        <a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors" href="ayuda.html">Ayuda</a>
+                    </nav>
+                </div>
+                
+                <button id="menu-toggle" class="md:hidden text-gray-900 dark:text-white z-20">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
             </div>
-            <h2 class="text-lg font-bold tracking-[-0.015em]"><a href="index.html">Clasificador Oscilatorio</a></h2>
-        </div>
-        
-        <div class="hidden md:flex items-center gap-8">
-            <nav class="flex items-center gap-9">
-                <a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors" href="index.html">Inicio</a>
-                <a class="text-sm font-bold text-primary dark:text-primary transition-colors" href="clasificador.html" aria-current="page">Clasificador</a>
-                <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors" href="galeria.html">Galería</a>
-                <a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors" href="ayuda.html">Ayuda</a>
+            
+            <nav id="mobile-menu" class="hidden md:hidden absolute w-full left-0 bg-background-light dark:bg-background-dark border-b border-gray-200 dark:border-white/10 z-10">
+                <div class="px-4 pb-4 pt-2 space-y-2">
+                    <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors" href="index.html">Inicio</a>
+                    <a class="text-sm font-bold text-primary dark:text-primary transition-colors" href="clasificador.html" aria-current="page">Clasificador</a>
+                    <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors" href="galeria.html">Galería</a>
+                    <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors" href="ayuda.html">Ayuda</a>
+                </div>
             </nav>
-        </div>
+        </header>
         
-        <button id="menu-toggle" class="md:hidden text-gray-900 dark:text-white z-20">
-            <span class="material-symbols-outlined">menu</span>
-        </button>
+        <main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-20">
+            <div class="max-w-3xl mx-auto flex flex-col gap-10">
+                <div class="flex flex-wrap justify-between gap-3 text-center">
+                    <div class="flex w-full flex-col gap-3">
+                        <h1 class="text-gray-900 dark:text-white text-4xl sm:text-5xl font-black tracking-[-0.033em]">Clasificar Movimiento Oscilatorio</h1>
+                        <p class="text-gray-500 dark:text-gray-400 text-base sm:text-lg font-normal">Sube tu imagen para análisis.</p>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col">
+                    <div class="flex flex-col items-center gap-6 rounded-xl border-2 border-dashed border-gray-300 dark:border-white/20 px-6 py-14 bg-background-light dark:bg-background-dark/50 transition-colors hover:border-primary dark:hover:border-primary">
+                        <div class="text-primary">
+                            <span class="material-symbols-outlined" style="font-size: 48px;">upload_file</span>
+                        </div>
+                        <div class="flex max-w-[480px] flex-col items-center gap-2">
+                            <p class="text-gray-900 dark:text-white text-lg font-bold tracking-[-0.015em] text-center">Arrastra y suelta tu imagen aquí</p>
+                            <p class="text-gray-500 dark:text-gray-400 text-sm font-normal text-center">Formatos soportados: JPG, PNG, GIF. Tamaño máximo: 50MB.</p>
+                        </div>
+                        <button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-gray-200 dark:bg-white/10 text-gray-900 dark:text-white text-sm font-bold tracking-[0.015em] hover:bg-gray-300 dark:hover:bg-white/20 transition-colors">
+                            <span class="truncate" id="selectFileBtn">Seleccionar Imagen</span>
+                            <input type="file" id="fileInput" accept="image/*" style="display:none;">
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="result-area" style="display:none;">
+                    <div id="image-container" class="mt-8 text-center">
+                        <img id="uploaded-image" style="max-width: 100%; max-height: 400px; margin: 0 auto;" alt="Imagen subida para clasificar">
+                    </div>
+                    <div id="label-container" class="mt-6 p-4 rounded-xl bg-background-light dark:bg-background-dark/50 border border-gray-200 dark:border-white/10 text-center">
+                        Cargando modelo...
+                    </div>
+                    <button id="analyze-button" class="h-12 px-6 rounded-lg bg-primary text-white font-bold hover:bg-primary/90 transition-colors mt-6 w-full" style="display:none;">
+                        Ver Análisis Detallado
+                    </button>
+                </div>
+
+            </div>
+        </main>
+        
+        <footer class="bg-background-light dark:bg-background-dark border-t border-gray-200/50 dark:border-white/10">
+            <div class="max-w-6xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500 dark:text-gray-400">
+                © 2025 Sistema de Clasificación Automática de Tipos de Movimiento Oscilatorio Simple y Amortiguado Mediante Reconocimiento de Imágenes con Deep Learning, Como Apoyo al Aprendizaje | Por:
+                <a href="mailto:juanfelipe.arbelaez@utp.edu.co" class="text-primary hover:text-primary/80 transition-colors">Juan Felipe Arbeláez Osorio</a>
+                y
+                <a href="mailto:angel.burbano@utp.edu.co" class="text-primary hover:text-primary/80 transition-colors">Ángel Gabriel Burbano Rodríguez</a>
+            </div>
+        </footer>
     </div>
     
-    <nav id="mobile-menu" class="hidden md:hidden absolute w-full left-0 bg-background-light dark:bg-background-dark border-b border-gray-200 dark:border-white/10 z-10">
-        <div class="px-4 pb-4 pt-2 space-y-2">
-            <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors" href="index.html">Inicio</a>
-            <a class="text-sm font-bold text-primary dark:text-primary transition-colors" href="clasificador.html" aria-current="page">Clasificador</a>
-            <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors" href="galeria.html">Galería</a>
-            <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors" href="ayuda.html">Ayuda</a>
-        </div>
-    </nav>
-</header>
-<!-- Main Content -->
-<main class="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-20">
-<div class="max-w-3xl mx-auto flex flex-col gap-10">
-<!-- Page Heading -->
-<div class="flex flex-wrap justify-between gap-3 text-center">
-<div class="flex w-full flex-col gap-3">
-<h1 class="text-gray-900 dark:text-white text-4xl sm:text-5xl font-black tracking-[-0.033em]">Analizar Movimiento Oscilatorio</h1>
-<p class="text-gray-500 dark:text-gray-400 text-base sm:text-lg font-normal">Sube tu archivo de imagen o video para su clasificación automática.</p>
-</div>
-</div>
-<!-- Empty State / File Upload Area -->
-<div class="flex flex-col">
-<div class="flex flex-col items-center gap-6 rounded-xl border-2 border-dashed border-gray-300 dark:border-white/20 px-6 py-14 bg-background-light dark:bg-background-dark/50 transition-colors hover:border-primary dark:hover:border-primary">
-<div class="text-primary">
-<span class="material-symbols-outlined" style="font-size: 48px;">upload_file</span>
-</div>
-<div class="flex max-w-[480px] flex-col items-center gap-2">
-<p class="text-gray-900 dark:text-white text-lg font-bold tracking-[-0.015em] text-center">Arrastra y suelta tu imagen o video aquí</p>
-<p class="text-gray-500 dark:text-gray-400 text-sm font-normal text-center">Formatos soportados: JPG, PNG, MP4, GIF. Tamaño máximo: 50MB.</p>
-</div>
-<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-gray-200 dark:bg-white/10 text-gray-900 dark:text-white text-sm font-bold tracking-[0.015em] hover:bg-gray-300 dark:hover:bg-white/20 transition-colors">
-
-<span class="truncate" id="selectFileBtn">Seleccionar Archivo</span>
-<input type="file" id="fileInput" accept="image/*" style="display:none;">
-
-</button>
-</div>
-</div>
-<!-- Progress Bar Example -->
-<div class="flex flex-col gap-6">
-<p class="text-gray-900 dark:text-white text-lg font-bold tracking-[-0.015em]">Ejemplo de Carga:</p>
-<div class="flex flex-col gap-3 p-4 rounded-xl bg-background-light dark:bg-background-dark/50 border border-gray-200 dark:border-white/10">
-<div class="flex gap-6 justify-between">
-<p class="text-gray-900 dark:text-white text-base font-medium">Subiendo archivo...</p>
-<p class="text-gray-900 dark:text-white text-sm font-normal">75%</p>
-</div>
-<div class="w-full rounded-full bg-gray-200 dark:bg-white/10">
-<div class="h-2 rounded-full bg-primary" style="width: 75%;"></div>
-</div>
-<p class="text-gray-500 dark:text-gray-400 text-sm font-normal">video_pendulo.mp4</p>
-</div>
-</div>
-</div>
-</main>
-
-<!-- Footer -->
-    <footer class="bg-background-light dark:bg-background-dark border-t border-gray-200/50 dark:border-white/10">
-        <div class="max-w-6xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500 dark:text-gray-400">
-            © 2025 Sistema de Clasificación Automática de Tipos de Movimiento Oscilatorio Simple y Amortiguado Mediante Reconocimiento de Imágenes con Deep Learning, Como Apoyo al Aprendizaje | Por:
-<a href="mailto:juanfelipe.arbelaez@utp.edu.co">Juan Felipe Arbeláez Osorio</a>
-y
-<a href="mailto:angel.burbano@utp.edu.co">Ángel Gabriel Burbano Rodríguez</a>
-        </div>
-    </footer>
-
-</div>
-<script src ="script.js"></script> 
-</body></html>
+    <script src="script.js"></script> 
+</body>
+</html>
