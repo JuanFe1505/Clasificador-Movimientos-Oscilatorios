@@ -5,27 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Clasificador de Movimiento Oscilatorio con IA</title>
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-
-    <!-- Fuentes -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-    <link rel="icon" type="image/svg+xml" href="img/logo-cmo.svg">
-    
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Clasificador de Movimiento Oscilatorio con IA" />
     <meta property="og:description" content="Herramienta interactiva para analizar movimientos oscilatorios." />
     
     <meta property="og:image" content="https://cmo-utp.vercel.app/img/portada-cmo.png" />
-    
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="1100" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="https://cmo-utp.vercel.app/img/portada-cmo.png" />
+
+    <link rel="icon" type="image/svg+xml" href="img/logo-cmo.svg">
+    <link rel="apple-touch-icon" href="img/portada-cmo.png">
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 
     <script>
         tailwind.config = {
@@ -54,6 +53,10 @@
                 "opsz" 24;
             font-size: 24px;
         }
+        /* Animación suave para el botón flotante */
+        .fab-hover:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
     </style>
 </head>
 
@@ -61,48 +64,46 @@
 
 <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
 
-<!-- Top Navigation Bar -->
-<header class="w-full px-4 sm:px-6 lg:px-8 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm sticky top-0 z-50">
-    <div class="container mx-auto flex items-center justify-between whitespace-nowrap border-b border-gray-200 dark:border-white/10 py-3">
-        
-        <div class="flex items-center gap-4 text-gray-900 dark:text-white z-20">
-            <div class="size-9 text-primary">
-                <a href="index.html">
-                    <img src="img/logo-cmo.svg" 
-                    alt="Logo Clasificador Oscilatorio" 
-                    class="h-full w-auto brightness-200 contrast-125">
-                </a>
+    <header class="w-full px-4 sm:px-6 lg:px-8 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm sticky top-0 z-50">
+        <div class="container mx-auto flex items-center justify-between whitespace-nowrap border-b border-gray-200 dark:border-white/10 py-3">
+            
+            <div class="flex items-center gap-4 text-gray-900 dark:text-white z-20">
+                <div class="size-9 text-primary">
+                    <a href="index.html">
+                        <img src="img/logo-cmo.svg" 
+                             alt="Logo Clasificador Oscilatorio" 
+                             class="h-full w-auto brightness-200 contrast-125 drop-shadow-md">
+                    </a>
+                </div>
+                <h2 class="text-lg font-bold tracking-[-0.015em]">Clasificador Oscilatorio</h2>
             </div>
-            <h2 class="text-lg font-bold tracking-[-0.015em]">Clasificador Oscilatorio</h2>
+            
+            <div class="hidden md:flex items-center gap-8">
+                <nav class="flex items-center gap-9">
+                    <a class="text-sm font-bold text-primary dark:text-primary transition-colors" href="index.html" aria-current="page">Inicio</a>
+                    <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors" href="clasificador.html">Clasificador</a>
+                    <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors" href="galeria.html">Galería</a>
+                    <a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors" href="ayuda.html">Ayuda</a>
+                </nav>
+            </div>
+            
+            <button id="menu-toggle" class="md:hidden text-gray-900 dark:text-white z-20">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
         </div>
         
-        <div class="hidden md:flex items-center gap-8">
-            <nav class="flex items-center gap-9">
+        <nav id="mobile-menu" class="hidden md:hidden absolute w-full left-0 bg-background-light dark:bg-background-dark border-b border-gray-200 dark:border-white/10 z-10">
+            <div class="px-4 pb-4 pt-2 space-y-2">
                 <a class="text-sm font-bold text-primary dark:text-primary transition-colors" href="index.html" aria-current="page">Inicio</a>
                 <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors" href="clasificador.html">Clasificador</a>
                 <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors" href="galeria.html">Galería</a>
-                <a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors" href="ayuda.html">Ayuda</a>
-            </nav>
-        </div>
-        
-        <button id="menu-toggle" class="md:hidden text-gray-900 dark:text-white z-20">
-            <span class="material-symbols-outlined">menu</span>
-        </button>
-    </div>
-    
-    <nav id="mobile-menu" class="hidden md:hidden absolute w-full left-0 bg-background-light dark:bg-background-dark border-b border-gray-200 dark:border-white/10 z-10">
-        <div class="px-4 pb-4 pt-2 space-y-2">
-            <a class="text-sm font-bold text-primary dark:text-primary transition-colors" href="index.html" aria-current="page">Inicio</a>
-            <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors" href="clasificador.html">Clasificador</a>
-            <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors" href="galeria.html">Galería</a>
-            <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors" href="ayuda.html">Ayuda</a>
-        </div>
-    </nav>
-</header>
+                <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors" href="ayuda.html">Ayuda</a>
+            </div>
+        </nav>
+    </header>
 
     <main class="flex-grow">
 
-        <!-- Hero Section -->
         <section class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8">
             <div class="max-w-4xl mx-auto text-center">
                 <div class="flex flex-col items-center gap-6">
@@ -120,7 +121,6 @@
             </div>
         </section>
 
-        <!-- Feature Section -->
         <section class="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 bg-gray-100/50 dark:bg-white/5">
             <div class="max-w-5xl mx-auto">
                 <div class="text-center flex flex-col gap-6">
@@ -134,7 +134,6 @@
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
 
-                    <!-- Card 1 -->
                     <div class="p-6 rounded-xl border border-gray-200 dark:border-white/10 bg-background-light dark:bg-background-dark flex flex-col gap-4">
                         <span class="material-symbols-outlined text-4xl text-primary">timeline</span>
                         <h3 class="text-lg font-bold text-gray-900 dark:text-white">¿Qué es el movimiento oscilatorio?</h3>
@@ -143,7 +142,6 @@
                         </p>
                     </div>
 
-                    <!-- Card 2 -->
                     <div class="p-6 rounded-xl border border-gray-200 dark:border-white/10 bg-background-light dark:bg-background-dark flex flex-col gap-4">
                         <span class="material-symbols-outlined text-4xl text-primary">psychology</span>
                         <h3 class="text-lg font-bold text-gray-900 dark:text-white">¿Cómo funciona la IA?</h3>
@@ -152,7 +150,6 @@
                         </p>
                     </div>
 
-                    <!-- Card 3 -->
                     <div class="p-6 rounded-xl border border-gray-200 dark:border-white/10 bg-background-light dark:bg-background-dark flex flex-col gap-4">
                         <span class="material-symbols-outlined text-4xl text-primary">school</span>
                         <h3 class="text-lg font-bold text-gray-900 dark:text-white">Beneficios Educativos</h3>
@@ -165,20 +162,18 @@
             </div>
         </section>
 
-        <!-- How it Works -->
         <section class="py-20 sm:py-24 px-4 sm:px-6 lg:px-8">
-            <div class="max-w-4xl mx-auto text-center">
+            <div class="max-w-4xl mx-auto text-center mb-16">
                 <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Simple, Rápido y Preciso</h2>
                 <p class="max-w-2xl mx-auto mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300">
                     Entender cómo funciona nuestro clasificador es fácil. Sigue estos pasos.
                 </p>
             </div>
 
-            <div class="mt-16 grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
 
-                <!-- Paso 1 -->
-                <div class="flex flex-col items-center gap-4 z-10">
-                    <div class="size-12 rounded-full bg-primary/20 border-2 border-primary flex items-center justify-center text-primary">
+                <div class="p-6 rounded-xl border border-gray-200 dark:border-white/10 bg-background-light dark:bg-background-dark flex flex-col items-center text-center gap-4 hover:border-primary/50 transition-colors duration-300">
+                    <div class="size-12 rounded-full bg-primary/10 border border-primary flex items-center justify-center text-primary shrink-0">
                         <span class="font-bold text-lg">1</span>
                     </div>
                     <h3 class="font-bold text-gray-900 dark:text-white">Sube una Imagen</h3>
@@ -187,66 +182,61 @@
                     </p>
                 </div>
 
-                <!-- Paso 2 -->
-                <div class="flex flex-col items-center gap-4 z-10">
-                    <div class="size-12 rounded-full bg-primary/20 border-2 border-primary flex items-center justify-center text-primary">
+                <div class="p-6 rounded-xl border border-gray-200 dark:border-white/10 bg-background-light dark:bg-background-dark flex flex-col items-center text-center gap-4 hover:border-primary/50 transition-colors duration-300">
+                    <div class="size-12 rounded-full bg-primary/10 border border-primary flex items-center justify-center text-primary shrink-0">
                         <span class="font-bold text-lg">2</span>
                     </div>
                     <h3 class="font-bold text-gray-900 dark:text-white">Análisis por IA</h3>
                     <p class="text-sm text-gray-600 dark:text-gray-400">
-                        La IA detecta el tipo de movimiento en la imagen.
+                        La IA detecta el tipo de movimiento en la imagen automáticamente.
                     </p>
                 </div>
 
-                <!-- Paso 3 -->
-                <div class="flex flex-col items-center gap-4 z-10">
-                    <div class="size-12 rounded-full bg-primary/20 border-2 border-primary flex items-center justify-center text-primary">
+                <div class="p-6 rounded-xl border border-gray-200 dark:border-white/10 bg-background-light dark:bg-background-dark flex flex-col items-center text-center gap-4 hover:border-primary/50 transition-colors duration-300">
+                    <div class="size-12 rounded-full bg-primary/10 border border-primary flex items-center justify-center text-primary shrink-0">
                         <span class="font-bold text-lg">3</span>
                     </div>
-                    <h3 class="font-bold text-gray-900 dark:text-white">Obtén la Clasificación</h3>
+                    <h3 class="font-bold text-gray-900 dark:text-white">Obtén Clasificación</h3>
                     <p class="text-sm text-gray-600 dark:text-gray-400">
-                        Recibe si es armónico simple o amortiguado.
+                        Recibe el resultado: si es armónico simple o amortiguado.
                     </p>
                 </div>
 
-                <!-- Paso 4 -->
-                <div class="flex flex-col items-center gap-4 z-10">
-                    <div class="size-12 rounded-full bg-primary/20 border-2 border-primary flex items-center justify-center text-primary">
+                <div class="p-6 rounded-xl border border-gray-200 dark:border-white/10 bg-background-light dark:bg-background-dark flex flex-col items-center text-center gap-4 hover:border-primary/50 transition-colors duration-300">
+                    <div class="size-12 rounded-full bg-primary/10 border border-primary flex items-center justify-center text-primary shrink-0">
                         <span class="font-bold text-lg">4</span>
                     </div>
-                    <h3 class="font-bold text-gray-900 dark:text-white">Obtén la Retroalimentación</h3>
+                    <h3 class="font-bold text-gray-900 dark:text-white">Retroalimentación</h3>
                     <p class="text-sm text-gray-600 dark:text-gray-400">
-                        Ingresa tus datos y obtén análisis del movimiento.
+                        Ingresa tus datos y obtén un análisis completo del movimiento.
                     </p>
                 </div>
 
             </div>
         </section>
 
-        <!-- CTA -->
         <section class="py-20 sm:py-24 px-4 sm:px-6 lg:px-8 bg-gray-100/50 dark:bg-white/5">
             <div class="max-w-4xl mx-auto text-center">
-                <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Explora una galeria de movimientos</h2>
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Explora una galería de movimientos</h2>
                 <p class="max-w-2xl mx-auto mt-4 text-base sm:text-lg text-gray-600 dark:text-gray-300">
                     Transforma tu manera de aprender con apoyo visual
                 </p>
                 <button class="mt-6 h-12 px-6 rounded-lg bg-primary text-white font-bold hover:bg-primary/90 transition-colors">
-                    <a href="galeria.html">Ir a la galeria</a>
+                    <a href="galeria.html">Ir a la galería</a>
                 </button>
             </div>
         </section>
 
     </main>
 
-    <!-- Footer -->
     <footer class="bg-background-light dark:bg-background-dark border-t border-gray-200/50 dark:border-white/10">
-            <div class="max-w-6xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500 dark:text-gray-400">
-                © 2025 Sistema de Clasificación Automática de Tipos de Movimiento Oscilatorio Simple y Amortiguado Mediante Reconocimiento de Imágenes con Deep Learning, Como Apoyo al Aprendizaje | Por:
-                <a href="mailto:juanfelipe.arbelaez@utp.edu.co" class="text-primary hover:text-primary/80 transition-colors">Juan Felipe Arbeláez Osorio</a>
-                y
-                <a href="mailto:angel.burbano@utp.edu.co" class="text-primary hover:text-primary/80 transition-colors">Ángel Gabriel Burbano Rodríguez</a>
-            </div>
-        </footer>
+        <div class="max-w-6xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500 dark:text-gray-400">
+            © 2025 Sistema de Clasificación Automática de Tipos de Movimiento Oscilatorio Simple y Amortiguado Mediante Reconocimiento de Imágenes con Deep Learning, Como Apoyo al Aprendizaje | Por:
+            <a href="mailto:juanfelipe.arbelaez@utp.edu.co" class="text-primary hover:text-primary/80 transition-colors">Juan Felipe Arbeláez Osorio</a>
+            y
+            <a href="mailto:angel.burbano@utp.edu.co" class="text-primary hover:text-primary/80 transition-colors">Ángel Gabriel Burbano Rodríguez</a>
+        </div>
+    </footer>
 
 </div>
 
