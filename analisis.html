@@ -42,25 +42,35 @@
 <div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
 <!-- Top Navigation Bar -->
 <header class="w-full px-4 sm:px-6 lg:px-8 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm sticky top-0 z-50">
-<div class="container mx-auto flex items-center justify-between whitespace-nowrap border-b border-gray-200 dark:border-white/10 py-3">
-<div class="flex items-center gap-4 text-gray-900 dark:text-white">
-<div class="size-6 text-primary">
-<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-<path d="M24 45.8096C19.6865 45.8096 15.4698 44.5305 11.8832 42.134C8.29667 39.7376 5.50128 36.3314 3.85056 32.3462C2.19985 28.361 1.76794 23.9758 2.60947 19.7452C3.451 15.5145 5.52816 11.6284 8.57829 8.5783C11.6284 5.52817 15.5145 3.45101 19.7452 2.60948C23.9758 1.76795 28.361 2.19986 32.3462 3.85057C36.3314 5.50129 39.7376 8.29668 42.134 11.8833C44.5305 15.4698 45.8096 19.6865 45.8096 24L24 24L24 45.8096Z" fill="currentColor"></path>
-</svg>
-</div>
-<h2 class="text-lg font-bold tracking-[-0.015em]"><a href="index.html">Clasificador Oscilatorio</a></h2>
-</div>
-<div class="hidden md:flex items-center gap-8">
-<nav class="flex items-center gap-9">
-<a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors" href="index.html">Inicio</a>
-<a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors" href="ayuda.html">Ayuda</a>
-</nav>
-</div>
-<button class="md:hidden text-gray-900 dark:text-white">
-<span class="material-symbols-outlined">menu</span>
-</button>
-</div>
+    <div class="container mx-auto flex items-center justify-between whitespace-nowrap border-b border-gray-200 dark:border-white/10 py-3">
+        
+        <div class="flex items-center gap-4 text-gray-900 dark:text-white z-20">
+            <div class="size-6 text-primary">
+                <svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M24 45.8096C19.6865 45.8096 15.4698 44.5305 11.8832 42.134C8.29667 39.7376 5.50128 36.3314 3.85056 32.3462C2.19985 28.361 1.76794 23.9758 2.60947 19.7452C3.451 15.5145 5.52816 11.6284 8.57829 8.5783C11.6284 5.52817 15.5145 3.45101 19.7452 2.60948C23.9758 1.76795 28.361 2.19986 32.3462 3.85057C36.3314 5.50129 39.7376 8.29668 42.134 11.8833C44.5305 15.4698 45.8096 19.6865 45.8096 24L24 24L24 45.8096Z" fill="currentColor"></path>
+                </svg>
+            </div>
+            <h2 class="text-lg font-bold tracking-[-0.015em]"><a href="index.html">Clasificador Oscilatorio</a></h2>
+        </div>
+        
+        <div class="hidden md:flex items-center gap-8">
+            <nav class="flex items-center gap-9">
+                <a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors" href="index.html">Inicio</a>
+                <a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors" href="ayuda.html">Ayuda</a>
+            </nav>
+        </div>
+        
+        <button id="menu-toggle" class="md:hidden text-gray-900 dark:text-white z-20">
+            <span class="material-symbols-outlined">menu</span>
+        </button>
+    </div>
+    
+    <nav id="mobile-menu" class="hidden md:hidden absolute w-full left-0 bg-background-light dark:bg-background-dark border-b border-gray-200 dark:border-white/10 z-10">
+        <div class="px-4 pb-4 pt-2 space-y-2">
+            <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors" href="index.html">Inicio</a>
+            <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors" href="ayuda.html">Ayuda</a>
+        </div>
+    </nav>
 </header>
 <main class="flex-1 w-full max-w-7xl mx-auto px-6 lg:px-8 py-10">
 <!-- PageHeading -->
@@ -193,5 +203,5 @@ y
 <a href="mailto:angel.burbano@utp.edu.co">Ángel Gabriel Burbano Rodríguez</a>
         </div>
     </footer>
-
+<script src ="script.js"></script>  
 </body></html>
