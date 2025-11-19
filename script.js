@@ -1,32 +1,19 @@
-// Espera a que el documento HTML esté completamente cargado
-document.addEventListener('DOMContentLoaded', function() {
-    // Obtiene referencias al botón y al menú móvil por sus ID
-    const menuToggle = document.getElementById('menu-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
+// =========================================================
+// CÓDIGO CORREGIDO PARA script.js
+// =========================================================
 
-    // Agrega un "escuchador de eventos" para el clic en el botón
-    menuToggle.addEventListener('click', function() {
-        // La función clave de Tailwind: 'classList.toggle("hidden")'
-        // Si el menú está oculto (tiene la clase 'hidden'), la quita (lo muestra).
-        // Si el menú está visible (no tiene 'hidden'), la pone (lo oculta).
-        mobileMenu.classList.toggle('hidden');
-    });
-});
-
-//subir img
-
+// =========================================================
+// 1. LÓGICA DE INICIO Y DECLARACIÓN DE VARIABLES
+// =========================================================
 document.addEventListener('DOMContentLoaded', function() {
     
-    // =========================================================
-    // 1. VARIABLES GLOBALES DE ML (Teachable Machine)
-    // =========================================================
+    // --- ML Variables ---
     const TM_MODEL_URL = "https://teachablemachine.withgoogle.com/models/Kc7rWFMTA/";
-    const IMAGE_SIZE = 224; // Tamaño requerido: 224x224px
+    const IMAGE_SIZE = 224;
     let model, maxPredictions;
 
-    // =========================================================
-    // 2. REFERENCIAS HTML
-    // =========================================================
+    // --- Referencias HTML ---
+    // NO se redeclaran las referencias si se obtienen en el mismo scope.
     const menuToggle = document.getElementById('menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
     
@@ -39,15 +26,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const labelContainer = document.getElementById("label-container");
     const analyzeButton = document.getElementById('analyze-button');
 
-    // Crea un elemento canvas oculto para el redimensionamiento
+    // --- Canvas Setup ---
     const canvas = document.createElement('canvas');
     canvas.width = IMAGE_SIZE;
     canvas.height = IMAGE_SIZE;
     const ctx = canvas.getContext('2d');
     
     // =========================================================
-    // 3. FUNCIONALIDAD DEL MENÚ MÓVIL
+    // 2. FUNCIONALIDAD DEL MENÚ MÓVIL (CORREGIDO)
     // =========================================================
+    // Este código ahora es el ÚNICO lugar donde se define el toggle
     if (menuToggle && mobileMenu) {
         menuToggle.addEventListener('click', function() {
             mobileMenu.classList.toggle('hidden');
@@ -55,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // =========================================================
-    // 4. FUNCIONALIDAD DE SUBIDA Y DRAG & DROP (Solo imágenes)
+    // 3. FUNCIONALIDAD DE SUBIDA Y DRAG & DROP
     // =========================================================
     
     // --- Evento del botón "Seleccionar Imagen" ---
@@ -68,7 +56,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // --- Lógica de Arrastrar y Soltar (Drag and Drop) ---
     if (dropArea) {
-        // Prevenir comportamiento por defecto
         ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => { dropArea.addEventListener(eventName, preventDefaults, false); });
         function preventDefaults(e) { e.preventDefault(); e.stopPropagation(); }
         
@@ -85,11 +72,9 @@ document.addEventListener('DOMContentLoaded', function() {
         resultArea.style.display = 'block';
         labelContainer.innerHTML = 'Cargando imagen y modelo...';
         
-        // Mostrar la imagen subida (crea una URL local)
         const fileURL = URL.createObjectURL(file);
         uploadedImageElement.src = fileURL;
         
-        // Proceso de redimensionamiento y predicción después de la carga visual
         uploadedImageElement.onload = () => {
             processAndPredict(uploadedImageElement);
         };
@@ -98,44 +83,33 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function validateFile(file) {
-        const MAX_SIZE = 50 * 1024 * 1024; // 50MB
-        // Solo tipos de imagen
+        const MAX_SIZE = 50 * 1024 * 1024;
         const SUPPORTED_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/webp']; 
         
-        if (file.size > MAX_SIZE) { 
-            alert('Error: El tamaño máximo de imagen es 50MB.'); 
-            return false; 
-        }
-        if (!SUPPORTED_TYPES.includes(file.type)) { 
-            alert(`Error: Formato no soportado. Use JPG, PNG o GIF.`); 
-            return false; 
-        }
+        if (file.size > MAX_SIZE) { alert('Error: El tamaño máximo de imagen es 50MB.'); return false; }
+        if (!SUPPORTED_TYPES.includes(file.type)) { alert(`Error: Formato no soportado. Use JPG, PNG o GIF.`); return false; }
         return true;
     }
 
 
     // =========================================================
-    // 5. FUNCIONES DE TEACHABLE MACHINE Y REDIMENSIONAMIENTO
+    // 4. FUNCIONES DE TEACHABLE MACHINE Y REDIMENSIONAMIENTO
     // =========================================================
 
-    // Función que redimensiona y llama a la predicción
     async function processAndPredict(imageElement) {
         if (!model) {
             labelContainer.innerHTML = 'Modelo no cargado. Intentando inicializar...';
-            await init(); // Intenta cargar el modelo si no lo está
+            await init(); 
             if (!model) return;
         }
 
         labelContainer.innerHTML = 'Redimensionando a 224x224px y analizando imagen...';
         
-        // Dibuja la imagen en el canvas, forzando el redimensionamiento a 224x224
         ctx.drawImage(imageElement, 0, 0, IMAGE_SIZE, IMAGE_SIZE); 
         
-        // Ejecuta la predicción usando el canvas como fuente de datos
         predict(canvas); 
     }
 
-    // Cargar el modelo
     async function init() {
         const modelURL = TM_MODEL_URL + "model.json";
         const metadataURL = TM_MODEL_URL + "metadata.json";
@@ -150,8 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Ejecutar la predicción (Ahora recibe el elemento canvas redimensionado)
-    async function predict(inputElement) { // inputElement es el canvas
+    async function predict(inputElement) { 
         
         const prediction = await model.predict(inputElement);
         let bestPrediction = { className: "No Clasificado", probability: 0 };
@@ -163,7 +136,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // Formatear y mostrar el resultado
         const resultText = `Clasificación: ${bestPrediction.className} (Probabilidad: ${(bestPrediction.probability * 100).toFixed(2)}%)`;
         
         labelContainer.innerHTML = `
@@ -173,7 +145,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         analyzeButton.style.display = 'block';
         analyzeButton.onclick = () => {
-             // Pasa el resultado a la página de análisis
              window.location.href = 'analisis.html?result=' + encodeURIComponent(bestPrediction.className);
         };
     }
