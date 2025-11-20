@@ -149,13 +149,7 @@ document.addEventListener('DOMContentLoaded', function() {
         };
     }
     
-    // INICIO: Cargar el modelo al cargar la página
-    init();
-});
-
-
-
-        document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', () => {
             const menuButton = document.getElementById('menu-toggle');
             const mobileMenu = document.getElementById('mobile-menu');
             const icon = menuButton.querySelector('.material-symbols-outlined');
@@ -169,3 +163,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         });
+
+    // INICIO: Cargar el modelo al cargar la página
+    init();
+});
+
+
+
+        
