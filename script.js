@@ -152,3 +152,20 @@ document.addEventListener('DOMContentLoaded', function() {
     // INICIO: Cargar el modelo al cargar la página
     init();
 });
+
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuButton = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const icon = menuButton.querySelector('.material-symbols-outlined');
+
+            menuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                if (mobileMenu.classList.contains('hidden')) {
+                    icon.textContent = 'menu';
+                } else {
+                    icon.textContent = 'close';
+                }
+            });
+        });
