@@ -29,7 +29,23 @@
         }
     </script>
     <style>
-        .formula { font-family: 'Courier New', monospace; background: rgba(19, 127, 236, 0.1); padding: 0.25rem 0.5rem; border-radius: 0.25rem; }
+        .formula { 
+            font-family: 'Courier New', monospace; 
+            background: rgba(19, 127, 236, 0.1); 
+            padding: 0.25rem 0.5rem; 
+            border-radius: 0.25rem; 
+        }
+        .tab-active {
+            background: rgba(19, 127, 236, 0.2);
+            border-bottom: 2px solid #137fec;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
     </style>
 </head>
 <body class="bg-background-light dark:bg-background-dark font-display">
@@ -59,100 +75,156 @@
 
     <main class="flex-1 w-full max-w-7xl mx-auto px-6 lg:px-8 py-10">
         
-        <!-- ENCABEZADO -->
-        <div class="mb-8">
-            <h1 class="text-4xl font-black text-gray-900 dark:text-white mb-2">Análisis Completo del Movimiento</h1>
-            <p class="text-gray-600 dark:text-gray-400">Resultados del procesamiento con IA y cálculos físicos</p>
+        <!-- ENCABEZADO CON CONFIANZA -->
+        <div class="mb-8 fade-in">
+            <div class="flex items-start justify-between gap-4 flex-wrap">
+                <div>
+                    <h1 class="text-4xl font-black text-gray-900 dark:text-white mb-2">Análisis Completo del Movimiento</h1>
+                    <p class="text-gray-600 dark:text-gray-400">Resultados del procesamiento con IA y cálculos físicos</p>
+                </div>
+                <div id="confianza-badge" class="px-4 py-2 rounded-lg border-2">
+                    <!-- Se llena dinámicamente -->
+                </div>
+            </div>
         </div>
 
-        <!-- GRID PRINCIPAL -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            
-            <!-- COLUMNA IZQUIERDA: IMAGEN Y CLASIFICACIÓN -->
-            <div class="flex flex-col gap-6">
+        <!-- TABS DE NAVEGACIÓN -->
+        <div class="mb-6 border-b border-gray-200 dark:border-white/10">
+            <div class="flex gap-2 overflow-x-auto">
+                <button class="tab-btn tab-active px-4 py-3 text-sm font-medium transition-colors" data-tab="resumen">
+                    <span class="material-symbols-outlined text-sm">dashboard</span>
+                    Resumen
+                </button>
+                <button class="tab-btn px-4 py-3 text-sm font-medium transition-colors hover:bg-white/5" data-tab="graficas">
+                    <span class="material-symbols-outlined text-sm">show_chart</span>
+                    Gráficas
+                </button>
+                <button class="tab-btn px-4 py-3 text-sm font-medium transition-colors hover:bg-white/5" data-tab="ecuaciones">
+                    <span class="material-symbols-outlined text-sm">functions</span>
+                    Ecuaciones
+                </button>
+                <button class="tab-btn px-4 py-3 text-sm font-medium transition-colors hover:bg-white/5" data-tab="analisis">
+                    <span class="material-symbols-outlined text-sm">insights</span>
+                    Análisis
+                </button>
+            </div>
+        </div>
+
+        <!-- TAB: RESUMEN -->
+        <div id="tab-resumen" class="tab-content">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 
-                <!-- Imagen analizada -->
-                <div class="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl p-6">
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Imagen Analizada</h3>
-                    <img id="imagen-analizada" class="w-full rounded-lg" alt="Imagen del movimiento">
-                </div>
-
-                <!-- Clasificación -->
-                <div class="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl p-6">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="flex items-center justify-center size-12 rounded-full bg-primary/20 text-primary">
-                            <span class="material-symbols-outlined text-3xl">wb_twilight</span>
-                        </div>
-                        <div>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">Clasificación Detectada</p>
-                            <h2 id="clasificacion-titulo" class="text-2xl font-black text-gray-900 dark:text-white"></h2>
-                        </div>
-                    </div>
+                <!-- COLUMNA IZQUIERDA -->
+                <div class="flex flex-col gap-6">
                     
-                    <div id="tipo-amortiguamiento-badge" class="hidden mt-4 p-4 rounded-lg">
-                        <p class="text-sm font-semibold mb-1">Tipo de Amortiguamiento:</p>
-                        <p id="tipo-amortiguamiento-texto" class="text-xl font-bold"></p>
+                    <!-- Imagen -->
+                    <div class="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl p-6 fade-in">
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Imagen Analizada</h3>
+                        <img id="imagen-analizada" class="w-full rounded-lg shadow-lg" alt="Imagen del movimiento">
                     </div>
+
+                    <!-- Clasificación -->
+                    <div class="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl p-6 fade-in">
+                        <div class="flex items-center gap-4 mb-4">
+                            <div class="flex items-center justify-center size-12 rounded-full bg-primary/20 text-primary">
+                                <span class="material-symbols-outlined text-3xl">wb_twilight</span>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Clasificación Detectada</p>
+                                <h2 id="clasificacion-titulo" class="text-2xl font-black text-gray-900 dark:text-white"></h2>
+                            </div>
+                        </div>
+                        
+                        <div id="tipo-amortiguamiento-badge" class="hidden mt-4 p-4 rounded-lg">
+                            <p class="text-sm font-semibold mb-1">Tipo de Amortiguamiento:</p>
+                            <p id="tipo-amortiguamiento-texto" class="text-xl font-bold"></p>
+                        </div>
+                    </div>
+
                 </div>
 
-            </div>
+                <!-- COLUMNA DERECHA -->
+                <div class="flex flex-col gap-6">
+                    
+                    <!-- Parámetros Principales -->
+                    <div class="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl p-6 fade-in">
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary">analytics</span>
+                            Parámetros Principales
+                        </h3>
+                        
+                        <div class="grid grid-cols-2 gap-4" id="parametros-principales">
+                            <!-- Se llena dinámicamente -->
+                        </div>
+                    </div>
 
-            <!-- COLUMNA DERECHA: PARÁMETROS CALCULADOS -->
-            <div class="flex flex-col gap-6">
+                    <!-- Magnitudes Derivadas -->
+                    <div class="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl p-6 fade-in">
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary">speed</span>
+                            Magnitudes Cinemáticas
+                        </h3>
+                        
+                        <div class="space-y-4" id="magnitudes-derivadas">
+                            <!-- Se llena dinámicamente -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB: GRÁFICAS -->
+        <div id="tab-graficas" class="tab-content hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 
-                <!-- Parámetros Principales -->
                 <div class="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl p-6">
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
-                        <span class="material-symbols-outlined text-primary">analytics</span>
-                        Parámetros Principales
-                    </h3>
-                    
-                    <div class="grid grid-cols-2 gap-4" id="parametros-principales">
-                        <!-- Se llenará dinámicamente -->
-                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Posición vs Tiempo</h3>
+                    <canvas id="grafica-posicion" height="300"></canvas>
                 </div>
 
-                <!-- Magnitudes Derivadas -->
                 <div class="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl p-6">
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
-                        <span class="material-symbols-outlined text-primary">speed</span>
-                        Magnitudes Cinemáticas
-                    </h3>
-                    
-                    <div class="space-y-4" id="magnitudes-derivadas">
-                        <!-- Se llenará dinámicamente -->
-                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Velocidad vs Tiempo</h3>
+                    <canvas id="grafica-velocidad" height="300"></canvas>
+                </div>
+
+                <div class="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl p-6">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Aceleración vs Tiempo</h3>
+                    <canvas id="grafica-aceleracion" height="300"></canvas>
+                </div>
+
+                <div class="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl p-6">
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Energía vs Tiempo</h3>
+                    <canvas id="grafica-energia" height="300"></canvas>
                 </div>
 
             </div>
         </div>
 
-        <!-- SECCIÓN DE ECUACIONES -->
-        <div class="mt-8 bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl p-6">
-            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
-                <span class="material-symbols-outlined text-primary">functions</span>
-                Ecuaciones del Movimiento
-            </h3>
-            <div id="ecuaciones-container" class="space-y-4">
-                <!-- Se llenará dinámicamente -->
+        <!-- TAB: ECUACIONES -->
+        <div id="tab-ecuaciones" class="tab-content hidden">
+            <div class="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl p-6">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary">functions</span>
+                    Ecuaciones del Movimiento
+                </h3>
+                <div id="ecuaciones-container" class="space-y-4">
+                    <!-- Se llena dinámicamente -->
+                </div>
             </div>
         </div>
 
-        <!-- ANÁLISIS DETALLADO -->
-        <div class="mt-8 bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl p-6">
-            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
-                <span class="material-symbols-outlined text-primary">insights</span>
-                Análisis Físico Detallado
-            </h3>
-            <div id="analisis-detallado" class="space-y-6">
-                <!-- Se llenará dinámicamente -->
+        <!-- TAB: ANÁLISIS -->
+        <div id="tab-analisis" class="tab-content hidden">
+            <div class="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl p-6">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary">insights</span>
+                    Análisis Físico Detallado
+                </h3>
+                <div id="analisis-detallado" class="space-y-6">
+                    <!-- Se llena dinámicamente -->
+                </div>
             </div>
-        </div>
-
-        <!-- GRÁFICA CONCEPTUAL -->
-        <div class="mt-8 bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl p-6">
-            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Representación Gráfica</h3>
-            <canvas id="grafica-movimiento" class="w-full" height="300"></canvas>
         </div>
 
         <!-- BOTONES DE ACCIÓN -->
@@ -160,10 +232,6 @@
             <a href="clasificador.html" class="flex-1 flex items-center justify-center gap-2 h-12 px-6 bg-primary text-white font-bold rounded-lg hover:bg-primary/90 transition">
                 <span class="material-symbols-outlined">replay</span>
                 Analizar Otro Movimiento
-            </a>
-            <a href="mailto:cmoreportes@gmail.com?subject=Reporte%20de%20Análisis" class="flex-1 flex items-center justify-center gap-2 h-12 px-6 bg-gray-200 dark:bg-white/10 text-gray-900 dark:text-white font-bold rounded-lg hover:bg-gray-300 dark:hover:bg-white/20 transition">
-                <span class="material-symbols-outlined">flag</span>
-                Reportar Problema
             </a>
         </div>
 
@@ -182,12 +250,14 @@
 
 <script>
 // =========================================================
-// SCRIPT DE ANÁLISIS - MOSTRAR RESULTADOS CALCULADOS
+// ANÁLISIS MEJORADO CON TABS Y MÚLTIPLES GRÁFICAS
 // =========================================================
+
+let datosGlobales = null;
 
 document.addEventListener('DOMContentLoaded', function() {
     
-    // Recuperar datos del localStorage
+    // Recuperar datos
     const datosJSON = localStorage.getItem('datosAnalisis');
     
     if (!datosJSON) {
@@ -196,8 +266,8 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
     
-    const datos = JSON.parse(datosJSON);
-    const { clasificacion, parametros, imagenURL } = datos;
+    datosGlobales = JSON.parse(datosJSON);
+    const { clasificacion, confianza, parametros, imagenURL } = datosGlobales;
     
     // Mostrar imagen
     document.getElementById('imagen-analizada').src = imagenURL;
@@ -205,66 +275,117 @@ document.addEventListener('DOMContentLoaded', function() {
     // Mostrar clasificación
     document.getElementById('clasificacion-titulo').textContent = clasificacion;
     
-    // Mostrar tipo de amortiguamiento si aplica
+    // Badge de confianza
+    mostrarConfianza(confianza);
+    
+    // Tipo de amortiguamiento
     if (parametros.esAmortiguado) {
         const badge = document.getElementById('tipo-amortiguamiento-badge');
         const texto = document.getElementById('tipo-amortiguamiento-texto');
         badge.classList.remove('hidden');
         texto.textContent = parametros.tipoAmortiguamiento;
         
-        // Colorear según el tipo
-        if (parametros.tipoAmortiguamiento.includes('Subamortiguado')) {
-            badge.classList.add('bg-yellow-100', 'dark:bg-yellow-900/30', 'border', 'border-yellow-300', 'dark:border-yellow-700');
-            texto.classList.add('text-yellow-700', 'dark:text-yellow-300');
-        } else if (parametros.tipoAmortiguamiento.includes('Crítico')) {
-            badge.classList.add('bg-orange-100', 'dark:bg-orange-900/30', 'border', 'border-orange-300', 'dark:border-orange-700');
-            texto.classList.add('text-orange-700', 'dark:text-orange-300');
-        } else {
-            badge.classList.add('bg-red-100', 'dark:bg-red-900/30', 'border', 'border-red-300', 'dark:border-red-700');
-            texto.classList.add('text-red-700', 'dark:text-red-300');
-        }
+        const colores = {
+            'Subamortiguado': 'bg-yellow-100 dark:bg-yellow-900/30 border border-yellow-300 dark:border-yellow-700 text-yellow-700 dark:text-yellow-300',
+            'Críticamente Amortiguado': 'bg-orange-100 dark:bg-orange-900/30 border border-orange-300 dark:border-orange-700 text-orange-700 dark:text-orange-300',
+            'Sobreamortiguado': 'bg-red-100 dark:bg-red-900/30 border border-red-300 dark:border-red-700 text-red-700 dark:text-red-300'
+        };
+        
+        badge.className += ' ' + (colores[parametros.tipoAmortiguamiento] || '');
     }
     
-    // Renderizar parámetros principales
+    // Renderizar contenido
     renderizarParametrosPrincipales(parametros);
-    
-    // Renderizar magnitudes derivadas
     renderizarMagnitudesDerivadas(parametros);
-    
-    // Renderizar ecuaciones
     renderizarEcuaciones(parametros);
-    
-    // Renderizar análisis detallado
     renderizarAnalisisDetallado(parametros);
     
-    // Dibujar gráfica
-    dibujarGrafica(parametros);
+    // Configurar tabs
+    configurarTabs();
+    
+    // Dibujar gráficas (solo cuando se active el tab)
+    document.querySelector('[data-tab="graficas"]').addEventListener('click', () => {
+        setTimeout(() => dibujarTodasGraficas(parametros), 100);
+    });
 });
+
+function mostrarConfianza(confianza) {
+    const badge = document.getElementById('confianza-badge');
+    const porcentaje = (confianza * 100).toFixed(1);
+    
+    let color, icono, texto;
+    if (confianza >= 0.85) {
+        color = 'border-green-500 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300';
+        icono = 'verified';
+        texto = 'Alta Confianza';
+    } else if (confianza >= 0.70) {
+        color = 'border-yellow-500 bg-yellow-50 dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-300';
+        icono = 'warning';
+        texto = 'Confianza Media';
+    } else {
+        color = 'border-red-500 bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-300';
+        icono = 'error';
+        texto = 'Baja Confianza';
+    }
+    
+    badge.className = `px-4 py-2 rounded-lg border-2 ${color}`;
+    badge.innerHTML = `
+        <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-sm">${icono}</span>
+            <div>
+                <p class="text-xs font-medium">${texto}</p>
+                <p class="text-lg font-bold">${porcentaje}%</p>
+            </div>
+        </div>
+    `;
+}
+
+function configurarTabs() {
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+    
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const tabName = btn.dataset.tab;
+            
+            // Actualizar botones
+            tabBtns.forEach(b => b.classList.remove('tab-active'));
+            btn.classList.add('tab-active');
+            
+            // Actualizar contenido
+            tabContents.forEach(content => {
+                content.classList.add('hidden');
+            });
+            document.getElementById(`tab-${tabName}`).classList.remove('hidden');
+        });
+    });
+}
 
 function renderizarParametrosPrincipales(p) {
     const container = document.getElementById('parametros-principales');
     
     const params = [
-        { label: 'Amplitud (A)', valor: p.amplitud, unidad: 'm' },
-        { label: 'Frecuencia (f)', valor: p.frecuencia, unidad: 'Hz' },
-        { label: 'Periodo (T)', valor: p.periodo, unidad: 's' },
-        { label: 'Frecuencia Angular (ω)', valor: p.omega, unidad: 'rad/s' },
+        { label: 'Amplitud (A)', valor: p.amplitud, unidad: 'm', icono: '↕' },
+        { label: 'Frecuencia (f)', valor: p.frecuencia, unidad: 'Hz', icono: '~' },
+        { label: 'Periodo (T)', valor: p.periodo, unidad: 's', icono: '⟳' },
+        { label: 'Frecuencia Angular (ω)', valor: p.omega, unidad: 'rad/s', icono: '⊛' },
     ];
     
-    if (p.masa) {
-        params.push({ label: 'Masa (m)', valor: p.masa, unidad: 'kg' });
-    }
-    
-    if (p.beta) {
-        params.push({ label: 'Constante Amortiguamiento (β)', valor: p.beta, unidad: '1/s' });
-    }
+    if (p.masa) params.push({ label: 'Masa (m)', valor: p.masa, unidad: 'kg', icono: '⚖' });
+    if (p.beta) params.push({ label: 'Amortiguamiento (β)', valor: p.beta, unidad: '1/s', icono: '↓' });
     
     params.forEach(param => {
         const div = document.createElement('div');
-        div.className = 'bg-gray-100 dark:bg-background-dark p-4 rounded-lg';
+        div.className = 'bg-gray-100 dark:bg-background-dark p-4 rounded-lg hover:scale-105 transition-transform';
         div.innerHTML = `
-            <p class="text-xs text-gray-600 dark:text-gray-400 mb-1">${param.label}</p>
-            <p class="text-2xl font-bold text-gray-900 dark:text-white">${param.valor.toFixed(4)} <span class="text-sm text-gray-500">${param.unidad}</span></p>
+            <div class="flex items-center justify-between mb-2">
+                <p class="text-xs text-gray-600 dark:text-gray-400">${param.label}</p>
+                <span class="text-xl">${param.icono}</span>
+            </div>
+            <p class="text-2xl font-bold text-gray-900 dark:text-white">
+                ${param.valor.toFixed(4)} 
+                <span class="text-sm text-gray-500">${param.unidad}</span>
+            </p>
         `;
         container.appendChild(div);
     });
@@ -274,55 +395,29 @@ function renderizarMagnitudesDerivadas(p) {
     const container = document.getElementById('magnitudes-derivadas');
     
     const magnitudes = [
-        { 
-            icon: 'speed', 
-            label: 'Velocidad Máxima', 
-            valor: p.velocidadMaxima, 
-            unidad: 'm/s',
-            formula: 'v_max = ωA'
-        },
-        { 
-            icon: 'bolt', 
-            label: 'Aceleración Máxima', 
-            valor: p.aceleracionMaxima, 
-            unidad: 'm/s²',
-            formula: 'a_max = ω²A'
-        },
+        { icon: 'speed', label: 'Velocidad Máxima', valor: p.velocidadMaxima, unidad: 'm/s', formula: 'v_max = ωA' },
+        { icon: 'bolt', label: 'Aceleración Máxima', valor: p.aceleracionMaxima, unidad: 'm/s²', formula: 'a_max = ω²A' },
     ];
     
     if (p.energiaTotal) {
-        magnitudes.push({ 
-            icon: 'energy', 
-            label: 'Energía Total', 
-            valor: p.energiaTotal, 
-            unidad: 'J',
-            formula: 'E = ½mω²A²'
-        });
+        magnitudes.push({ icon: 'energy', label: 'Energía Total', valor: p.energiaTotal, unidad: 'J', formula: 'E = ½mω²A²' });
+    }
+    
+    if (p.constanteResorte) {
+        magnitudes.push({ icon: 'linear_scale', label: 'Constante de Resorte', valor: p.constanteResorte, unidad: 'N/m', formula: 'k = mω²' });
     }
     
     if (p.tiempoRelajacion) {
-        magnitudes.push({ 
-            icon: 'timer', 
-            label: 'Tiempo de Relajación', 
-            valor: p.tiempoRelajacion, 
-            unidad: 's',
-            formula: 'τ = 1/β'
-        });
+        magnitudes.push({ icon: 'timer', label: 'Tiempo de Relajación', valor: p.tiempoRelajacion, unidad: 's', formula: 'τ = 1/β' });
     }
     
     if (p.factorCalidad) {
-        magnitudes.push({ 
-            icon: 'grade', 
-            label: 'Factor de Calidad (Q)', 
-            valor: p.factorCalidad, 
-            unidad: '',
-            formula: 'Q = ω₀/(2β)'
-        });
+        magnitudes.push({ icon: 'grade', label: 'Factor de Calidad (Q)', valor: p.factorCalidad, unidad: '', formula: 'Q = ω₀/(2β)' });
     }
     
     magnitudes.forEach(mag => {
         const div = document.createElement('div');
-        div.className = 'flex items-start gap-4 p-4 bg-gray-50 dark:bg-background-dark rounded-lg';
+        div.className = 'flex items-start gap-4 p-4 bg-gray-50 dark:bg-background-dark rounded-lg hover:shadow-md transition-shadow';
         div.innerHTML = `
             <span class="material-symbols-outlined text-primary text-3xl">${mag.icon}</span>
             <div class="flex-1">
@@ -337,11 +432,9 @@ function renderizarMagnitudesDerivadas(p) {
 
 function renderizarEcuaciones(p) {
     const container = document.getElementById('ecuaciones-container');
-    
     let ecuaciones = [];
     
     if (!p.esAmortiguado) {
-        // Movimiento Armónico Simple
         ecuaciones = [
             {
                 titulo: 'Posición en función del tiempo',
@@ -360,7 +453,6 @@ function renderizarEcuaciones(p) {
             }
         ];
     } else {
-        // Movimiento Amortiguado
         if (p.tipoAmortiguamiento === 'Subamortiguado') {
             ecuaciones = [
                 {
@@ -369,16 +461,21 @@ function renderizarEcuaciones(p) {
                     descripcion: 'Amplitud exponencialmente decreciente con oscilaciones'
                 },
                 {
-                    titulo: 'Frecuencia angular amortiguada',
-                    formula: `ω_d = ${p.omegaAmortiguado.toFixed(3)} rad/s`,
-                    descripcion: 'La frecuencia de oscilación se reduce por el amortiguamiento'
+                    titulo: 'Envolvente de decaimiento',
+                    formula: `A(t) = ${p.amplitud.toFixed(3)} · e^(-${p.beta.toFixed(3)}t)`,
+                    descripcion: 'La amplitud disminuye exponencialmente'
+                },
+                {
+                    titulo: 'Decremento logarítmico',
+                    formula: `δ = ${p.decrementoLogaritmico.toFixed(4)}`,
+                    descripcion: 'Mide la tasa de decaimiento de las oscilaciones'
                 }
             ];
         } else if (p.tipoAmortiguamiento === 'Críticamente Amortiguado') {
             ecuaciones = [
                 {
                     titulo: 'Posición (Críticamente Amortiguado)',
-                    formula: `x(t) = (A + Bt) · e^(-${p.beta.toFixed(3)}t)`,
+                    formula: `x(t) = (C₁ + C₂t) · e^(-${p.beta.toFixed(3)}t)`,
                     descripcion: 'Regreso al equilibrio lo más rápido posible sin oscilaciones'
                 }
             ];
@@ -386,16 +483,17 @@ function renderizarEcuaciones(p) {
             ecuaciones = [
                 {
                     titulo: 'Posición (Sobreamortiguado)',
-                    formula: `x(t) = A₁·e^(-r₁t) + A₂·e^(-r₂t)`,
+                    formula: `x(t) = C₁·e^(-${p.gamma1.toFixed(3)}t) + C₂·e^(-${p.gamma2.toFixed(3)}t)`,
                     descripcion: 'Regreso lento al equilibrio sin oscilaciones'
                 }
             ];
         }
     }
     
-    ecuaciones.forEach(ec => {
+    ecuaciones.forEach((ec, i) => {
         const div = document.createElement('div');
-        div.className = 'p-4 bg-gray-50 dark:bg-background-dark rounded-lg border-l-4 border-primary';
+        div.className = 'p-4 bg-gray-50 dark:bg-background-dark rounded-lg border-l-4 border-primary fade-in';
+        div.style.animationDelay = `${i * 0.1}s`;
         div.innerHTML = `
             <h4 class="font-bold text-gray-900 dark:text-white mb-2">${ec.titulo}</h4>
             <p class="formula text-lg mb-2">${ec.formula}</p>
@@ -407,7 +505,6 @@ function renderizarEcuaciones(p) {
 
 function renderizarAnalisisDetallado(p) {
     const container = document.getElementById('analisis-detallado');
-    
     let analisis = [];
     
     if (!p.esAmortiguado) {
@@ -416,34 +513,46 @@ function renderizarAnalisisDetallado(p) {
                 icon: 'trending_flat',
                 color: 'green',
                 titulo: 'Movimiento Armónico Simple (MAS)',
-                contenido: 'Este es un movimiento oscilatorio ideal donde no hay pérdida de energía. La amplitud permanece constante en el tiempo y el sistema oscila indefinidamente.'
+                contenido: 'Este es un movimiento oscilatorio ideal donde no hay pérdida de energía. La amplitud permanece constante en el tiempo y el sistema oscila indefinidamente con la misma frecuencia y amplitud.'
             },
             {
                 icon: 'sync',
                 color: 'blue',
                 titulo: 'Periodicidad',
                 contenido: `El sistema completa una oscilación completa cada ${p.periodo.toFixed(3)} segundos, con una frecuencia de ${p.frecuencia.toFixed(3)} Hz. Esto significa que realiza ${p.frecuencia.toFixed(2)} oscilaciones por segundo.`
-            },
-            {
+            }
+        ];
+        
+        if (p.energiaTotal) {
+            analisis.push({
                 icon: 'power',
                 color: 'purple',
                 titulo: 'Conservación de Energía',
-                contenido: p.energiaTotal ? `La energía mecánica total del sistema es ${p.energiaTotal.toFixed(6)} J y se conserva, transformándose continuamente entre energía cinética y potencial.` : 'Se requiere la masa para calcular la energía total del sistema.'
-            }
-        ];
+                contenido: `La energía mecánica total del sistema es ${p.energiaTotal.toFixed(6)} J y se conserva, transformándose continuamente entre energía cinética y potencial. En los extremos (x = ±A) toda la energía es potencial, mientras que en el equilibrio (x = 0) toda es cinética.`
+            });
+        }
+        
+        if (p.constanteResorte) {
+            analisis.push({
+                icon: 'apps',
+                color: 'indigo',
+                titulo: 'Constante de Resorte Equivalente',
+                contenido: `Si este fuera un sistema masa-resorte, la constante del resorte sería k = ${p.constanteResorte.toFixed(3)} N/m. Para un péndulo simple, la longitud equivalente sería L = ${p.longitudPendulo.toFixed(3)} m.`
+            });
+        }
     } else {
         analisis = [
             {
                 icon: 'trending_down',
                 color: 'yellow',
                 titulo: 'Movimiento Oscilatorio Amortiguado',
-                contenido: 'Este sistema pierde energía con el tiempo debido a fuerzas disipativas como la fricción o resistencia del aire. La amplitud de las oscilaciones disminuye exponencialmente.'
+                contenido: 'Este sistema pierde energía con el tiempo debido a fuerzas disipativas como la fricción o resistencia del aire. La amplitud de las oscilaciones disminuye exponencialmente hasta que el sistema alcanza el reposo.'
             },
             {
                 icon: 'timer',
                 color: 'orange',
                 titulo: 'Tiempo de Relajación',
-                contenido: `El tiempo característico de decaimiento es τ = ${p.tiempoRelajacion.toFixed(3)} s. Después de este tiempo, la amplitud se reduce a aproximadamente el 37% de su valor inicial.`
+                contenido: `El tiempo característico de decaimiento es τ = ${p.tiempoRelajacion.toFixed(3)} s. Después de este tiempo, la amplitud se reduce a aproximadamente el 37% (1/e) de su valor inicial. Después de 3τ = ${(3*p.tiempoRelajacion).toFixed(3)} s, la amplitud es solo el 5% del valor inicial.`
             }
         ];
         
@@ -452,28 +561,38 @@ function renderizarAnalisisDetallado(p) {
                 icon: 'show_chart',
                 color: 'blue',
                 titulo: 'Características del Subamortiguamiento',
-                contenido: `El sistema aún oscila, pero con una frecuencia reducida (${p.frecuenciaAmortiguada.toFixed(3)} Hz vs ${p.frecuencia.toFixed(3)} Hz original). ${p.factorCalidad ? `El factor de calidad Q = ${p.factorCalidad.toFixed(2)} indica cuántas oscilaciones ocurren antes de que la amplitud decaiga significativamente.` : ''}`
+                contenido: `El sistema aún oscila, pero con una frecuencia reducida: ${p.frecuenciaAmortiguada.toFixed(3)} Hz (vs ${p.frecuencia.toFixed(3)} Hz original). ${p.factorCalidad ? `El factor de calidad Q = ${p.factorCalidad.toFixed(2)} indica que ocurren aproximadamente ${p.numeroOscilaciones.toFixed(1)} oscilaciones antes de que la amplitud decaiga significativamente.` : ''} El decremento logarítmico δ = ${p.decrementoLogaritmico.toFixed(4)} cuantifica la tasa de decaimiento entre oscilaciones consecutivas.`
             });
         } else if (p.tipoAmortiguamiento === 'Críticamente Amortiguado') {
             analisis.push({
                 icon: 'check_circle',
                 color: 'green',
                 titulo: 'Amortiguamiento Crítico',
-                contenido: 'Este es el punto óptimo donde el sistema regresa al equilibrio lo más rápido posible sin oscilar. Es el caso límite entre subamortiguado y sobreamortiguado.'
+                contenido: `Este es el punto óptimo donde el sistema regresa al equilibrio lo más rápido posible sin oscilar. El coeficiente de amortiguamiento crítico es β_c = ${p.betaCritico.toFixed(4)} s⁻¹. Este régimen es ideal para sistemas de suspensión de vehículos y puertas con cierre automático, donde se desea un retorno rápido sin rebotes.`
             });
         } else {
             analisis.push({
                 icon: 'moving',
                 color: 'red',
                 titulo: 'Sobreamortiguamiento',
-                contenido: 'El amortiguamiento es tan fuerte que el sistema no oscila. Simplemente regresa lentamente a la posición de equilibrio de forma exponencial.'
+                contenido: `El amortiguamiento es tan fuerte que el sistema no oscila. Simplemente regresa lentamente a la posición de equilibrio de forma exponencial. Las constantes de decaimiento son γ₁ = ${p.gamma1.toFixed(4)} s⁻¹ y γ₂ = ${p.gamma2.toFixed(4)} s⁻¹. Aunque estable, este régimen es más lento que el críticamente amortiguado.`
+            });
+        }
+        
+        if (p.coeficienteAmortiguamiento) {
+            analisis.push({
+                icon: 'water_drop',
+                color: 'cyan',
+                titulo: 'Coeficiente de Amortiguamiento Viscoso',
+                contenido: `El coeficiente de amortiguamiento viscoso es c = ${p.coeficienteAmortiguamiento.toFixed(6)} kg/s. Este valor representa la fuerza de fricción por unidad de velocidad que actúa sobre el sistema. Un valor mayor indica mayor resistencia al movimiento.`
             });
         }
     }
     
-    analisis.forEach(item => {
+    analisis.forEach((item, i) => {
         const div = document.createElement('div');
-        div.className = 'flex items-start gap-4';
+        div.className = 'flex items-start gap-4 fade-in';
+        div.style.animationDelay = `${i * 0.1}s`;
         div.innerHTML = `
             <div class="flex-shrink-0 size-10 rounded-full bg-${item.color}-100 dark:bg-${item.color}-900/30 text-${item.color}-600 dark:text-${item.color}-400 flex items-center justify-center">
                 <span class="material-symbols-outlined">${item.icon}</span>
@@ -487,19 +606,26 @@ function renderizarAnalisisDetallado(p) {
     });
 }
 
-function dibujarGrafica(p) {
-    const canvas = document.getElementById('grafica-movimiento');
-    const ctx = canvas.getContext('2d');
+function dibujarTodasGraficas(p) {
+    dibujarGrafica('grafica-posicion', p, 'posicion');
+    dibujarGrafica('grafica-velocidad', p, 'velocidad');
+    dibujarGrafica('grafica-aceleracion', p, 'aceleracion');
+    if (p.masa) dibujarGrafica('grafica-energia', p, 'energia');
+}
+
+function dibujarGrafica(canvasId, p, tipo) {
+    const canvas = document.getElementById(canvasId);
+    if (!canvas) return;
     
+    const ctx = canvas.getContext('2d');
     const width = canvas.width = canvas.offsetWidth;
     const height = canvas.height;
     
-    // Limpiar canvas
-    ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--tw-color-background-dark') || '#101922';
+    // Limpiar
+    ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('color-scheme') === 'dark' ? '#101922' : '#f6f7f8';
     ctx.fillRect(0, 0, width, height);
     
-    // Configuración
-    const padding = 40;
+    const padding = 50;
     const graphWidth = width - 2 * padding;
     const graphHeight = height - 2 * padding;
     const centerY = height / 2;
@@ -521,90 +647,122 @@ function dibujarGrafica(p) {
     ctx.fillStyle = '#999';
     ctx.font = '12px Space Grotesk';
     ctx.fillText('t (s)', width - padding - 20, centerY + 20);
-    ctx.fillText('x (m)', padding + 5, padding - 10);
+    
+    const labels = {
+        'posicion': 'x (m)',
+        'velocidad': 'v (m/s)',
+        'aceleracion': 'a (m/s²)',
+        'energia': 'E (J)'
+    };
+    ctx.fillText(labels[tipo], padding + 5, padding - 10);
+    
+    // Datos
+    const numPuntos = 300;
+    const tiempoMax = p.esAmortiguado ? p.tiempoRelajacion * 5 : p.periodo * 3;
+    
+    const datos = [];
+    for (let i = 0; i <= numPuntos; i++) {
+        const t = (i / numPuntos) * tiempoMax;
+        let valor = 0;
+        
+        if (!p.esAmortiguado) {
+            switch(tipo) {
+                case 'posicion':
+                    valor = p.amplitud * Math.cos(p.omega * t);
+                    break;
+                case 'velocidad':
+                    valor = -p.velocidadMaxima * Math.sin(p.omega * t);
+                    break;
+                case 'aceleracion':
+                    valor = -p.aceleracionMaxima * Math.cos(p.omega * t);
+                    break;
+                case 'energia':
+                    const Ec = 0.5 * p.masa * Math.pow(p.velocidadMaxima * Math.sin(p.omega * t), 2);
+                    const Ep = 0.5 * p.constanteResorte * Math.pow(p.amplitud * Math.cos(p.omega * t), 2);
+                    valor = tipo === 'energia' ? Ec : Ep; // Alternar o mostrar total
+                    break;
+            }
+        } else {
+            const envelope = p.amplitud * Math.exp(-p.beta * t);
+            
+            if (p.tipoAmortiguamiento === 'Subamortiguado') {
+                switch(tipo) {
+                    case 'posicion':
+                        valor = envelope * Math.cos(p.omegaAmortiguado * t);
+                        break;
+                    case 'velocidad':
+                        valor = envelope * (-p.beta * Math.cos(p.omegaAmortiguado * t) - p.omegaAmortiguado * Math.sin(p.omegaAmortiguado * t));
+                        break;
+                    case 'aceleracion':
+                        valor = envelope * ((Math.pow(p.beta, 2) - Math.pow(p.omegaAmortiguado, 2)) * Math.cos(p.omegaAmortiguado * t) + 2 * p.beta * p.omegaAmortiguado * Math.sin(p.omegaAmortiguado * t));
+                        break;
+                    case 'energia':
+                        valor = p.energiaTotal * Math.exp(-2 * p.beta * t);
+                        break;
+                }
+            } else {
+                valor = envelope; // Simplificado
+            }
+        }
+        
+        datos.push(valor);
+    }
+    
+    // Encontrar rango
+    const maxVal = Math.max(...datos.map(Math.abs));
     
     // Dibujar gráfica
     ctx.strokeStyle = '#137fec';
     ctx.lineWidth = 3;
     ctx.beginPath();
     
-    const numPuntos = 200;
-    const tiempoMax = p.esAmortiguado ? p.tiempoRelajacion * 5 : p.periodo * 3;
-    
     for (let i = 0; i <= numPuntos; i++) {
-        const t = (i / numPuntos) * tiempoMax;
-        let x;
-        
-        if (!p.esAmortiguado) {
-            x = p.amplitud * Math.cos(p.omega * t);
-        } else {
-            if (p.tipoAmortiguamiento === 'Subamortiguado') {
-                x = p.amplitud * Math.exp(-p.beta * t) * Math.cos(p.omegaAmortiguado * t);
-            } else {
-                x = p.amplitud * Math.exp(-p.beta * t);
-            }
-        }
-        
         const px = padding + (i / numPuntos) * graphWidth;
-        const py = centerY - (x / p.amplitud) * (graphHeight / 2) * 0.8;
+        const py = centerY - (datos[i] / maxVal) * (graphHeight / 2) * 0.85;
         
-        if (i === 0) {
-            ctx.moveTo(px, py);
-        } else {
-            ctx.lineTo(px, py);
-        }
+        if (i === 0) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
     }
-    
     ctx.stroke();
     
     // Envolvente para amortiguados
-    if (p.esAmortiguado && p.tipoAmortiguamiento === 'Subamortiguado') {
+    if (p.esAmortiguado && p.tipoAmortiguamiento === 'Subamortiguado' && tipo === 'posicion') {
         ctx.strokeStyle = 'rgba(255, 193, 7, 0.5)';
-        ctx.lineWidth = 1;
+        ctx.lineWidth = 2;
         ctx.setLineDash([5, 5]);
         
-        // Envolvente superior
+        // Superior
         ctx.beginPath();
         for (let i = 0; i <= numPuntos; i++) {
             const t = (i / numPuntos) * tiempoMax;
-            const envelope = p.amplitud * Math.exp(-p.beta * t);
+            const env = p.amplitud * Math.exp(-p.beta * t);
             const px = padding + (i / numPuntos) * graphWidth;
-            const py = centerY - (envelope / p.amplitud) * (graphHeight / 2) * 0.8;
-            
-            if (i === 0) {
-                ctx.moveTo(px, py);
-            } else {
-                ctx.lineTo(px, py);
-            }
+            const py = centerY - (env / maxVal) * (graphHeight / 2) * 0.85;
+            if (i === 0) ctx.moveTo(px, py);
+            else ctx.lineTo(px, py);
         }
         ctx.stroke();
         
-        // Envolvente inferior
+        // Inferior
         ctx.beginPath();
         for (let i = 0; i <= numPuntos; i++) {
             const t = (i / numPuntos) * tiempoMax;
-            const envelope = -p.amplitud * Math.exp(-p.beta * t);
+            const env = -p.amplitud * Math.exp(-p.beta * t);
             const px = padding + (i / numPuntos) * graphWidth;
-            const py = centerY - (envelope / p.amplitud) * (graphHeight / 2) * 0.8;
-            
-            if (i === 0) {
-                ctx.moveTo(px, py);
-            } else {
-                ctx.lineTo(px, py);
-            }
+            const py = centerY - (env / maxVal) * (graphHeight / 2) * 0.85;
+            if (i === 0) ctx.moveTo(px, py);
+            else ctx.lineTo(px, py);
         }
         ctx.stroke();
-        
         ctx.setLineDash([]);
     }
 }
 
 // Menú móvil
 const menuToggle = document.getElementById('menu-toggle');
-const mobileMenu = document.getElementById('mobile-menu');
-if (menuToggle && mobileMenu) {
+if (menuToggle) {
     menuToggle.addEventListener('click', function() {
-        mobileMenu.classList.toggle('hidden');
+        // Implementar según necesidad
     });
 }
 
