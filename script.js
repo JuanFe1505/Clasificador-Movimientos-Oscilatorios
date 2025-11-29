@@ -29,6 +29,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const btnCalcular = document.getElementById('btnCalcular');
     const resultadoParametros = document.getElementById('resultadoParametros');
 
+    // --- Referencias de Validación ---
+    const feedbackBox = document.getElementById("feedback-clasificacion");
+    const btnCorrecto = document.getElementById("btnCorrecto");
+    const btnIncorrecto = document.getElementById("btnIncorrecto");
+    const correccionContainer = document.getElementById("correccion-container");
+    const correccionSelect = document.getElementById("correccion-select");
+    const btnEnviarReporte = document.getElementById("btnEnviarReporte");
+    const mensajeEnviado = document.getElementById("mensaje-enviado");
+
     // --- Canvas Setup ---
     const canvas = document.createElement('canvas');
     canvas.width = IMAGE_SIZE;
@@ -110,6 +119,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function handleFileUpload(file) {
         if (!validateFile(file)) { return; }
+        
+        // Ocultar feedback anterior si existe
+        feedbackBox.style.display = 'none';
+        correccionContainer.style.display = 'none';
+        mensajeEnviado.style.display = 'none';
+        parametrosSection.style.display = 'none';
         
         // Mostrar indicador de carga mejorado
         resultArea.style.display = 'block';
@@ -326,7 +341,99 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
         
         AppState.clasificacionCompleta = true;
-        mostrarFormularioParametros(bestPrediction.className);
+        
+        // Mostrar feedback de validación
+        mostrarFeedback();
+    }
+
+    // =========================================================
+    // FUNCIONALIDAD DE VALIDACIÓN DE CLASIFICACIÓN
+    // =========================================================
+    
+    function mostrarFeedback() {
+        feedbackBox.style.display = 'block';
+        feedbackBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    // Si el usuario dice que la clasificación fue correcta
+    if (btnCorrecto) {
+        btnCorrecto.addEventListener("click", () => {
+            correccionContainer.style.display = "none";
+            mensajeEnviado.style.display = "none";
+            
+            // Mostrar mensaje de confirmación
+            mostrarNotificacion('¡Gracias por confirmar! Continuando con el análisis...', 'success');
+            
+            // Mostrar formulario de parámetros después de 1 segundo
+            setTimeout(() => {
+                mostrarFormularioParametros(clasificacionActual);
+            }, 1000);
+        });
+    }
+
+    // Si dice que NO fue correcta → mostrar opciones
+    if (btnIncorrecto) {
+        btnIncorrecto.addEventListener("click", () => {
+            correccionContainer.style.display = "block";
+            mensajeEnviado.style.display = "none";
+            correccionSelect.value = ""; // Reset del select
+            
+            // Scroll hacia el contenedor de corrección
+            setTimeout(() => {
+                correccionContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+        });
+    }
+
+    // Habilitar/deshabilitar botón según selección
+    if (correccionSelect) {
+        correccionSelect.addEventListener('change', () => {
+            if (btnEnviarReporte) {
+                btnEnviarReporte.disabled = !correccionSelect.value;
+            }
+        });
+    }
+
+    // Enviar el reporte vía correo
+    if (btnEnviarReporte) {
+        btnEnviarReporte.addEventListener("click", () => {
+            const clasificacionCorrecta = correccionSelect.value;
+            
+            if (!clasificacionCorrecta) {
+                mostrarNotificacion('Por favor selecciona la clasificación correcta', 'warning');
+                return;
+            }
+
+            const asunto = encodeURIComponent("Reporte de Clasificación Incorrecta - CMO");
+            const cuerpo = encodeURIComponent(
+                `Hola,\n\nQuiero reportar una clasificación incorrecta:\n\n` +
+                `Clasificación del modelo: ${clasificacionActual}\n` +
+                `Confianza del modelo: ${(confianzaClasificacion * 100).toFixed(2)}%\n` +
+                `Clasificación correcta (según usuario): ${clasificacionCorrecta}\n\n` +
+                `Timestamp: ${new Date().toLocaleString()}\n\n` +
+                `Gracias por permitirme contribuir a mejorar el modelo.`
+            );
+
+            // Abrir cliente de correo
+            window.location.href = `mailto:cmoreportes@gmail.com?subject=${asunto}&body=${cuerpo}`;
+
+            // Mostrar mensaje de agradecimiento
+            mensajeEnviado.style.display = "flex";
+            
+            // Ocultar el botón de envío y select después de enviar
+            btnEnviarReporte.style.display = "none";
+            correccionSelect.disabled = true;
+            
+            mostrarNotificacion('Reporte preparado. ¡Gracias por tu ayuda!', 'success');
+            
+            // Actualizar la clasificación para continuar con la correcta
+            clasificacionActual = clasificacionCorrecta;
+            
+            // Mostrar formulario de parámetros después de 2 segundos
+            setTimeout(() => {
+                mostrarFormularioParametros(clasificacionCorrecta);
+            }, 2000);
+        });
     }
 
     function mostrarFormularioParametros(tipoMovimiento) {
@@ -420,7 +527,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (beta && beta < 0) errores.push('El coeficiente de amortiguamiento no puede ser negativo');
 
         if (errores.length > 0) {
-            mostrarError(errores.join('. ') + '.');
+            mostrarErrorParametros(errores.join('. ') + '.');
             return;
         }
 
@@ -452,7 +559,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }, 500);
             
         } catch (error) {
-            mostrarError(error.message);
+            mostrarErrorParametros(error.message);
         }
     }
 
@@ -548,7 +655,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return resultado;
     }
 
-    function mostrarError(mensaje) {
+    function mostrarErrorParametros(mensaje) {
         resultadoParametros.classList.remove('hidden');
         resultadoParametros.innerHTML = `
             <div class="flex items-start gap-3">
