@@ -162,75 +162,186 @@
                             <strong>Clasificación detectada:</strong> <span id="tipo-movimiento-detectado" class="font-bold text-primary"></span>
                         </p>
                         <p class="text-xs text-gray-600 dark:text-gray-400 mt-2">
-                            Ingresa los parámetros que conozcas. El sistema calculará automáticamente el resto.
+                            Ingresa los parámetros que conozcas. El sistema calculará automáticamente el resto. Los campos marcados con <span class="text-red-500">*</span> son obligatorios.
                         </p>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Amplitud -->
-                        <div class="flex flex-col">
-                            <label class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
-                                Amplitud (A) <span class="text-xs text-gray-500">[metros]</span>
-                            </label>
-                            <input id="amplitud" type="number" step="any"
-                                class="h-12 px-4 rounded-lg bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20
-                                       text-gray-900 dark:text-white text-sm focus:ring-primary focus:border-primary"
-                                placeholder="Ej: 0.12">
+                    <!-- TABS DE CATEGORÍAS -->
+                    <div class="mb-6 border-b border-gray-200 dark:border-white/10">
+                        <div class="flex gap-2 overflow-x-auto">
+                            <button class="param-tab-btn tab-active px-4 py-3 text-sm font-medium transition-colors" data-param-tab="basicos">
+                                <span class="material-symbols-outlined text-sm">tune</span>
+                                Básicos
+                            </button>
+                            <button class="param-tab-btn px-4 py-3 text-sm font-medium transition-colors hover:bg-white/5" data-param-tab="cinematicos">
+                                <span class="material-symbols-outlined text-sm">speed</span>
+                                Cinemáticos
+                            </button>
+                            <button class="param-tab-btn px-4 py-3 text-sm font-medium transition-colors hover:bg-white/5" data-param-tab="dinamicos">
+                                <span class="material-symbols-outlined text-sm">fitness_center</span>
+                                Dinámicos
+                            </button>
+                            <button id="tab-amortiguamiento-btn" class="param-tab-btn px-4 py-3 text-sm font-medium transition-colors hover:bg-white/5" data-param-tab="amortiguamiento" style="display:none;">
+                                <span class="material-symbols-outlined text-sm">trending_down</span>
+                                Amortiguamiento
+                            </button>
                         </div>
+                    </div>
 
-                        <!-- Frecuencia -->
-                        <div class="flex flex-col">
-                            <label class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
-                                Frecuencia (f) <span class="text-xs text-gray-500">[Hz]</span>
-                            </label>
-                            <input id="frecuencia" type="number" step="any"
-                                class="h-12 px-4 rounded-lg bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20
-                                       text-gray-900 dark:text-white text-sm focus:ring-primary focus:border-primary"
-                                placeholder="Ej: 2">
+                    <!-- TAB: PARÁMETROS BÁSICOS -->
+                    <div id="param-tab-basicos" class="param-tab-content">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Amplitud -->
+                            <div class="flex flex-col">
+                                <label class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                                    Amplitud (A) <span class="text-red-500">*</span> <span class="text-xs text-gray-500">[metros]</span>
+                                </label>
+                                <input id="amplitud" type="number" step="any"
+                                    class="h-12 px-4 rounded-lg bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20
+                                        text-gray-900 dark:text-white text-sm focus:ring-primary focus:border-primary"
+                                    placeholder="Ej: 0.12">
+                            </div>
+
+                            <!-- Frecuencia -->
+                            <div class="flex flex-col">
+                                <label class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                                    Frecuencia (f) <span class="text-xs text-gray-500">[Hz]</span>
+                                </label>
+                                <input id="frecuencia" type="number" step="any"
+                                    class="h-12 px-4 rounded-lg bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20
+                                        text-gray-900 dark:text-white text-sm focus:ring-primary focus:border-primary"
+                                    placeholder="Ej: 2">
+                            </div>
+
+                            <!-- Frecuencia angular -->
+                            <div class="flex flex-col">
+                                <label class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                                    Frecuencia Angular (ω) <span class="text-xs text-gray-500">[rad/s]</span>
+                                </label>
+                                <input id="omega" type="number" step="any"
+                                    class="h-12 px-4 rounded-lg bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20
+                                        text-gray-900 dark:text-white text-sm focus:ring-primary focus:border-primary"
+                                    placeholder="Ej: 12.56">
+                            </div>
+
+                            <!-- Periodo -->
+                            <div class="flex flex-col">
+                                <label class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                                    Periodo (T) <span class="text-xs text-gray-500">[segundos]</span>
+                                </label>
+                                <input id="periodo" type="number" step="any"
+                                    class="h-12 px-4 rounded-lg bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20
+                                        text-gray-900 dark:text-white text-sm focus:ring-primary focus:border-primary"
+                                    placeholder="Ej: 0.5">
+                            </div>
                         </div>
+                    </div>
 
-                        <!-- Frecuencia angular -->
-                        <div class="flex flex-col">
-                            <label class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
-                                Frecuencia Angular (ω) <span class="text-xs text-gray-500">[rad/s]</span>
-                            </label>
-                            <input id="omega" type="number" step="any"
-                                class="h-12 px-4 rounded-lg bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20
-                                       text-gray-900 dark:text-white text-sm focus:ring-primary focus:border-primary"
-                                placeholder="Ej: 12.56">
+                    <!-- TAB: PARÁMETROS CINEMÁTICOS -->
+                    <div id="param-tab-cinematicos" class="param-tab-content hidden">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Posición Inicial -->
+                            <div class="flex flex-col">
+                                <label class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                                    Posición Inicial (x₀) <span class="text-xs text-gray-500">[metros]</span>
+                                </label>
+                                <input id="posicion-inicial" type="number" step="any"
+                                    class="h-12 px-4 rounded-lg bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20
+                                        text-gray-900 dark:text-white text-sm focus:ring-primary focus:border-primary"
+                                    placeholder="Ej: 0.1">
+                                <p class="text-xs text-gray-500 mt-1">Desplazamiento desde equilibrio en t=0</p>
+                            </div>
+
+                            <!-- Velocidad Inicial -->
+                            <div class="flex flex-col">
+                                <label class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                                    Velocidad Inicial (v₀) <span class="text-xs text-gray-500">[m/s]</span>
+                                </label>
+                                <input id="velocidad-inicial" type="number" step="any"
+                                    class="h-12 px-4 rounded-lg bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20
+                                        text-gray-900 dark:text-white text-sm focus:ring-primary focus:border-primary"
+                                    placeholder="Ej: 0.5">
+                            </div>
+
+                            <!-- Ángulo de Fase -->
+                            <div class="flex flex-col">
+                                <label class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                                    Ángulo de Fase (φ) <span class="text-xs text-gray-500">[radianes]</span>
+                                </label>
+                                <input id="fase" type="number" step="any"
+                                    class="h-12 px-4 rounded-lg bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20
+                                        text-gray-900 dark:text-white text-sm focus:ring-primary focus:border-primary"
+                                    placeholder="Ej: 0.785">
+                                <p class="text-xs text-gray-500 mt-1">Desfase respecto al coseno estándar</p>
+                            </div>
                         </div>
+                    </div>
 
-                        <!-- Periodo -->
-                        <div class="flex flex-col">
-                            <label class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
-                                Periodo (T) <span class="text-xs text-gray-500">[segundos]</span>
-                            </label>
-                            <input id="periodo" type="number" step="any"
-                                class="h-12 px-4 rounded-lg bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20
-                                       text-gray-900 dark:text-white text-sm focus:ring-primary focus:border-primary"
-                                placeholder="Ej: 0.5">
+                    <!-- TAB: PARÁMETROS DINÁMICOS -->
+                    <div id="param-tab-dinamicos" class="param-tab-content hidden">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Masa -->
+                            <div class="flex flex-col">
+                                <label class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                                    Masa (m) <span class="text-xs text-gray-500">[kg]</span>
+                                </label>
+                                <input id="masa" type="number" step="any"
+                                    class="h-12 px-4 rounded-lg bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20
+                                        text-gray-900 dark:text-white text-sm focus:ring-primary focus:border-primary"
+                                    placeholder="Ej: 0.2">
+                            </div>
+
+                            <!-- Constante de Resorte -->
+                            <div class="flex flex-col">
+                                <label class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                                    Constante de Resorte (k) <span class="text-xs text-gray-500">[N/m]</span>
+                                </label>
+                                <input id="constante-resorte" type="number" step="any"
+                                    class="h-12 px-4 rounded-lg bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20
+                                        text-gray-900 dark:text-white text-sm focus:ring-primary focus:border-primary"
+                                    placeholder="Ej: 10">
+                            </div>
                         </div>
+                    </div>
 
-                        <!-- Masa -->
-                        <div class="flex flex-col">
-                            <label class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
-                                Masa (m) <span class="text-xs text-gray-500">[kg]</span>
-                            </label>
-                            <input id="masa" type="number" step="any"
-                                class="h-12 px-4 rounded-lg bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20
-                                       text-gray-900 dark:text-white text-sm focus:ring-primary focus:border-primary"
-                                placeholder="Ej: 0.2">
-                        </div>
+                    <!-- TAB: PARÁMETROS DE AMORTIGUAMIENTO -->
+                    <div id="param-tab-amortiguamiento" class="param-tab-content hidden">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Beta (γ) -->
+                            <div class="flex flex-col">
+                                <label class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                                    Coeficiente de Amortiguamiento (β o γ) <span class="text-xs text-gray-500">[1/s]</span>
+                                </label>
+                                <input id="beta" type="number" step="any"
+                                    class="h-12 px-4 rounded-lg bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20
+                                        text-gray-900 dark:text-white text-sm focus:ring-primary focus:border-primary"
+                                    placeholder="Ej: 0.45">
+                                <p class="text-xs text-gray-500 mt-1">β = c/(2m)</p>
+                            </div>
 
-                        <!-- Constante de amortiguamiento (solo para MOA) -->
-                        <div class="flex flex-col" id="beta-container" style="display:none;">
-                            <label class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
-                                Constante de Amortiguamiento (β o γ) <span class="text-xs text-gray-500">[1/s]</span>
-                            </label>
-                            <input id="beta" type="number" step="any"
-                                class="h-12 px-4 rounded-lg bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20
-                                       text-gray-900 dark:text-white text-sm focus:ring-primary focus:border-primary"
-                                placeholder="Ej: 0.45">
+                            <!-- Constante de Amortiguamiento Viscoso -->
+                            <div class="flex flex-col">
+                                <label class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                                    Constante Amortiguamiento Viscoso (c) <span class="text-xs text-gray-500">[kg/s]</span>
+                                </label>
+                                <input id="constante-amortiguamiento" type="number" step="any"
+                                    class="h-12 px-4 rounded-lg bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20
+                                        text-gray-900 dark:text-white text-sm focus:ring-primary focus:border-primary"
+                                    placeholder="Ej: 0.18">
+                                <p class="text-xs text-gray-500 mt-1">c = 2mβ (requiere masa)</p>
+                            </div>
+
+                            <!-- Lambda (factor de decaimiento) -->
+                            <div class="flex flex-col">
+                                <label class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
+                                    Factor de Decaimiento (λ) <span class="text-xs text-gray-500">[1/s]</span>
+                                </label>
+                                <input id="lambda" type="number" step="any"
+                                    class="h-12 px-4 rounded-lg bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20
+                                        text-gray-900 dark:text-white text-sm focus:ring-primary focus:border-primary"
+                                    placeholder="Ej: 0.45">
+                                <p class="text-xs text-gray-500 mt-1">En algunos textos λ = β</p>
+                            </div>
                         </div>
                     </div>
 
@@ -242,7 +353,7 @@
 
                     <div id="resultadoParametros"
                         class="hidden mt-6 p-6 rounded-xl bg-red-50 dark:bg-red-900/20
-                               border border-red-300 dark:border-red-500/30 text-red-800 dark:text-red-200">
+                            border border-red-300 dark:border-red-500/30 text-red-800 dark:text-red-200">
                     </div>
                 </section>
 

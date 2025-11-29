@@ -118,10 +118,7 @@
                 <div class="flex flex-col gap-6">
                     
                     <!-- Imagen -->
-                    <div class="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl p-6 fade-in">
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Imagen Analizada</h3>
-                        <img id="imagen-analizada" class="w-full rounded-lg shadow-lg" alt="Imagen del movimiento">
-                    </div>
+                    
 
                     <!-- Clasificación -->
                     <div class="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl p-6 fade-in">
@@ -269,9 +266,6 @@ document.addEventListener('DOMContentLoaded', function() {
     datosGlobales = JSON.parse(datosJSON);
     const { clasificacion, confianza, parametros, imagenURL } = datosGlobales;
     
-    // Mostrar imagen
-    document.getElementById('imagen-analizada').src = imagenURL;
-    
     // Mostrar clasificación
     document.getElementById('clasificacion-titulo').textContent = clasificacion;
     
@@ -371,7 +365,9 @@ function renderizarParametrosPrincipales(p) {
         { label: 'Frecuencia Angular (ω)', valor: p.omega, unidad: 'rad/s', icono: '⊛' },
     ];
     
+    if (p.fase !== undefined) params.push({ label: 'Ángulo de Fase (φ)', valor: p.fase, unidad: 'rad', icono: '∠' });
     if (p.masa) params.push({ label: 'Masa (m)', valor: p.masa, unidad: 'kg', icono: '⚖' });
+    if (p.constanteResorte) params.push({ label: 'Constante Resorte (k)', valor: p.constanteResorte, unidad: 'N/m', icono: '≋' });
     if (p.beta) params.push({ label: 'Amortiguamiento (β)', valor: p.beta, unidad: '1/s', icono: '↓' });
     
     params.forEach(param => {

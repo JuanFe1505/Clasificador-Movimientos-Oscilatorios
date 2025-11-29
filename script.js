@@ -5,7 +5,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     
     // --- ML Variables ---
-    const TM_MODEL_URL = "https://teachablemachine.withgoogle.com/models/Kc7rWFMTA/";
+    const TM_MODEL_URL = "https://teachablemachine.withgoogle.com/models/8JDXnQdns/";
     const IMAGE_SIZE = 224;
     let model, maxPredictions;
     let clasificacionActual = "";
@@ -37,6 +37,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const correccionSelect = document.getElementById("correccion-select");
     const btnEnviarReporte = document.getElementById("btnEnviarReporte");
     const mensajeEnviado = document.getElementById("mensaje-enviado");
+    // --- Referencias adicionales de parámetros ---
+    const tabAmortiguamientoBtn = document.getElementById('tab-amortiguamiento-btn');
+    const posicionInicial = document.getElementById('posicion-inicial');
+    const velocidadInicial = document.getElementById('velocidad-inicial');
+    const faseInicial = document.getElementById('fase');
+    const constanteResorte = document.getElementById('constante-resorte');
+    const constanteAmortiguamiento = document.getElementById('constante-amortiguamiento');
+    const lambda = document.getElementById('lambda');
 
     // --- Canvas Setup ---
     const canvas = document.createElement('canvas');
@@ -437,57 +445,117 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function mostrarFormularioParametros(tipoMovimiento) {
-        parametrosSection.style.display = 'block';
-        tipoMovimientoDetectado.textContent = tipoMovimiento;
-        
-        // Mostrar/ocultar campo de amortiguamiento
-        const esAmortiguado = tipoMovimiento.toLowerCase().includes('moa') || 
-                             tipoMovimiento.toLowerCase().includes('amortiguado') ||
-                             tipoMovimiento.toLowerCase().includes('subamortiguado') ||
-                             tipoMovimiento.toLowerCase().includes('crítico') ||
-                             tipoMovimiento.toLowerCase().includes('sobreamortiguado');
-        
-        betaContainer.style.display = esAmortiguado ? 'block' : 'none';
-        
-        // Scroll suave
-        setTimeout(() => {
-            parametrosSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 300);
+    parametrosSection.style.display = 'block';
+    tipoMovimientoDetectado.textContent = tipoMovimiento;
+    
+    // Mostrar/ocultar tab de amortiguamiento
+    const esAmortiguado = tipoMovimiento.toLowerCase().includes('moa') || 
+                         tipoMovimiento.toLowerCase().includes('amortiguado') ||
+                         tipoMovimiento.toLowerCase().includes('subamortiguado') ||
+                         tipoMovimiento.toLowerCase().includes('crítico') ||
+                         tipoMovimiento.toLowerCase().includes('sobreamortiguado');
+    
+    if (tabAmortiguamientoBtn) {
+        tabAmortiguamientoBtn.style.display = esAmortiguado ? 'block' : 'none';
     }
+    
+    // Configurar tabs de parámetros
+    configurarTabsParametros();
+    
+    // Scroll suave
+    setTimeout(() => {
+        parametrosSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 300);
+}
+
+// =========================================================
+// GESTIÓN DE TABS DE PARÁMETROS
+// =========================================================
+function configurarTabsParametros() {
+    const paramTabBtns = document.querySelectorAll('.param-tab-btn');
+    const paramTabContents = document.querySelectorAll('.param-tab-content');
+    
+    paramTabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const tabName = btn.dataset.paramTab;
+            
+            // Actualizar botones
+            paramTabBtns.forEach(b => b.classList.remove('tab-active'));
+            btn.classList.add('tab-active');
+            
+            // Actualizar contenido
+            paramTabContents.forEach(content => content.classList.add('hidden'));
+            document.getElementById(`param-tab-${tabName}`).classList.remove('hidden');
+        });
+    });
+}
 
     // =========================================================
     // MEJORA 6: AUTO-CÁLCULO EN TIEMPO REAL
     // =========================================================
-    const inputs = ['amplitud', 'frecuencia', 'omega', 'periodo', 'masa', 'beta'];
-    inputs.forEach(inputId => {
-        const input = document.getElementById(inputId);
-        if (input) {
-            input.addEventListener('input', () => {
-                // Calcular valores relacionados automáticamente
-                autoCalcularParametros();
-            });
-        }
-    });
+    const inputs = ['amplitud', 'frecuencia', 'omega', 'periodo', 'masa', 'beta', 
+                'constante-resorte', 'constante-amortiguamiento', 'lambda',
+                'posicion-inicial', 'velocidad-inicial', 'fase'];
+inputs.forEach(inputId => {
+    const input = document.getElementById(inputId);
+    if (input) {
+        input.addEventListener('input', () => {
+            autoCalcularParametros();
+        });
+    }
+});
 
     function autoCalcularParametros() {
-        const f = parseFloat(document.getElementById('frecuencia').value) || null;
-        const omega = parseFloat(document.getElementById('omega').value) || null;
-        const T = parseFloat(document.getElementById('periodo').value) || null;
+    const f = parseFloat(document.getElementById('frecuencia').value) || null;
+    const omega = parseFloat(document.getElementById('omega').value) || null;
+    const T = parseFloat(document.getElementById('periodo').value) || null;
+    const m = parseFloat(document.getElementById('masa').value) || null;
+    const k = parseFloat(document.getElementById('constante-resorte').value) || null;
+    const beta = parseFloat(document.getElementById('beta').value) || null;
+    const c = parseFloat(document.getElementById('constante-amortiguamiento').value) || null;
+    const lambdaVal = parseFloat(document.getElementById('lambda').value) || null;
 
-        const PI = Math.PI;
+    const PI = Math.PI;
 
-        // Auto-completar frecuencia, periodo y omega
-        if (f && !omega && !T) {
-            document.getElementById('omega').value = (2 * PI * f).toFixed(4);
-            document.getElementById('periodo').value = (1 / f).toFixed(4);
-        } else if (omega && !f && !T) {
-            document.getElementById('frecuencia').value = (omega / (2 * PI)).toFixed(4);
-            document.getElementById('periodo').value = (2 * PI / omega).toFixed(4);
-        } else if (T && !f && !omega) {
-            document.getElementById('frecuencia').value = (1 / T).toFixed(4);
-            document.getElementById('omega').value = (2 * PI / T).toFixed(4);
-        }
+    // Auto-completar frecuencia, periodo y omega
+    if (f && !omega && !T) {
+        document.getElementById('omega').value = (2 * PI * f).toFixed(4);
+        document.getElementById('periodo').value = (1 / f).toFixed(4);
+    } else if (omega && !f && !T) {
+        document.getElementById('frecuencia').value = (omega / (2 * PI)).toFixed(4);
+        document.getElementById('periodo').value = (2 * PI / omega).toFixed(4);
+    } else if (T && !f && !omega) {
+        document.getElementById('frecuencia').value = (1 / T).toFixed(4);
+        document.getElementById('omega').value = (2 * PI / T).toFixed(4);
     }
+
+    // Auto-completar k si tenemos m y omega
+    if (m && omega && !k) {
+        document.getElementById('constante-resorte').value = (m * Math.pow(omega, 2)).toFixed(4);
+    }
+
+    // Auto-completar omega si tenemos k y m
+    if (k && m && !omega) {
+        const omegaCalc = Math.sqrt(k / m);
+        document.getElementById('omega').value = omegaCalc.toFixed(4);
+        document.getElementById('frecuencia').value = (omegaCalc / (2 * PI)).toFixed(4);
+        document.getElementById('periodo').value = (2 * PI / omegaCalc).toFixed(4);
+    }
+
+    // Relación entre c, beta y lambda
+    if (m && beta && !c) {
+        document.getElementById('constante-amortiguamiento').value = (2 * m * beta).toFixed(6);
+    }
+    if (m && c && !beta) {
+        document.getElementById('beta').value = (c / (2 * m)).toFixed(6);
+    }
+    if (beta && !lambdaVal) {
+        document.getElementById('lambda').value = beta.toFixed(6);
+    }
+    if (lambdaVal && !beta) {
+        document.getElementById('beta').value = lambdaVal.toFixed(6);
+    }
+}
 
     // =========================================================
     // MEJORA 7: VALIDACIÓN AVANZADA Y CÁLCULOS MEJORADOS
@@ -542,6 +610,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             // Guardar datos mejorados
+            
             const datosAnalisis = {
                 clasificacion: clasificacionActual,
                 confianza: confianzaClasificacion,
@@ -564,96 +633,171 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function calcularParametrosCompletos(A, f, omega, T, m, beta) {
-        const PI = Math.PI;
-        const G = 9.81; // Gravedad estándar
-        let resultado = {};
+    const PI = Math.PI;
+    const G = 9.81;
+    let resultado = {};
 
-        // PASO 1: Calcular parámetros temporales
-        if (f) {
-            resultado.frecuencia = f;
-            resultado.periodo = 1 / f;
-            resultado.omega = 2 * PI * f;
-        } else if (T) {
-            resultado.periodo = T;
-            resultado.frecuencia = 1 / T;
-            resultado.omega = 2 * PI / T;
-        } else if (omega) {
-            resultado.omega = omega;
-            resultado.frecuencia = omega / (2 * PI);
-            resultado.periodo = 2 * PI / omega;
+    // Obtener valores adicionales
+    const x0 = parseFloat(document.getElementById('posicion-inicial').value) || null;
+    const v0 = parseFloat(document.getElementById('velocidad-inicial').value) || null;
+    const phi = parseFloat(document.getElementById('fase').value) || null;
+    const k = parseFloat(document.getElementById('constante-resorte').value) || null;
+    const c = parseFloat(document.getElementById('constante-amortiguamiento').value) || null;
+    const lambdaVal = parseFloat(document.getElementById('lambda').value) || null;
+
+    // PASO 1: Parámetros temporales
+    if (f) {
+        resultado.frecuencia = f;
+        resultado.periodo = 1 / f;
+        resultado.omega = 2 * PI * f;
+    } else if (T) {
+        resultado.periodo = T;
+        resultado.frecuencia = 1 / T;
+        resultado.omega = 2 * PI / T;
+    } else if (omega) {
+        resultado.omega = omega;
+        resultado.frecuencia = omega / (2 * PI);
+        resultado.periodo = 2 * PI / omega;
+    }
+
+    // Si tenemos k y m pero no omega
+    if (k && m && !resultado.omega) {
+        resultado.omega = Math.sqrt(k / m);
+        resultado.frecuencia = resultado.omega / (2 * PI);
+        resultado.periodo = 2 * PI / resultado.omega;
+    }
+
+    resultado.amplitud = A;
+
+    // PASO 2: Ángulo de fase
+    if (phi !== null) {
+        resultado.fase = phi;
+    } else if (x0 !== null && v0 !== null && resultado.omega) {
+        // Calcular fase desde condiciones iniciales
+        // x(t) = A*cos(ωt + φ), v(t) = -Aω*sin(ωt + φ)
+        // En t=0: x0 = A*cos(φ), v0 = -Aω*sin(φ)
+        // tan(φ) = -v0/(ω*x0)
+        if (Math.abs(x0) > 0.0001) {
+            resultado.fase = Math.atan(-v0 / (resultado.omega * x0));
+        } else {
+            resultado.fase = v0 >= 0 ? -PI/2 : PI/2;
         }
+    } else {
+        resultado.fase = 0; // Asumimos fase cero por defecto
+    }
 
-        resultado.amplitud = A;
+    // PASO 3: Condiciones iniciales
+    if (x0 !== null) {
+        resultado.posicionInicial = x0;
+    } else {
+        resultado.posicionInicial = A * Math.cos(resultado.fase);
+    }
 
-        // PASO 2: Magnitudes cinemáticas
-        resultado.velocidadMaxima = resultado.omega * A;
-        resultado.aceleracionMaxima = Math.pow(resultado.omega, 2) * A;
+    if (v0 !== null) {
+        resultado.velocidadInicial = v0;
+    } else {
+        resultado.velocidadInicial = -A * resultado.omega * Math.sin(resultado.fase);
+    }
 
-        // PASO 3: Análisis energético
-        if (m) {
-            resultado.masa = m;
-            resultado.energiaTotal = 0.5 * m * Math.pow(resultado.omega, 2) * Math.pow(A, 2);
-            resultado.energiaCineticaMaxima = resultado.energiaTotal;
-            resultado.energiaPotencialMaxima = resultado.energiaTotal;
-            
-            // Constante de resorte equivalente (si aplica)
-            resultado.constanteResorte = m * Math.pow(resultado.omega, 2);
-            
-            // Longitud de péndulo equivalente (si aplica)
-            resultado.longitudPendulo = G / Math.pow(resultado.omega, 2);
-        }
+    // Rapidez inicial (magnitud de velocidad)
+    resultado.rapidezInicial = Math.abs(resultado.velocidadInicial);
 
-        // PASO 4: Análisis de amortiguamiento
-        if (beta !== null && beta > 0) {
-            resultado.beta = beta;
-            resultado.esAmortiguado = true;
+    // PASO 4: Magnitudes cinemáticas
+    resultado.velocidadMaxima = resultado.omega * A;
+    resultado.aceleracionMaxima = Math.pow(resultado.omega, 2) * A;
+
+    // PASO 5: Análisis energético
+    if (m) {
+        resultado.masa = m;
+        resultado.energiaTotal = 0.5 * m * Math.pow(resultado.omega, 2) * Math.pow(A, 2);
+        resultado.energiaCineticaMaxima = resultado.energiaTotal;
+        resultado.energiaPotencialMaxima = resultado.energiaTotal;
+        
+        // Energías iniciales
+        resultado.energiaCineticaInicial = 0.5 * m * Math.pow(resultado.velocidadInicial, 2);
+        resultado.energiaPotencialInicial = resultado.energiaTotal - resultado.energiaCineticaInicial;
+    }
+
+    // PASO 6: Constante de resorte
+    if (k) {
+        resultado.constanteResorte = k;
+    } else if (m && resultado.omega) {
+        resultado.constanteResorte = m * Math.pow(resultado.omega, 2);
+    }
+
+    // Longitud de péndulo equivalente
+    if (resultado.omega) {
+        resultado.longitudPendulo = G / Math.pow(resultado.omega, 2);
+    }
+
+    // PASO 7: Frecuencia natural (ω₀)
+    resultado.omega0 = resultado.omega; // En MAS, ω₀ = ω
+
+    // PASO 8: Amortiguamiento
+    if (beta !== null && beta > 0) {
+        resultado.beta = beta;
+        resultado.esAmortiguado = true;
+    } else if (lambdaVal !== null && lambdaVal > 0) {
+        resultado.beta = lambdaVal;
+        resultado.esAmortiguado = true;
+    } else if (c && m) {
+        resultado.beta = c / (2 * m);
+        resultado.esAmortiguado = resultado.beta > 0;
+    }
+
+    if (resultado.esAmortiguado) {
+        const omega0 = resultado.omega0;
+        resultado.omega0 = omega0;
+        
+        const discriminante = Math.pow(omega0, 2) - Math.pow(resultado.beta, 2);
+        
+        if (discriminante > 0) {
+            resultado.tipoAmortiguamiento = 'Subamortiguado';
+            resultado.omegaAmortiguado = Math.sqrt(discriminante);
+            resultado.frecuenciaAmortiguada = resultado.omegaAmortiguado / (2 * PI);
+            resultado.periodoAmortiguado = 2 * PI / resultado.omegaAmortiguado;
             
-            const omega0 = resultado.omega;
-            resultado.omega0 = omega0;
+            resultado.decrementoLogaritmico = 2 * PI * resultado.beta / resultado.omegaAmortiguado;
+            resultado.factorCalidad = omega0 / (2 * resultado.beta);
+            resultado.numeroOscilaciones = 1 / resultado.decrementoLogaritmico;
             
-            const discriminante = Math.pow(omega0, 2) - Math.pow(beta, 2);
-            
-            if (discriminante > 0) {
-                resultado.tipoAmortiguamiento = 'Subamortiguado';
-                resultado.omegaAmortiguado = Math.sqrt(discriminante);
-                resultado.frecuenciaAmortiguada = resultado.omegaAmortiguado / (2 * PI);
-                resultado.periodoAmortiguado = 2 * PI / resultado.omegaAmortiguado;
-                
-                // Decremento logarítmico
-                resultado.decrementoLogaritmico = 2 * PI * beta / resultado.omegaAmortiguado;
-                
-                // Factor de calidad
-                resultado.factorCalidad = omega0 / (2 * beta);
-                
-                // Número de oscilaciones antes de reducirse a 1/e
-                resultado.numeroOscilaciones = 1 / resultado.decrementoLogaritmico;
-                
-            } else if (Math.abs(discriminante) < 0.0001) {
-                resultado.tipoAmortiguamiento = 'Críticamente Amortiguado';
-                resultado.omegaAmortiguado = 0;
-                resultado.betaCritico = omega0;
-                
+            // Desfase en amortiguado
+            if (x0 !== null && v0 !== null) {
+                // x(t) = A*e^(-βt)*cos(ω't + φ)
+                // v(t) = A*e^(-βt)*[-β*cos(ω't + φ) - ω'*sin(ω't + φ)]
+                // En t=0: x0 = A*cos(φ), v0 = A*[-β*cos(φ) - ω'*sin(φ)]
+                const omega_d = resultado.omegaAmortiguado;
+                resultado.faseAmortiguado = Math.atan(-(v0 + resultado.beta * x0) / (omega_d * x0));
             } else {
-                resultado.tipoAmortiguamiento = 'Sobreamortiguado';
-                resultado.gamma1 = beta + Math.sqrt(Math.pow(beta, 2) - Math.pow(omega0, 2));
-                resultado.gamma2 = beta - Math.sqrt(Math.pow(beta, 2) - Math.pow(omega0, 2));
+                resultado.faseAmortiguado = resultado.fase;
             }
             
-            // Tiempo de relajación
-            resultado.tiempoRelajacion = 1 / beta;
-            
-            // Coeficiente de amortiguamiento viscoso (si hay masa)
-            if (m) {
-                resultado.coeficienteAmortiguamiento = 2 * m * beta;
-            }
+        } else if (Math.abs(discriminante) < 0.0001) {
+            resultado.tipoAmortiguamiento = 'Críticamente Amortiguado';
+            resultado.omegaAmortiguado = 0;
+            resultado.betaCritico = omega0;
             
         } else {
-            resultado.esAmortiguado = false;
-            resultado.tipoAmortiguamiento = 'Sin Amortiguamiento (MAS Ideal)';
+            resultado.tipoAmortiguamiento = 'Sobreamortiguado';
+            resultado.gamma1 = resultado.beta + Math.sqrt(Math.pow(resultado.beta, 2) - Math.pow(omega0, 2));
+            resultado.gamma2 = resultado.beta - Math.sqrt(Math.pow(resultado.beta, 2) - Math.pow(omega0, 2));
         }
-
-        return resultado;
+        
+        resultado.tiempoRelajacion = 1 / resultado.beta;
+        
+        if (m) {
+            resultado.coeficienteAmortiguamiento = 2 * m * resultado.beta;
+        } else if (c) {
+            resultado.coeficienteAmortiguamiento = c;
+        }
+        
+    } else {
+        resultado.esAmortiguado = false;
+        resultado.tipoAmortiguamiento = 'Sin Amortiguamiento (MAS Ideal)';
     }
+
+    return resultado;
+}
 
     function mostrarErrorParametros(mensaje) {
         resultadoParametros.classList.remove('hidden');
