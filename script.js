@@ -5,7 +5,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     
     // --- ML Variables ---
-    const TM_MODEL_URL = "https://teachablemachine.withgoogle.com/models/8JDXnQdns/";
+    const TM_MODEL_URL = "https://teachablemachine.withgoogle.com/models/_T5Ne8BPG/";
     const IMAGE_SIZE = 224;
     let model, maxPredictions;
     let clasificacionActual = "";
