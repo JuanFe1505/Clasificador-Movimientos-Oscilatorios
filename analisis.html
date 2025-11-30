@@ -91,19 +91,19 @@
         <!-- TABS DE NAVEGACIÓN -->
         <div class="mb-6 border-b border-gray-200 dark:border-white/10">
             <div class="flex gap-2 overflow-x-auto">
-                <button class="tab-btn tab-active px-4 py-3 text-sm font-medium transition-colors" data-tab="resumen">
+                <button class="tab-btn tab-active px-4 py-3 text-sm font-medium transition-colors text-white" data-tab="resumen">
                     <span class="material-symbols-outlined text-sm">dashboard</span>
                     Resumen
                 </button>
-                <button class="tab-btn px-4 py-3 text-sm font-medium transition-colors hover:bg-white/5" data-tab="graficas">
+                <button class="tab-btn px-4 py-3 text-sm font-medium transition-colors hover:bg-white/5 text-white" data-tab="graficas">
                     <span class="material-symbols-outlined text-sm">show_chart</span>
                     Gráficas
                 </button>
-                <button class="tab-btn px-4 py-3 text-sm font-medium transition-colors hover:bg-white/5" data-tab="ecuaciones">
+                <button class="tab-btn px-4 py-3 text-sm font-medium transition-colors hover:bg-white/5 text-white" data-tab="ecuaciones">
                     <span class="material-symbols-outlined text-sm">functions</span>
                     Ecuaciones
                 </button>
-                <button class="tab-btn px-4 py-3 text-sm font-medium transition-colors hover:bg-white/5" data-tab="analisis">
+                <button class="tab-btn px-4 py-3 text-sm font-medium transition-colors hover:bg-white/5 text-white" data-tab="analisis">
                     <span class="material-symbols-outlined text-sm">insights</span>
                     Análisis
                 </button>
@@ -111,15 +111,12 @@
         </div>
 
         <!-- TAB: RESUMEN -->
-        <div id="tab-resumen" class="tab-content">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div id="tab-resumen" class="tab-content text-white">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 text-white">
                 
                 <!-- COLUMNA IZQUIERDA -->
                 <div class="flex flex-col gap-6">
                     
-                    <!-- Imagen -->
-                    
-
                     <!-- Clasificación -->
                     <div class="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl p-6 fade-in">
                         <div class="flex items-center gap-4 mb-4">
@@ -205,7 +202,7 @@
                     <span class="material-symbols-outlined text-primary">functions</span>
                     Ecuaciones del Movimiento
                 </h3>
-                <div id="ecuaciones-container" class="space-y-4">
+                <div id="ecuaciones-container" class="space-y-4 text-white">
                     <!-- Se llena dinámicamente -->
                 </div>
             </div>
@@ -480,8 +477,8 @@ function renderizarMagnitudesDerivadas(p) {
             <span class="material-symbols-outlined text-primary text-3xl">${mag.icon}</span>
             <div class="flex-1">
                 <p class="font-bold text-gray-900 dark:text-white">${mag.label}</p>
-                <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">${mag.valor.toFixed(6)} ${mag.unidad}</p>
-                <p class="text-xs text-gray-500 dark:text-gray-500 mt-1 formula">${mag.formula}</p>
+                <p class="text-sm text-gray-600 dark:text-white mt-1">${mag.valor.toFixed(6)} ${mag.unidad}</p>
+                <p class="text-xs text-gray-500 dark:text-white mt-1 formula">${mag.formula}</p>
             </div>
         `;
         container.appendChild(div);
