@@ -84,7 +84,7 @@
                 <nav class="flex items-center gap-9">
                     <a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors" href="index.html">Inicio</a>
                     <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors" href="clasificador.html">Clasificador</a>
-                    <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors" href="galeria.html">Galería</a>
+                    <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors" href="ecuaciones.html">Ecuaaciones</a>
                     <a class="text-sm font-bold text-primary dark:text-primary transition-colors" href="ayuda.html" aria-current="page">Ayuda</a>
                 </nav>
             </div>
@@ -98,7 +98,7 @@
             <div class="px-4 pb-4 pt-2 space-y-2">
                 <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary" href="index.html">Inicio</a>
                 <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary" href="clasificador.html">Clasificador</a>
-                <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary" href="galeria.html">Galería</a>
+                <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary" href="ecuaciones.html">Ecuaciones</a>
                 <a class="block text-sm font-bold text-primary dark:text-primary" href="ayuda.html">Ayuda</a>
             </div>
         </nav>
@@ -124,7 +124,6 @@
                     <h3 class="font-bold text-lg">Iluminación Clara</h3>
                     <p class="text-sm text-gray-600 dark:text-gray-400">Asegúrate de que el sistema oscilatorio (péndulo, resorte) esté bien iluminado y sin sombras fuertes que confundan a la IA.</p>
                 </div>
-
                 <div class="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl p-6 flex flex-col gap-3">
                     <div class="size-10 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-2">
                         <span class="material-symbols-outlined">crop_free</span>
@@ -132,13 +131,45 @@
                     <h3 class="font-bold text-lg">Fondo Limpio</h3>
                     <p class="text-sm text-gray-600 dark:text-gray-400">Intenta que el fondo sea de un color sólido (preferiblemente blanco o una pared lisa) para evitar ruido visual en la imagen.</p>
                 </div>
-
                 <div class="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl p-6 flex flex-col gap-3">
                     <div class="size-10 rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 flex items-center justify-center mb-2">
                         <span class="material-symbols-outlined">center_focus_strong</span>
                     </div>
                     <h3 class="font-bold text-lg">Enfoque Central</h3>
                     <p class="text-sm text-gray-600 dark:text-gray-400">Toma la foto centrada en el objeto en movimiento. Evita ángulos extremos o que el objeto se vea muy pequeño.</p>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-6xl mx-auto mb-20">
+            <h2 class="text-2xl font-bold mb-8 text-center sm:text-left border-l-4 border-primary pl-4">Ejemplo de uso correcto</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl p-6 flex flex-col gap-3 h-[520px]">
+                    <div class="size-10 rounded-full bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 flex items-center justify-center mb-2">
+                        <span class="material-symbols-outlined">photo_camera</span>
+                    </div>
+                    <h3 class="font-bold text-lg">Forma Adecuada</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">
+                        Esta es la forma correcta de subir tu imagen. Buena iluminación, fondo limpio, plano y movimiento oscilatorio.
+                    </p>
+                    <div class="mt-auto">
+                        <img src="img/ayuda1.jpg"
+                            alt="Ejemplo de uso correcto"
+                            class="w-64 h-64 object-cover mx-auto rounded-md">
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl p-6 flex flex-col gap-3 h-[520px]">
+                    <div class="size-10 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-2">
+                        <span class="material-symbols-outlined">check</span>
+                    </div>
+                    <h3 class="font-bold text-lg">Clasificación Correcta</h3>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">
+                        Obtendrás la calificación adecuada.
+                    </p>
+                    <div class="mt-auto">
+                        <img src="img/clasificacion1.png"
+                            alt="Ejemplo de clasificación correcta"
+                            class="w-64 h-64 object-cover mx-auto rounded-md">
+                    </div>
                 </div>
             </div>
         </div>
@@ -155,7 +186,7 @@
                         </span>
                     </summary>
                     <div class="px-4 pb-4 text-gray-600 dark:text-gray-300 text-sm leading-relaxed border-t border-gray-100 dark:border-white/5 pt-4">
-                        El clasificador acepta imágenes en formatos estándar como <strong>.JPG, .JPEG y .PNG</strong>. Recomendamos que el tamaño del archivo no exceda los 5MB para un procesamiento rápido.
+                        El clasificador acepta imágenes en formatos estándar como <strong>.JPG, .JPEG y .PNG</strong>.
                     </div>
                 </details>
 
@@ -168,23 +199,7 @@
                     </summary>
                     <div class="px-4 pb-4 text-gray-600 dark:text-gray-300 text-sm leading-relaxed border-t border-gray-100 dark:border-white/5 pt-4">
                         
-                        La IA puede fallar si la imagen está borrosa, muy oscura, o si hay muchos objetos alrededor que confunden al modelo. Revisa nuestra sección de "Guía para mejores resultados" arriba e intenta subir una foto más clara.
-                    </div>
-                </details>
-
-                <details class="group bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-xl overflow-hidden">
-                    <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-4 text-gray-900 dark:text-white font-medium hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
-                        <span>¿Cuál es la diferencia entre movimiento simple y amortiguado?</span>
-                        <span class="transition group-open:rotate-180">
-                            <span class="material-symbols-outlined">expand_more</span>
-                        </span>
-                    </summary>
-                    <div class="px-4 pb-4 text-gray-600 dark:text-gray-300 text-sm leading-relaxed border-t border-gray-100 dark:border-white/5 pt-4">
-                        
-
-[Image of simple vs damped harmonic motion graphs]
-
-                        El <strong>Movimiento Armónico Simple (M.A.S.)</strong> es ideal y perpetuo (sin fricción), manteniendo su amplitud constante. El <strong>Amortiguado</strong> pierde energía con el tiempo debido a la fricción, haciendo que las oscilaciones se reduzcan hasta detenerse.
+                        La IA puede fallar si la imagen está borrosa, muy oscura, o si hay muchos objetos alrededor que confunden al modelo. Revisa nuestra sección de "Ejemplo de uso correcto" arriba e intenta subir una foto más clara.
                     </div>
                 </details>
             </div>
@@ -194,11 +209,11 @@
             <div class="p-8 bg-primary/5 rounded-2xl border border-primary/20">
                 <h3 class="text-xl font-bold text-primary mb-2">¿Sigues teniendo problemas?</h3>
                 <p class="text-sm text-gray-600 dark:text-gray-400 mb-6">
-                    Si encuentras un error técnico en la plataforma, contacta al equipo de desarrollo.
+                    Si encuentras un error técnico, contactanos, será de mucha ayuda tu aporte para mejorar el sistema clasificador.
                 </p>
                 <a href="mailto:cmoreporte@gmail.com" class="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors font-medium text-sm">
                     <span class="material-symbols-outlined text-[20px]">mail</span>
-                    Contactar Soporte
+                    Contactar
                 </a>
             </div>
         </div>

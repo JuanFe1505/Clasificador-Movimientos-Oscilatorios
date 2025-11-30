@@ -61,16 +61,28 @@
                 </div>
                 <h2 class="text-lg font-bold">Clasificador Oscilatorio</h2>
             </div>
-            <nav class="hidden md:flex gap-9">
-                <a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary transition-colors" href="index.html">Inicio</a>
-                <a class="text-sm font-medium text-gray-900 dark:text-white hover:text-primary transition-colors" href="clasificador.html">Clasificador</a>
-                <a class="text-sm font-medium text-gray-900 dark:text-white hover:text-primary transition-colors" href="galeria.html">Galería</a>
-                <a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary transition-colors" href="ayuda.html">Ayuda</a>
-            </nav>
-            <button id="menu-toggle" class="md:hidden text-gray-900 dark:text-white">
+            <div class="hidden md:flex items-center gap-8">
+                <nav class="flex items-center gap-9">
+                    <a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors" href="index.html">Inicio</a>
+                    <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors" href="clasificador.html">Clasificador</a>
+                    <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors" href="ecuaciones.html">Ecuaaciones</a>
+                    <a class="text-sm font-bold text-primary dark:text-primary transition-colors" href="ayuda.html" aria-current="page">Ayuda</a>
+                </nav>
+            </div>
+            
+            <button id="menu-toggle" class="md:hidden text-gray-900 dark:text-white z-20">
                 <span class="material-symbols-outlined">menu</span>
             </button>
         </div>
+        
+        <nav id="mobile-menu" class="hidden md:hidden absolute w-full left-0 bg-background-light dark:bg-background-dark border-b border-gray-200 dark:border-white/10 z-10">
+            <div class="px-4 pb-4 pt-2 space-y-2">
+                <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary" href="index.html">Inicio</a>
+                <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary" href="clasificador.html">Clasificador</a>
+                <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary" href="ecuaciones.html">Ecuaciones</a>
+                <a class="block text-sm font-bold text-primary dark:text-primary" href="ayuda.html">Ayuda</a>
+            </div>
+        </nav>
     </header>
 
     <main class="flex-1 w-full max-w-7xl mx-auto px-6 lg:px-8 py-10">
