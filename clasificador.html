@@ -307,10 +307,10 @@
                     <!-- TAB: PARÁMETROS DE AMORTIGUAMIENTO -->
                     <div id="param-tab-amortiguamiento" class="param-tab-content hidden">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <!-- Beta (γ) -->
+                            <!-- Beta (β) -->
                             <div class="flex flex-col">
                                 <label class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
-                                    Coeficiente de Amortiguamiento (β o γ) <span class="text-xs text-gray-500">[1/s]</span>
+                                    Coeficiente de Amortiguamiento (β) <span class="text-red-500">*</span> <span class="text-xs text-gray-500">[1/s]</span>
                                 </label>
                                 <input id="beta" type="number" step="any"
                                     class="h-12 px-4 rounded-lg bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20
@@ -319,17 +319,6 @@
                                 <p class="text-xs text-gray-500 mt-1">β = c/(2m)</p>
                             </div>
 
-                            <!-- Constante de Amortiguamiento Viscoso -->
-                            <div class="flex flex-col">
-                                <label class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
-                                    Constante Amortiguamiento Viscoso (c) <span class="text-xs text-gray-500">[kg/s]</span>
-                                </label>
-                                <input id="constante-amortiguamiento" type="number" step="any"
-                                    class="h-12 px-4 rounded-lg bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20
-                                        text-gray-900 dark:text-white text-sm focus:ring-primary focus:border-primary"
-                                    placeholder="Ej: 0.18">
-                                <p class="text-xs text-gray-500 mt-1">c = 2mβ (requiere masa)</p>
-                            </div>
 
                             <!-- Lambda (factor de decaimiento) -->
                             <div class="flex flex-col">

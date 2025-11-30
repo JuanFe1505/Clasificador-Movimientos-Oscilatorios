@@ -363,24 +363,86 @@ function renderizarParametrosPrincipales(p) {
         { label: 'Frecuencia (f)', valor: p.frecuencia, unidad: 'Hz', icono: '~' },
         { label: 'Periodo (T)', valor: p.periodo, unidad: 's', icono: '⟳' },
         { label: 'Frecuencia Angular (ω)', valor: p.omega, unidad: 'rad/s', icono: '⊛' },
+        { label: 'Frecuencia Angular Natural (ω₀)', valor: p.omega0, unidad: 'rad/s', icono: '⊙' },
     ];
     
-    if (p.fase !== undefined) params.push({ label: 'Ángulo de Fase (φ)', valor: p.fase, unidad: 'rad', icono: '∠' });
+    if (p.fase !== undefined && p.fase !== null) {
+        params.push({ label: 'Ángulo de Fase (φ)', valor: p.fase, unidad: 'rad', icono: '∠' });
+    }
+    
+    if (p.posicionInicial !== undefined && p.posicionInicial !== null) {
+        params.push({ label: 'Posición Inicial (x₀)', valor: p.posicionInicial, unidad: 'm', icono: '⌖' });
+    }
+    
+    if (p.velocidadInicial !== undefined && p.velocidadInicial !== null) {
+        params.push({ label: 'Velocidad Inicial (v₀)', valor: p.velocidadInicial, unidad: 'm/s', icono: '➔' });
+    }
+    
+    if (p.rapidezInicial !== undefined && p.rapidezInicial !== null) {
+        params.push({ label: 'Rapidez Inicial (|v₀|)', valor: p.rapidezInicial, unidad: 'm/s', icono: '⚡' });
+    }
+    
     if (p.masa) params.push({ label: 'Masa (m)', valor: p.masa, unidad: 'kg', icono: '⚖' });
     if (p.constanteResorte) params.push({ label: 'Constante Resorte (k)', valor: p.constanteResorte, unidad: 'N/m', icono: '≋' });
+    if (p.longitudPendulo) params.push({ label: 'Longitud Péndulo Equiv. (L)', valor: p.longitudPendulo, unidad: 'm', icono: '⌇' });
+    
     if (p.beta) params.push({ label: 'Amortiguamiento (β)', valor: p.beta, unidad: '1/s', icono: '↓' });
+    
+    if (p.omegaAmortiguado !== undefined && p.omegaAmortiguado !== null) {
+        params.push({ label: 'Frecuencia Amortiguada (ω\')', valor: p.omegaAmortiguado, unidad: 'rad/s', icono: '⊚' });
+    }
+    
+    if (p.frecuenciaAmortiguada !== undefined && p.frecuenciaAmortiguada !== null) {
+        params.push({ label: 'Frecuencia Amortiguada (f\')', valor: p.frecuenciaAmortiguada, unidad: 'Hz', icono: '≈' });
+    }
+    
+    if (p.periodoAmortiguado !== undefined && p.periodoAmortiguado !== null) {
+        params.push({ label: 'Periodo Amortiguado (T\')', valor: p.periodoAmortiguado, unidad: 's', icono: '⟲' });
+    }
+    
+    if (p.decrementoLogaritmico !== undefined && p.decrementoLogaritmico !== null) {
+        params.push({ label: 'Decremento Logarítmico (δ)', valor: p.decrementoLogaritmico, unidad: '', icono: 'δ' });
+    }
+    
+    if (p.factorCalidad !== undefined && p.factorCalidad !== null) {
+        params.push({ label: 'Factor de Calidad (Q)', valor: p.factorCalidad, unidad: '', icono: 'Q' });
+    }
+    
+    if (p.tiempoRelajacion !== undefined && p.tiempoRelajacion !== null) {
+        params.push({ label: 'Tiempo de Relajación (τ)', valor: p.tiempoRelajacion, unidad: 's', icono: '⏱' });
+    }
+    
+    if (p.numeroOscilaciones !== undefined && p.numeroOscilaciones !== null) {
+        params.push({ label: 'Número de Oscilaciones', valor: p.numeroOscilaciones, unidad: '', icono: '#' });
+    }
+    
+    if (p.coeficienteAmortiguamiento !== undefined && p.coeficienteAmortiguamiento !== null) {
+        params.push({ label: 'Coef. Amortiguamiento (c)', valor: p.coeficienteAmortiguamiento, unidad: 'kg/s', icono: '∿' });
+    }
+    
+    if (p.energiaTotal !== undefined && p.energiaTotal !== null) {
+        params.push({ label: 'Energía Total (E)', valor: p.energiaTotal, unidad: 'J', icono: '⚡' });
+    }
+    
+    if (p.energiaCineticaMaxima !== undefined && p.energiaCineticaMaxima !== null) {
+        params.push({ label: 'Energía Cinética Máx.', valor: p.energiaCineticaMaxima, unidad: 'J', icono: '⟿' });
+    }
+    
+    if (p.energiaPotencialMaxima !== undefined && p.energiaPotencialMaxima !== null) {
+        params.push({ label: 'Energía Potencial Máx.', valor: p.energiaPotencialMaxima, unidad: 'J', icono: '⬆' });
+    }
     
     params.forEach(param => {
         const div = document.createElement('div');
-        div.className = 'bg-gray-100 dark:bg-background-dark p-4 rounded-lg hover:scale-105 transition-transform';
+        div.className = 'bg-gray-100 dark:bg-white/10 p-4 rounded-lg hover:scale-105 transition-transform';
         div.innerHTML = `
             <div class="flex items-center justify-between mb-2">
-                <p class="text-xs text-gray-600 dark:text-gray-400">${param.label}</p>
+                <p class="text-xs text-gray-600 dark:text-gray-300">${param.label}</p>
                 <span class="text-xl">${param.icono}</span>
             </div>
             <p class="text-2xl font-bold text-gray-900 dark:text-white">
                 ${param.valor.toFixed(4)} 
-                <span class="text-sm text-gray-500">${param.unidad}</span>
+                <span class="text-sm text-gray-500 dark:text-gray-400">${param.unidad}</span>
             </p>
         `;
         container.appendChild(div);
@@ -413,7 +475,7 @@ function renderizarMagnitudesDerivadas(p) {
     
     magnitudes.forEach(mag => {
         const div = document.createElement('div');
-        div.className = 'flex items-start gap-4 p-4 bg-gray-50 dark:bg-background-dark rounded-lg hover:shadow-md transition-shadow';
+        div.className = 'flex items-start gap-4 p-4 bg-gray-50 dark:bg-white/10 rounded-lg hover:shadow-md transition-shadow';
         div.innerHTML = `
             <span class="material-symbols-outlined text-primary text-3xl">${mag.icon}</span>
             <div class="flex-1">
@@ -488,7 +550,7 @@ function renderizarEcuaciones(p) {
     
     ecuaciones.forEach((ec, i) => {
         const div = document.createElement('div');
-        div.className = 'p-4 bg-gray-50 dark:bg-background-dark rounded-lg border-l-4 border-primary fade-in';
+        div.className = 'p-4 bg-gray-50 dark:bg-white/10 rounded-lg border-l-4 border-primary fade-in';
         div.style.animationDelay = `${i * 0.1}s`;
         div.innerHTML = `
             <h4 class="font-bold text-gray-900 dark:text-white mb-2">${ec.titulo}</h4>

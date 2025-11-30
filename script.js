@@ -237,7 +237,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 `;
                 
-                mostrarNotificacion('Modelo de IA cargado exitosamente', 'success');
+                //mostrarNotificacion('Modelo de IA cargado exitosamente', 'success');
                 return;
                 
             } catch (error) {
@@ -370,7 +370,7 @@ document.addEventListener('DOMContentLoaded', function() {
             mensajeEnviado.style.display = "none";
             
             // Mostrar mensaje de confirmación
-            mostrarNotificacion('¡Gracias por confirmar! Continuando con el análisis...', 'success');
+            //mostrarNotificacion('¡Gracias por confirmar! Continuando con el análisis...', 'success');
             
             // Mostrar formulario de parámetros después de 1 segundo
             setTimeout(() => {
@@ -587,6 +587,12 @@ inputs.forEach(inputId => {
         if (!f && !omega && !T) {
             errores.push('Debes ingresar al menos uno: frecuencia, periodo o frecuencia angular');
         }
+        const esAmortiguado = clasificacionActual.toLowerCase().includes('moa') || 
+                            clasificacionActual.toLowerCase().includes('amortiguado');
+
+        if (esAmortiguado && !beta) {
+            errores.push('Para movimiento amortiguado, el coeficiente β es obligatorio');
+        }
 
         if (f && f <= 0) errores.push('La frecuencia debe ser positiva');
         if (omega && omega <= 0) errores.push('La frecuencia angular debe ser positiva');
@@ -621,7 +627,7 @@ inputs.forEach(inputId => {
 
             localStorage.setItem('datosAnalisis', JSON.stringify(datosAnalisis));
             
-            mostrarNotificacion('Cálculos completados exitosamente', 'success');
+            //mostrarNotificacion('Cálculos completados exitosamente', 'success');
             
             setTimeout(() => {
                 window.location.href = 'analisis.html';
