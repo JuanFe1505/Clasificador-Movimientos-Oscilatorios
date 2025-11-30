@@ -1,66 +1,87 @@
 <!DOCTYPE html>
-
-<html class="dark" lang="es"><head>
+<html class="dark" lang="es">
+<head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Oscillation Classifier - Examples Gallery</title>
+<title>Oscillation Classifier - Gallery of Equations</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
 <link rel="icon" type="image/svg+xml" href="img/logo-cmo.svg">
     
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Clasificador de Movimiento Oscilatorio con IA" />
-    <meta property="og:description" content="Herramienta interactiva para analizar movimientos oscilatorios." />
-    
-    <meta property="og:image" content="https://cmo-utp.vercel.app/img/portada-cmo.png" />
-    
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="1100" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Clasificador de Movimiento Oscilatorio con IA" />
+<meta property="og:description" content="Herramienta interactiva para analizar movimientos oscilatorios." />
+<meta property="og:image" content="https://cmo-utp.vercel.app/img/portada-cmo.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="1100" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://cmo-utp.vercel.app/img/portada-cmo.png" />
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="https://cmo-utp.vercel.app/img/portada-cmo.png" />
 <style>
-        .material-symbols-outlined {
-          font-variation-settings:
-          'FILL' 0,
-          'wght' 400,
-          'GRAD' 0,
-          'opsz' 24
-        }
-    </style>
+    .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24
+    }
+    .equation-card {
+        transition: all 0.3s ease;
+    }
+    .equation-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(19, 127, 236, 0.2);
+    }
+    .formula-text {
+        font-family: 'Courier New', monospace;
+        background: rgba(19, 127, 236, 0.1);
+        padding: 0.75rem;
+        border-radius: 0.5rem;
+        font-size: 1.1rem;
+        line-height: 1.8;
+        overflow-x: auto;
+    }
+    .category-badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+</style>
+
 <script>
-      tailwind.config = {
+    tailwind.config = {
         darkMode: "class",
         theme: {
-          extend: {
-            colors: {
-              "primary": "#1380ec",
-              "background-light": "#f6f7f8",
-              "background-dark": "#111a22",
-              "container-light": "#ffffff",
-              "container-dark": "#182534",
-              "border-light": "#e5e7eb",
-              "border-dark": "#233648",
-              "text-primary-light": "#1f2937",
-              "text-primary-dark": "#ffffff",
-              "text-secondary-light": "#6b7280",
-              "text-secondary-dark": "#92adc9",
+            extend: {
+                colors: {
+                    "primary": "#1380ec",
+                    "background-light": "#f6f7f8",
+                    "background-dark": "#111a22",
+                    "container-light": "#ffffff",
+                    "container-dark": "#182534",
+                    "border-light": "#e5e7eb",
+                    "border-dark": "#233648",
+                    "text-primary-light": "#1f2937",
+                    "text-primary-dark": "#ffffff",
+                    "text-secondary-light": "#6b7280",
+                    "text-secondary-dark": "#92adc9",
+                },
+                fontFamily: {
+                    "display": ["Space Grotesk", "sans-serif"]
+                },
+                borderRadius: {"DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px"},
             },
-            fontFamily: {
-              "display": ["Space Grotesk", "sans-serif"]
-            },
-            borderRadius: {"DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px"},
-          },
         },
-      }
-    </script>
+    }
+</script>
 </head>
 <body class="bg-background-light dark:bg-background-dark font-display text-text-primary-light dark:text-text-primary-dark">
 <div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
 <div class="flex h-full grow flex-col">
+
 <!-- Top Navigation Bar -->
 <header class="w-full px-4 sm:px-6 lg:px-8 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm sticky top-0 z-50">
     <div class="container mx-auto flex items-center justify-between whitespace-nowrap border-b border-gray-200 dark:border-white/10 py-3">
@@ -102,92 +123,579 @@
 
 <main class="flex flex-1 justify-center py-5 sm:py-8 lg:py-12">
 <div class="flex w-full max-w-7xl flex-col px-4 sm:px-6 lg:px-8">
+
 <!-- PageHeading -->
 <div class="flex flex-wrap justify-between gap-4 py-4">
 <div class="flex min-w-72 flex-col gap-3">
-<h1 class="text-4xl font-black leading-tight tracking-[-0.033em] sm:text-5xl">Galería de Ejemplos de Movimiento Oscilatorio</h1>
-<p class="text-base font-normal leading-normal text-text-secondary-light dark:text-text-secondary-dark">Explora videos y animaciones de movimientos preclasificados para entender sus diferencias.</p>
+<h1 class="text-4xl font-black leading-tight tracking-[-0.033em] sm:text-5xl">Galería de Ecuaciones del Movimiento Oscilatorio</h1>
+<p class="text-base font-normal leading-normal text-text-secondary-light dark:text-text-secondary-dark">Explora todas las ecuaciones utilizadas para analizar y clasificar movimientos oscilatorios.</p>
 </div>
 </div>
-<!-- ImageGrid -->
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 py-8">
 
-    <!-- MAS -->
-    <a href="https://www.youtube.com/watch?v=nQUlRJJdQFE" target="_blank"
-       class="flex flex-col gap-3 rounded-lg bg-container-light dark:bg-container-dark p-3 border border-border-light dark:border-border-dark transition-all hover:shadow-lg hover:-translate-y-1">
-        
-        <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg"
-             style="background-image: url('https://img.youtube.com/vi/nQUlRJJdQFE/maxresdefault.jpg');">
-        </div>
+<!-- FILTROS DE CATEGORÍAS -->
+<div class="flex flex-wrap gap-3 mb-8">
+    <button class="filter-btn active px-4 py-2 rounded-lg bg-primary text-white font-semibold transition-all hover:bg-primary/90" data-filter="all">
+        Todas
+    </button>
+    <button class="filter-btn px-4 py-2 rounded-lg bg-container-light dark:bg-container-dark border border-border-light dark:border-border-dark font-semibold transition-all hover:bg-primary/10" data-filter="mas">
+        MAS
+    </button>
+    <button class="filter-btn px-4 py-2 rounded-lg bg-container-light dark:bg-container-dark border border-border-light dark:border-border-dark font-semibold transition-all hover:bg-primary/10" data-filter="amortiguado">
+        Amortiguado
+    </button>
+    <button class="filter-btn px-4 py-2 rounded-lg bg-container-light dark:bg-container-dark border border-border-light dark:border-border-dark font-semibold transition-all hover:bg-primary/10" data-filter="energia">
+        Energía
+    </button>
+    <button class="filter-btn px-4 py-2 rounded-lg bg-container-light dark:bg-container-dark border border-border-light dark:border-border-dark font-semibold transition-all hover:bg-primary/10" data-filter="relaciones">
+        Relaciones
+    </button>
+</div>
 
-        <div class="flex flex-col p-1">
-            <span class="text-xs font-bold uppercase tracking-wider text-green-500">Movimiento Armónico Simple</span>
-            <p class="text-base font-bold leading-normal mt-1">Explicación</p>
-        </div>
-    </a>
+<!-- GRID DE ECUACIONES -->
+<div id="equations-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-6 py-4">
 
-    <!-- Subamortiguado -->
-    <a href="https://www.youtube.com/watch?v=CODIGO_VIDEO_SUB" target="_blank"
-       class="flex flex-col gap-3 rounded-lg bg-container-light dark:bg-container-dark p-3 border border-border-light dark:border-border-dark transition-all hover:shadow-lg hover:-translate-y-1">
-        
-        <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg"
-             style="background-image: url('https://img.youtube.com/vi/CODIGO_VIDEO_SUB/maxresdefault.jpg');">
+    <!-- ========================= -->
+    <!-- MOVIMIENTO ARMÓNICO SIMPLE -->
+    <!-- ========================= -->
+    
+    <!-- Posición MAS -->
+    <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="mas">
+        <div class="flex items-start justify-between">
+            <span class="category-badge bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300">MAS</span>
+            <span class="material-symbols-outlined text-primary text-3xl">timeline</span>
         </div>
+        <h3 class="text-xl font-bold">Posición en MAS</h3>
+        <div class="formula-text">
+            x(t) = A · cos(ωt + φ)
+        </div>
+        <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
+            Describe la posición del objeto en función del tiempo. <strong>A</strong> es la amplitud, <strong>ω</strong> la frecuencia angular, y <strong>φ</strong> el ángulo de fase inicial.
+        </p>
+    </div>
 
-        <div class="flex flex-col p-1">
-            <span class="text-xs font-bold uppercase tracking-wider text-yellow-500">Movimiento Subamortiguado</span>
-            <p class="text-base font-bold leading-normal mt-1">Explicación</p>
+    <!-- Velocidad MAS -->
+    <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="mas">
+        <div class="flex items-start justify-between">
+            <span class="category-badge bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300">MAS</span>
+            <span class="material-symbols-outlined text-primary text-3xl">speed</span>
         </div>
-    </a>
+        <h3 class="text-xl font-bold">Velocidad en MAS</h3>
+        <div class="formula-text">
+            v(t) = -Aω · sin(ωt + φ)
+        </div>
+        <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
+            Derivada de la posición respecto al tiempo. La velocidad máxima es <strong>v_max = Aω</strong>.
+        </p>
+    </div>
 
-    <!-- Crítico -->
-    <a href="https://www.youtube.com/watch?v=CODIGO_VIDEO_CRITICO" target="_blank"
-       class="flex flex-col gap-3 rounded-lg bg-container-light dark:bg-container-dark p-3 border border-border-light dark:border-border-dark transition-all hover:shadow-lg hover:-translate-y-1">
-        
-        <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg"
-             style="background-image: url('https://img.youtube.com/vi/CODIGO_VIDEO_CRITICO/maxresdefault.jpg');">
+    <!-- Aceleración MAS -->
+    <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="mas">
+        <div class="flex items-start justify-between">
+            <span class="category-badge bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300">MAS</span>
+            <span class="material-symbols-outlined text-primary text-3xl">bolt</span>
         </div>
+        <h3 class="text-xl font-bold">Aceleración en MAS</h3>
+        <div class="formula-text">
+            a(t) = -Aω² · cos(ωt + φ) = -ω²x(t)
+        </div>
+        <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
+            La aceleración es proporcional y opuesta al desplazamiento. Aceleración máxima: <strong>a_max = Aω²</strong>.
+        </p>
+    </div>
 
-        <div class="flex flex-col p-1">
-            <span class="text-xs font-bold uppercase tracking-wider text-orange-500">Movimiento Críticamente Amortiguado</span>
-            <p class="text-base font-bold leading-normal mt-1">Explicación</p>
+    <!-- Relaciones temporales -->
+    <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="relaciones">
+        <div class="flex items-start justify-between">
+            <span class="category-badge bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">Relaciones</span>
+            <span class="material-symbols-outlined text-primary text-3xl">sync</span>
         </div>
-    </a>
+        <h3 class="text-xl font-bold">Relaciones Frecuencia-Periodo</h3>
+        <div class="formula-text">
+            ω = 2πf<br>
+            f = 1/T<br>
+            ω = 2π/T
+        </div>
+        <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
+            Relaciones fundamentales entre frecuencia angular (<strong>ω</strong>), frecuencia (<strong>f</strong>) y periodo (<strong>T</strong>).
+        </p>
+    </div>
 
-    <!-- Sobreamortiguado -->
-    <a href="https://www.youtube.com/watch?v=CODIGO_VIDEO_SOBRE" target="_blank"
-       class="flex flex-col gap-3 rounded-lg bg-container-light dark:bg-container-dark p-3 border border-border-light dark:border-border-dark transition-all hover:shadow-lg hover:-translate-y-1">
-        
-        <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg"
-             style="background-image: url('https://img.youtube.com/vi/CODIGO_VIDEO_SOBRE/maxresdefault.jpg');">
-        </div>
+    <!-- ========================= -->
+    <!-- ENERGÍA -->
+    <!-- ========================= -->
 
-        <div class="flex flex-col p-1">
-            <span class="text-xs font-bold uppercase tracking-wider text-red-500">Movimiento Sobreamortiguado</span>
-            <p class="text-base font-bold leading-normal mt-1">Explicación</p>
+    <!-- Energía Total -->
+    <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="energia">
+        <div class="flex items-start justify-between">
+            <span class="category-badge bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300">Energía</span>
+            <span class="material-symbols-outlined text-primary text-3xl">power</span>
         </div>
-    </a>
+        <h3 class="text-xl font-bold">Energía Total</h3>
+        <div class="formula-text">
+            E = ½kA² = ½mω²A²
+        </div>
+        <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
+            En MAS ideal, la energía mecánica total se conserva y es proporcional al cuadrado de la amplitud.
+        </p>
+    </div>
+
+    <!-- Energía Cinética -->
+    <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="energia">
+        <div class="flex items-start justify-between">
+            <span class="category-badge bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300">Energía</span>
+            <span class="material-symbols-outlined text-primary text-3xl">electric_bolt</span>
+        </div>
+        <h3 class="text-xl font-bold">Energía Cinética</h3>
+        <div class="formula-text">
+            K(t) = ½mv² = ½mω²A²sin²(ωt + φ)
+        </div>
+        <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
+            Energía cinética en función del tiempo. Máxima en la posición de equilibrio (x = 0).
+        </p>
+    </div>
+
+    <!-- Energía Potencial -->
+    <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="energia">
+        <div class="flex items-start justify-between">
+            <span class="category-badge bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300">Energía</span>
+            <span class="material-symbols-outlined text-primary text-3xl">landscape</span>
+        </div>
+        <h3 class="text-xl font-bold">Energía Potencial</h3>
+        <div class="formula-text">
+            U(t) = ½kx² = ½kA²cos²(ωt + φ)
+        </div>
+        <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
+            Energía potencial elástica. Máxima en los extremos del movimiento (x = ±A).
+        </p>
+    </div>
+
+    <!-- Constante de resorte -->
+    <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="relaciones">
+        <div class="flex items-start justify-between">
+            <span class="category-badge bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">Relaciones</span>
+            <span class="material-symbols-outlined text-primary text-3xl">settings</span>
+        </div>
+        <h3 class="text-xl font-bold">Constante de Resorte</h3>
+        <div class="formula-text">
+            k = mω²<br>
+            ω = √(k/m)
+        </div>
+        <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
+            Relación entre la constante del resorte, masa y frecuencia angular en un sistema masa-resorte.
+        </p>
+    </div>
+
+    <!-- ========================= -->
+    <!-- AMORTIGUADO SUBAMORTIGUADO -->
+    <!-- ========================= -->
+
+    <!-- Posición Subamortiguado -->
+    <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="amortiguado">
+        <div class="flex items-start justify-between">
+            <span class="category-badge bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300">Amortiguado</span>
+            <span class="material-symbols-outlined text-primary text-3xl">trending_down</span>
+        </div>
+        <h3 class="text-xl font-bold">Posición Subamortiguado</h3>
+        <div class="formula-text">
+            x(t) = Ae^(-βt) · cos(ω't + φ)
+        </div>
+        <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
+            Oscilaciones con amplitud decreciente exponencialmente. <strong>β</strong> es el coeficiente de amortiguamiento y <strong>ω'</strong> la frecuencia amortiguada.
+        </p>
+    </div>
+
+    <!-- Frecuencia Amortiguada -->
+    <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="amortiguado">
+        <div class="flex items-start justify-between">
+            <span class="category-badge bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300">Amortiguado</span>
+            <span class="material-symbols-outlined text-primary text-3xl">waves</span>
+        </div>
+        <h3 class="text-xl font-bold">Frecuencia Amortiguada</h3>
+        <div class="formula-text">
+            ω' = √(ω₀² - β²)<br>
+            Condición: β < ω₀
+        </div>
+        <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
+            Frecuencia de oscilación reducida por el amortiguamiento. <strong>ω₀</strong> es la frecuencia natural sin amortiguamiento.
+        </p>
+    </div>
+
+    <!-- Envolvente de Decaimiento -->
+    <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="amortiguado">
+        <div class="flex items-start justify-between">
+            <span class="category-badge bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300">Amortiguado</span>
+            <span class="material-symbols-outlined text-primary text-3xl">show_chart</span>
+        </div>
+        <h3 class="text-xl font-bold">Envolvente de Decaimiento</h3>
+        <div class="formula-text">
+            A(t) = A₀e^(-βt)
+        </div>
+        <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
+            La amplitud disminuye exponencialmente con el tiempo, definiendo los límites superior e inferior de las oscilaciones.
+        </p>
+    </div>
+
+    <!-- Decremento Logarítmico -->
+    <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="amortiguado">
+        <div class="flex items-start justify-between">
+            <span class="category-badge bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300">Amortiguado</span>
+            <span class="material-symbols-outlined text-primary text-3xl">functions</span>
+        </div>
+        <h3 class="text-xl font-bold">Decremento Logarítmico</h3>
+        <div class="formula-text">
+            δ = ln(A_n / A_{n+1}) = 2πβ/ω'
+        </div>
+        <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
+            Mide la tasa de decaimiento de amplitud entre oscilaciones consecutivas. Útil para determinar el amortiguamiento experimentalmente.
+        </p>
+    </div>
+
+    <!-- Factor de Calidad Q -->
+    <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="amortiguado">
+        <div class="flex items-start justify-between">
+            <span class="category-badge bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300">Amortiguado</span>
+            <span class="material-symbols-outlined text-primary text-3xl">grade</span>
+        </div>
+        <h3 class="text-xl font-bold">Factor de Calidad (Q)</h3>
+        <div class="formula-text">
+            Q = ω₀/(2β) = π/δ
+        </div>
+        <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
+            Indica cuántas oscilaciones ocurren antes de que la amplitud decaiga significativamente. Mayor Q = menor amortiguamiento.
+        </p>
+    </div>
+
+    <!-- Tiempo de Relajación -->
+    <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="amortiguado">
+        <div class="flex items-start justify-between">
+            <span class="category-badge bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300">Amortiguado</span>
+            <span class="material-symbols-outlined text-primary text-3xl">timer</span>
+        </div>
+        <h3 class="text-xl font-bold">Tiempo de Relajación</h3>
+        <div class="formula-text">
+            τ = 1/β
+        </div>
+        <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
+            Tiempo característico en el que la amplitud se reduce a 1/e (≈37%) de su valor inicial.
+        </p>
+    </div>
+
+    <!-- ========================= -->
+    <!-- AMORTIGUADO CRÍTICO -->
+    <!-- ========================= -->
+
+    <!-- Posición Críticamente Amortiguado -->
+    <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="amortiguado">
+        <div class="flex items-start justify-between">
+            <span class="category-badge bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300">Crítico</span>
+            <span class="material-symbols-outlined text-primary text-3xl">check_circle</span>
+        </div>
+        <h3 class="text-xl font-bold">Posición Críticamente Amortiguado</h3>
+        <div class="formula-text">
+            x(t) = (C₁ + C₂t)e^(-βt)<br>
+            Condición: β = ω₀
+        </div>
+        <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
+            El sistema retorna al equilibrio lo más rápido posible sin oscilar. Caso límite entre subamortiguado y sobreamortiguado.
+        </p>
+    </div>
+
+    <!-- Coeficiente Crítico -->
+    <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="amortiguado">
+        <div class="flex items-start justify-between">
+            <span class="category-badge bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300">Crítico</span>
+            <span class="material-symbols-outlined text-primary text-3xl">balance</span>
+        </div>
+        <h3 class="text-xl font-bold">Coeficiente de Amortiguamiento Crítico</h3>
+        <div class="formula-text">
+            c_crítico = 2√(km) = 2mω₀
+        </div>
+        <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
+            Valor del coeficiente de amortiguamiento que separa el régimen subamortiguado del sobreamortiguado.
+        </p>
+    </div>
+
+    <!-- ========================= -->
+    <!-- SOBREAMORTIGUADO -->
+    <!-- ========================= -->
+
+    <!-- Posición Sobreamortiguado -->
+    <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="amortiguado">
+        <div class="flex items-start justify-between">
+            <span class="category-badge bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300">Sobreamortiguado</span>
+            <span class="material-symbols-outlined text-primary text-3xl">moving</span>
+        </div>
+        <h3 class="text-xl font-bold">Posición Sobreamortiguado</h3>
+        <div class="formula-text">
+            x(t) = C₁e^(-γ₁t) + C₂e^(-γ₂t)<br>
+            Condición: β > ω₀
+        </div>
+        <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
+            El sistema retorna al equilibrio lentamente sin oscilar. Ambos términos decaen exponencialmente.
+        </p>
+    </div>
+
+    <!-- Constantes Gamma -->
+    <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="amortiguado">
+        <div class="flex items-start justify-between">
+            <span class="category-badge bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300">Sobreamortiguado</span>
+            <span class="material-symbols-outlined text-primary text-3xl">calculate</span>
+        </div>
+        <h3 class="text-xl font-bold">Constantes de Decaimiento</h3>
+        <div class="formula-text">
+            γ₁ = β + √(β² - ω₀²)<br>
+            γ₂ = β - √(β² - ω₀²)
+        </div>
+        <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
+            Tasas de decaimiento exponencial para el régimen sobreamortiguado. Ambas son reales y positivas.
+        </p>
+    </div>
+
+    <!-- ========================= -->
+    <!-- RELACIONES ADICIONALES -->
+    <!-- ========================= -->
+
+    <!-- Péndulo Simple -->
+    <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="relaciones">
+        <div class="flex items-start justify-between">
+            <span class="category-badge bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">Relaciones</span>
+            <span class="material-symbols-outlined text-primary text-3xl">insights</span>
+        </div>
+        <h3 class="text-xl font-bold">Péndulo Simple</h3>
+        <div class="formula-text">
+            ω₀ = √(g/L)<br>
+            T = 2π√(L/g)
+        </div>
+        <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
+            Frecuencia angular y periodo de un péndulo simple de longitud <strong>L</strong>. <strong>g</strong> es la aceleración gravitacional.
+        </p>
+    </div>
+
+    <!-- Relación Beta-Lambda -->
+    <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="relaciones">
+        <div class="flex items-start justify-between">
+            <span class="category-badge bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">Relaciones</span>
+            <span class="material-symbols-outlined text-primary text-3xl">link</span>
+        </div>
+        <h3 class="text-xl font-bold">Coeficiente de Amortiguamiento</h3>
+        <div class="formula-text">
+            β = c/(2m) = λ<br>
+            c = 2mβ
+        </div>
+        <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
+            Relación entre el coeficiente de amortiguamiento viscoso <strong>c</strong>, la masa <strong>m</strong> y el parámetro de amortiguamiento <strong>β</strong> (también llamado <strong>λ</strong>).
+        </p>
+    </div>
+
+    <!-- Energía Amortiguado -->
+    <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="energia">
+        <div class="flex items-start justify-between">
+            <span class="category-badge bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300">Energía</span>
+            <span class="material-symbols-outlined text-primary text-3xl">battery_charging_20</span>
+        </div>
+        <h3 class="text-xl font-bold">Energía en Sistema Amortiguado</h3>
+        <div class="formula-text">
+            E(t) = E₀e^(-2βt)
+        </div>
+        <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
+            La energía mecánica total disminuye exponencialmente con el tiempo debido a la disipación por fricción.
+        </p>
+    </div>
+
+    <!-- Número de Oscilaciones -->
+    <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="amortiguado">
+        <div class="flex items-start justify-between">
+            <span class="category-badge bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300">Amortiguado</span>
+            <span class="material-symbols-outlined text-primary text-3xl">counter_1</span>
+        </div>
+        <h3 class="text-xl font-bold">Número de Oscilaciones</h3>
+        <div class="formula-text">
+            N ≈ 1/δ = Q/π
+        </div>
+        <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
+            Número aproximado de oscilaciones antes de que la amplitud decaiga significativamente (a ~37% del valor inicial).
+        </p>
+    </div>
+
+    <!-- Periodo Amortiguado -->
+    <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="amortiguado">
+        <div class="flex items-start justify-between">
+            <span class="category-badge bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300">Amortiguado</span>
+            <span class="material-symbols-outlined text-primary text-3xl">schedule</span>
+        </div>
+        <h3 class="text-xl font-bold">Periodo Amortiguado</h3>
+        <div class="formula-text">
+            T' = 2π/ω' = 2π/√(ω₀² - β²)
+        </div>
+        <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
+            Periodo de oscilación en presencia de amortiguamiento. Siempre mayor que el periodo natural T₀ = 2π/ω₀.
+        </p>
+    </div>
+
+    <!-- Condiciones Iniciales -->
+    <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="relaciones">
+        <div class="flex items-start justify-between">
+            <span class="category-badge bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">Relaciones</span>
+            <span class="material-symbols-outlined text-primary text-3xl">play_arrow</span>
+        </div>
+        <h3 class="text-xl font-bold">Ángulo de Fase desde Condiciones Iniciales</h3>
+        <div class="formula-text">
+            tan(φ) = -v₀/(ωx₀)<br>
+            A = √(x₀² + (v₀/ω)²)
+        </div>
+        <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
+            Determinación del ángulo de fase y amplitud a partir de la posición inicial <strong>x₀</strong> y velocidad inicial <strong>v₀</strong>.
+        </p>
+    </div>
+
+    <!-- Velocidad Máxima -->
+    <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="mas">
+        <div class="flex items-start justify-between">
+            <span class="category-badge bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300">MAS</span>
+            <span class="material-symbols-outlined text-primary text-3xl">fast_forward</span>
+        </div>
+        <h3 class="text-xl font-bold">Velocidad Máxima</h3>
+        <div class="formula-text">
+            v_max = Aω = A·2πf
+        </div>
+        <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
+            La velocidad máxima ocurre cuando el objeto pasa por la posición de equilibrio (x = 0).
+        </p>
+    </div>
+
+    <!-- Aceleración Máxima -->
+    <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="mas">
+        <div class="flex items-start justify-between">
+            <span class="category-badge bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300">MAS</span>
+            <span class="material-symbols-outlined text-primary text-3xl">rocket_launch</span>
+        </div>
+        <h3 class="text-xl font-bold">Aceleración Máxima</h3>
+        <div class="formula-text">
+            a_max = Aω² = A·(2πf)²
+        </div>
+        <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
+            La aceleración máxima ocurre en los extremos del movimiento (x = ±A).
+        </p>
+    </div>
+
+    <!-- Fuerza Restauradora -->
+    <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="relaciones">
+        <div class="flex items-start justify-between">
+            <span class="category-badge bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">Relaciones</span>
+            <span class="material-symbols-outlined text-primary text-3xl">fitness_center</span>
+        </div>
+        <h3 class="text-xl font-bold">Fuerza Restauradora</h3>
+        <div class="formula-text">
+            F = -kx = ma
+        </div>
+        <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
+            Ley de Hooke para sistemas oscilatorios. La fuerza es proporcional y opuesta al desplazamiento.
+        </p>
+    </div>
+
+</div>
 
 </div>
 </main>
-</div>
-</div>
 
 <!-- Footer -->
-    <footer class="bg-background-light dark:bg-background-dark border-t border-gray-200/50 dark:border-white/10">
-            <div class="max-w-6xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500 dark:text-gray-400">
-                © 2025 Sistema de Clasificación Automática de Tipos de Movimiento Oscilatorio Simple y Amortiguado Mediante Reconocimiento de Imágenes con Deep Learning, Como Apoyo al Aprendizaje | Por:
-                <a href="mailto:juanfelipe.arbelaez@utp.edu.co" class="text-primary hover:text-primary/80 transition-colors">Juan Felipe Arbeláez Osorio</a>
-                y
-                <a href="mailto:angel.burbano@utp.edu.co" class="text-primary hover:text-primary/80 transition-colors">Ángel Gabriel Burbano Rodríguez</a>
-            </div>
-    </footer>
+<footer class="bg-background-light dark:bg-background-dark border-t border-gray-200/50 dark:border-white/10">
+    <div class="max-w-6xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500 dark:text-gray-400">
+        © 2025 Sistema de Clasificación Automática de Tipos de Movimiento Oscilatorio Simple y Amortiguado Mediante Reconocimiento de Imágenes con Deep Learning, Como Apoyo al Aprendizaje | Por:
+        <a href="mailto:juanfelipe.arbelaez@utp.edu.co" class="text-primary hover:text-primary/80 transition-colors">Juan Felipe Arbeláez Osorio</a>
+        y
+        <a href="mailto:angel.burbano@utp.edu.co" class="text-primary hover:text-primary/80 transition-colors">Ángel Gabriel Burbano Rodríguez</a>
+    </div>
+</footer>
 
-    <a href="ayuda.html" 
-    class="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-white shadow-lg transition-all duration-300 fab-hover focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-background-dark"
-    aria-label="Ayuda y Soporte">
-        <span class="material-symbols-outlined" style="font-size: 32px;">question_mark</span>
-    </a>
+<a href="ayuda.html" 
+class="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-white shadow-lg transition-all duration-300 fab-hover focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 dark:focus:ring-offset-background-dark"
+aria-label="Ayuda y Soporte">
+    <span class="material-symbols-outlined" style="font-size: 32px;">question_mark</span>
+</a>
 
-<script src ="script.js"></script> 
-</body></html>
+</div>
+</div>
+
+<script>
+// Sistema de filtrado de ecuaciones
+document.addEventListener('DOMContentLoaded', function() {
+    // Menú móvil
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+            const icon = menuToggle.querySelector('.material-symbols-outlined');
+            icon.textContent = mobileMenu.classList.contains('hidden') ? 'menu' : 'close';
+        });
+
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuToggle.querySelector('.material-symbols-outlined').textContent = 'menu';
+            });
+        });
+    }
+
+    // Sistema de filtrado
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const equationCards = document.querySelectorAll('.equation-card');
+
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const filter = this.dataset.filter;
+
+            // Actualizar botones activos
+            filterButtons.forEach(btn => {
+                btn.classList.remove('active', 'bg-primary', 'text-white');
+                btn.classList.add('bg-container-light', 'dark:bg-container-dark', 'border', 'border-border-light', 'dark:border-border-dark');
+            });
+            
+            this.classList.add('active', 'bg-primary', 'text-white');
+            this.classList.remove('bg-container-light', 'dark:bg-container-dark', 'border', 'border-border-light', 'dark:border-border-dark');
+
+            // Filtrar tarjetas
+            equationCards.forEach(card => {
+                if (filter === 'all') {
+                    card.style.display = 'flex';
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'scale(1)';
+                    }, 10);
+                } else {
+                    const category = card.dataset.category;
+                    if (category === filter) {
+                        card.style.display = 'flex';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'scale(1)';
+                        }, 10);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                }
+            });
+        });
+    });
+
+    // Animación inicial
+    equationCards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        setTimeout(() => {
+            card.style.transition = 'all 0.5s ease';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        }, index * 50);
+    });
+});
+</script>
+
+</body>
+</html>
