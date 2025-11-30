@@ -125,25 +125,71 @@ document.addEventListener('DOMContentLoaded', function() {
         }, false);
     }
 
-    function handleFileUpload(file) {
-        if (!validateFile(file)) { return; }
+    // =========================================================
+// FUNCIÓN PARA REDIMENSIONAR IMAGEN A 224x224
+// =========================================================
+
+function resizeImageTo224x224(file, callback) {
+    const reader = new FileReader();
+    
+    reader.onload = function(e) {
+        const img = new Image();
         
-        // Ocultar feedback anterior si existe
-        feedbackBox.style.display = 'none';
-        correccionContainer.style.display = 'none';
-        mensajeEnviado.style.display = 'none';
-        parametrosSection.style.display = 'none';
+        img.onload = function() {
+            // Crear canvas temporal para redimensionar
+            const canvas = document.createElement('canvas');
+            canvas.width = 224;
+            canvas.height = 224;
+            const ctx = canvas.getContext('2d');
+            
+            // Dibujar imagen redimensionada
+            ctx.drawImage(img, 0, 0, 224, 224);
+            
+            // Convertir canvas a blob
+            canvas.toBlob(function(blob) {
+                callback(blob);
+            }, file.type || 'image/jpeg', 0.95);
+        };
         
-        // Mostrar indicador de carga mejorado
-        resultArea.style.display = 'block';
-        labelContainer.innerHTML = `
-            <div class="flex flex-col items-center gap-3">
-                <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-                <p class="text-sm text-gray-600 dark:text-gray-400">Procesando imagen...</p>
-            </div>
-        `;
+        img.onerror = function() {
+            mostrarError('Error al cargar la imagen');
+        };
         
-        const fileURL = URL.createObjectURL(file);
+        img.src = e.target.result;
+    };
+    
+    reader.onerror = function() {
+        mostrarError('Error al leer el archivo');
+    };
+    
+    reader.readAsDataURL(file);
+}
+
+// =========================================================
+// MODIFICAR LA FUNCIÓN handleFileUpload
+// =========================================================
+
+function handleFileUpload(file) {
+    if (!validateFile(file)) { return; }
+    
+    // Ocultar feedback anterior si existe
+    feedbackBox.style.display = 'none';
+    correccionContainer.style.display = 'none';
+    mensajeEnviado.style.display = 'none';
+    parametrosSection.style.display = 'none';
+    
+    // Mostrar indicador de carga mejorado
+    resultArea.style.display = 'block';
+    labelContainer.innerHTML = `
+        <div class="flex flex-col items-center gap-3">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+            <p class="text-sm text-gray-600 dark:text-gray-400">Redimensionando y procesando imagen...</p>
+        </div>
+    `;
+    
+    // Redimensionar imagen a 224x224
+    resizeImageTo224x224(file, function(resizedBlob) {
+        const fileURL = URL.createObjectURL(resizedBlob);
         uploadedImageElement.src = fileURL;
         
         uploadedImageElement.onload = () => {
@@ -154,9 +200,10 @@ document.addEventListener('DOMContentLoaded', function() {
         uploadedImageElement.onerror = () => {
             mostrarError('Error al cargar la imagen. Intenta con otro archivo.');
         };
-        
-        fileInput.value = ""; 
-    }
+    });
+    
+    fileInput.value = ""; 
+}
     
     function validateFile(file) {
         const MAX_SIZE = 50 * 1024 * 1024; // 50MB
