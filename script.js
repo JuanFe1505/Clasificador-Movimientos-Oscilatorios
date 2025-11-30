@@ -494,8 +494,8 @@ function configurarTabsParametros() {
     // MEJORA 6: AUTO-CÁLCULO EN TIEMPO REAL
     // =========================================================
     const inputs = ['amplitud', 'frecuencia', 'omega', 'periodo', 'masa', 'beta', 
-                'constante-resorte', 'constante-amortiguamiento', 'lambda',
-                'posicion-inicial', 'velocidad-inicial', 'fase'];
+                    'constante-resorte', 'lambda',
+                    'posicion-inicial', 'velocidad-inicial', 'fase'];
 inputs.forEach(inputId => {
     const input = document.getElementById(inputId);
     if (input) {
@@ -512,7 +512,6 @@ inputs.forEach(inputId => {
     const m = parseFloat(document.getElementById('masa').value) || null;
     const k = parseFloat(document.getElementById('constante-resorte').value) || null;
     const beta = parseFloat(document.getElementById('beta').value) || null;
-    const c = parseFloat(document.getElementById('constante-amortiguamiento').value) || null;
     const lambdaVal = parseFloat(document.getElementById('lambda').value) || null;
 
     const PI = Math.PI;
@@ -542,13 +541,7 @@ inputs.forEach(inputId => {
         document.getElementById('periodo').value = (2 * PI / omegaCalc).toFixed(4);
     }
 
-    // Relación entre c, beta y lambda
-    if (m && beta && !c) {
-        document.getElementById('constante-amortiguamiento').value = (2 * m * beta).toFixed(6);
-    }
-    if (m && c && !beta) {
-        document.getElementById('beta').value = (c / (2 * m)).toFixed(6);
-    }
+    // Relación entre beta y lambda
     if (beta && !lambdaVal) {
         document.getElementById('lambda').value = beta.toFixed(6);
     }
@@ -648,7 +641,6 @@ inputs.forEach(inputId => {
     const v0 = parseFloat(document.getElementById('velocidad-inicial').value) || null;
     const phi = parseFloat(document.getElementById('fase').value) || null;
     const k = parseFloat(document.getElementById('constante-resorte').value) || null;
-    const c = parseFloat(document.getElementById('constante-amortiguamiento').value) || null;
     const lambdaVal = parseFloat(document.getElementById('lambda').value) || null;
 
     // PASO 1: Parámetros temporales
@@ -746,9 +738,6 @@ inputs.forEach(inputId => {
     } else if (lambdaVal !== null && lambdaVal > 0) {
         resultado.beta = lambdaVal;
         resultado.esAmortiguado = true;
-    } else if (c && m) {
-        resultado.beta = c / (2 * m);
-        resultado.esAmortiguado = resultado.beta > 0;
     }
 
     if (resultado.esAmortiguado) {
@@ -791,10 +780,8 @@ inputs.forEach(inputId => {
         
         resultado.tiempoRelajacion = 1 / resultado.beta;
         
-        if (m) {
+        if (m && resultado.beta) {
             resultado.coeficienteAmortiguamiento = 2 * m * resultado.beta;
-        } else if (c) {
-            resultado.coeficienteAmortiguamiento = c;
         }
         
     } else {
