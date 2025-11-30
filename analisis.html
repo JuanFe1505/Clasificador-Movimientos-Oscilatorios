@@ -637,14 +637,6 @@ function renderizarAnalisisDetallado(p) {
             });
         }
         
-        if (p.coeficienteAmortiguamiento) {
-            analisis.push({
-                icon: 'water_drop',
-                color: 'cyan',
-                titulo: 'Coeficiente de Amortiguamiento Viscoso',
-                contenido: `El coeficiente de amortiguamiento viscoso es c = ${p.coeficienteAmortiguamiento.toFixed(6)} kg/s. Este valor representa la fuerza de fricción por unidad de velocidad que actúa sobre el sistema. Un valor mayor indica mayor resistencia al movimiento.`
-            });
-        }
     }
     
     analisis.forEach((item, i) => {
