@@ -426,12 +426,25 @@ function handleFileUpload(file) {
         });
     }
 
-    // Si dice que NO fue correcta → mostrar opciones
+    // Si dice que NO fue correcta → inferir automáticamente la clasificación correcta
     if (btnIncorrecto) {
         btnIncorrecto.addEventListener("click", () => {
+            // Inferir la clasificación correcta (si es MAS, entonces es MOA; si es MOA, entonces es MAS)
+            const clasificacionesDisponibles = ['MAS', 'MOA'];
+            const clasificacionCorrecta = clasificacionesDisponibles.find(c => 
+                !clasificacionActual.toUpperCase().includes(c)
+            ) || (clasificacionActual.toUpperCase().includes('MAS') ? 'MOA' : 'MAS');
+            
+            // Mostrar la corrección automática
+            document.getElementById('clasificacion-original').textContent = clasificacionActual;
+            document.getElementById('clasificacion-corregida').textContent = 
+                clasificacionCorrecta === 'MAS' ? 'MAS (Movimiento Armónico Simple)' : 'MOA (Movimiento Oscilatorio Amortiguado)';
+            
+            // Guardar la clasificación corregida
+            clasificacionActual = clasificacionCorrecta;
+            
             correccionContainer.style.display = "block";
             mensajeEnviado.style.display = "none";
-            correccionSelect.value = ""; // Reset del select
             
             // Scroll hacia el contenedor de corrección
             setTimeout(() => {
@@ -440,31 +453,18 @@ function handleFileUpload(file) {
         });
     }
 
-    // Habilitar/deshabilitar botón según selección
-    if (correccionSelect) {
-        correccionSelect.addEventListener('change', () => {
-            if (btnEnviarReporte) {
-                btnEnviarReporte.disabled = !correccionSelect.value;
-            }
-        });
-    }
-
     // Enviar el reporte vía correo
     if (btnEnviarReporte) {
         btnEnviarReporte.addEventListener("click", () => {
-            const clasificacionCorrecta = correccionSelect.value;
-            
-            if (!clasificacionCorrecta) {
-                mostrarNotificacion('Por favor selecciona la clasificación correcta', 'warning');
-                return;
-            }
+            const clasificacionOriginalTexto = document.getElementById('clasificacion-original').textContent;
+            const clasificacionCorregidaTexto = document.getElementById('clasificacion-corregida').textContent;
 
             const asunto = encodeURIComponent("Reporte de Clasificación Incorrecta - CMO");
             const cuerpo = encodeURIComponent(
                 `Hola,\n\nQuiero reportar una clasificación incorrecta:\n\n` +
-                `Clasificación del modelo: ${clasificacionActual}\n` +
+                `Clasificación del modelo: ${clasificacionOriginalTexto}\n` +
                 `Confianza del modelo: ${(confianzaClasificacion * 100).toFixed(2)}%\n` +
-                `Clasificación correcta (según usuario): ${clasificacionCorrecta}\n\n` +
+                `Clasificación correcta (según usuario): ${clasificacionCorregidaTexto}\n\n` +
                 `Timestamp: ${new Date().toLocaleString()}\n\n` +
                 `Gracias por permitirme contribuir a mejorar el modelo.`
             );
@@ -475,18 +475,14 @@ function handleFileUpload(file) {
             // Mostrar mensaje de agradecimiento
             mensajeEnviado.style.display = "flex";
             
-            // Ocultar el botón de envío y select después de enviar
+            // Ocultar el botón de envío después de enviar
             btnEnviarReporte.style.display = "none";
-            correccionSelect.disabled = true;
             
             mostrarNotificacion('Reporte preparado. ¡Gracias por tu ayuda!', 'success');
             
-            // Actualizar la clasificación para continuar con la correcta
-            clasificacionActual = clasificacionCorrecta;
-            
             // Mostrar formulario de parámetros después de 2 segundos
             setTimeout(() => {
-                mostrarFormularioParametros(clasificacionCorrecta);
+                mostrarFormularioParametros(clasificacionActual);
             }, 2000);
         });
     }
@@ -588,12 +584,22 @@ inputs.forEach(inputId => {
         document.getElementById('periodo').value = (2 * PI / omegaCalc).toFixed(4);
     }
 
-    // Relación entre beta y lambda
-    if (beta && !lambdaVal) {
-        document.getElementById('lambda').value = beta.toFixed(6);
+    // Relación entre beta y lambda: λ = β/(2m)
+    if (beta && m && !lambdaVal) {
+        document.getElementById('lambda').value = (beta / (2 * m)).toFixed(6);
     }
-    if (lambdaVal && !beta) {
-        document.getElementById('beta').value = lambdaVal.toFixed(6);
+    if (lambdaVal && m && !beta) {
+        document.getElementById('beta').value = (lambdaVal * 2 * m).toFixed(6);
+    }
+
+    // Auto-calcular amplitud si tenemos x0, v0 y omega
+    const x0 = parseFloat(document.getElementById('posicion-inicial').value) || null;
+    const v0 = parseFloat(document.getElementById('velocidad-inicial').value) || null;
+    const A = parseFloat(document.getElementById('amplitud').value) || null;
+
+    if (x0 !== null && v0 !== null && omega && !A) {
+        const amplitudCalc = Math.sqrt(Math.pow(x0, 2) + Math.pow(v0 / omega, 2));
+        document.getElementById('amplitud').value = amplitudCalc.toFixed(6);
     }
 }
 
@@ -608,20 +614,30 @@ inputs.forEach(inputId => {
         // Limpiar mensajes previos
         resultadoParametros.classList.add('hidden');
 
+        // INICIALIZAR ARRAY DE ERRORES - ESTO FALTABA
+        let errores = [];
+
         const A = parseFloat(document.getElementById('amplitud').value) || null;
         const f = parseFloat(document.getElementById('frecuencia').value) || null;
         const omega = parseFloat(document.getElementById('omega').value) || null;
         const T = parseFloat(document.getElementById('periodo').value) || null;
         const m = parseFloat(document.getElementById('masa').value) || null;
         const beta = parseFloat(document.getElementById('beta').value) || null;
+        const x0 = parseFloat(document.getElementById('posicion-inicial').value) || null;
+        const v0 = parseFloat(document.getElementById('velocidad-inicial').value) || null;
 
-        // Validaciones mejoradas
-        const errores = [];
-        
-        if (!A) {
-            errores.push('La amplitud es obligatoria');
-        } else if (A <= 0) {
+        // Validar amplitud solo si se proporcionó
+        if (A && A <= 0) {
             errores.push('La amplitud debe ser mayor que cero');
+        }
+
+        // Validar que si no hay A, al menos haya x0, v0 y omega para calcularla
+        if (!A) {
+            const x0 = parseFloat(document.getElementById('posicion-inicial').value) || null;
+            const v0 = parseFloat(document.getElementById('velocidad-inicial').value) || null;
+            if (!x0 || !v0 || !omega) {
+                errores.push('Si no ingresas amplitud, debes proporcionar posición inicial (x₀), velocidad inicial (v₀) y frecuencia angular (ω)');
+            }
         }
 
         if (!f && !omega && !T) {
@@ -779,11 +795,23 @@ inputs.forEach(inputId => {
     resultado.omega0 = resultado.omega; // En MAS, ω₀ = ω
 
     // PASO 8: Amortiguamiento
+    // Calcular amplitud si no se proporcionó
+    if (!A && x0 !== null && v0 !== null && resultado.omega) {
+        resultado.amplitud = Math.sqrt(Math.pow(x0, 2) + Math.pow(v0 / resultado.omega, 2));
+    }
+
     if (beta !== null && beta > 0) {
         resultado.beta = beta;
         resultado.esAmortiguado = true;
-    } else if (lambdaVal !== null && lambdaVal > 0) {
-        resultado.beta = lambdaVal;
+        
+        // Calcular lambda: λ = β/(2m)
+        if (m) {
+            resultado.lambda = beta / (2 * m);
+        }
+    } else if (lambdaVal !== null && lambdaVal > 0 && m) {
+        // Si tenemos lambda, calcular beta: β = 2mλ
+        resultado.lambda = lambdaVal;
+        resultado.beta = 2 * m * lambdaVal;
         resultado.esAmortiguado = true;
     }
 

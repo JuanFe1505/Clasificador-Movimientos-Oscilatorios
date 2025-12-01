@@ -53,7 +53,7 @@
                     <nav class="flex items-center gap-9">
                         <a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors" href="index.html">Inicio</a>
                         <a class="text-sm font-bold text-primary dark:text-primary transition-colors" href="clasificador.html" aria-current="page">Clasificador</a>
-                        <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors" href="galeria.html">Galería</a>
+                        <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors" href="Ecuaciones.html">Ecuaciones</a>
                         <a class="text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors" href="ayuda.html">Ayuda</a>
                     </nav>
                 </div>
@@ -67,7 +67,7 @@
                 <div class="px-4 pb-4 pt-2 space-y-2">
                     <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors" href="index.html">Inicio</a>
                     <a class="text-sm font-bold text-primary dark:text-primary transition-colors" href="clasificador.html" aria-current="page">Clasificador</a>
-                    <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors" href="galeria.html">Galería</a>
+                    <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors" href="ecuaciones.html">Ecuaciones</a>
                     <a class="block text-sm font-medium text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-colors" href="ayuda.html">Ayuda</a>
                 </div>
             </nav>
@@ -127,18 +127,18 @@
                         </button>
                     </div>
 
-                    <!-- Selección corregida (solo aparece si dice NO) -->
-                    <div id="correccion-container" class="mt-6 p-4 bg-gray-50 dark:bg-background-dark rounded-lg border border-gray-300 dark:border-white/20" style="display:none;">
-                        <p class="mb-3 text-sm font-semibold text-gray-700 dark:text-gray-300">Selecciona la clasificación correcta:</p>
-                        <select id="correccion-select" class="w-full max-w-xs mx-auto p-3 rounded-lg bg-white dark:bg-white/10 border-2 border-gray-300 dark:border-white/20 text-gray-900 dark:text-white font-medium focus:border-primary focus:ring-2 focus:ring-primary/50 transition-all">
-                            <option value="">-- Seleccionar --</option>
-                            <option value="MAS">MAS (Movimiento Armónico Simple)</option>
-                            <option value="MOA">MOA (Movimiento Oscilatorio Amortiguado)</option>
-                        </select>
+                    <!-- Confirmación de corrección automática -->
+                    <div id="correccion-container" class="mt-6 p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg border border-yellow-300 dark:border-yellow-700" style="display:none;">
+                        <p class="mb-3 text-sm font-semibold text-gray-700 dark:text-gray-300">
+                            El modelo clasificó como: <span id="clasificacion-original" class="font-bold text-red-600 dark:text-red-400"></span>
+                        </p>
+                        <p class="mb-4 text-sm text-gray-600 dark:text-gray-400">
+                            Entonces la clasificación correcta es: <span id="clasificacion-corregida" class="font-bold text-green-600 dark:text-green-400"></span>
+                        </p>
 
-                        <button id="btnEnviarReporte" class="mt-4 flex items-center gap-2 mx-auto px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-all hover:scale-105 font-semibold disabled:opacity-50 disabled:cursor-not-allowed">
+                        <button id="btnEnviarReporte" class="flex items-center gap-2 mx-auto px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-all hover:scale-105 font-semibold">
                             <span class="material-symbols-outlined">send</span>
-                            Enviar reporte
+                            Confirmar y enviar reporte
                         </button>
 
                         <div id="mensaje-enviado" class="mt-4 p-3 bg-green-100 dark:bg-green-900/30 border border-green-300 dark:border-green-700 rounded-lg flex items-center justify-center gap-2" style="display:none;">
@@ -152,7 +152,7 @@
 
 
                 <!-- FORMULARIO DE PARÁMETROS FÍSICOS -->
-                <section id="parametros-section" class="mt-16" style="display:none;">
+                <section id="parametros-section" class="mt-5" style="display:none;">
                     <h2 class="text-3xl font-black text-gray-900 dark:text-white tracking-[-0.02em] mb-6 text-center">
                         Ingresar Parámetros del Movimiento
                     </h2>
@@ -194,7 +194,7 @@
                             <!-- Amplitud -->
                             <div class="flex flex-col">
                                 <label class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-1">
-                                    Amplitud (A) <span class="text-red-500">*</span> <span class="text-xs text-gray-500">[metros]</span>
+                                    Amplitud (A) <span class="text-xs text-gray-500">[metros] - Se puede calcular con x₀, v₀ y ω</span>
                                 </label>
                                 <input id="amplitud" type="number" step="any"
                                     class="h-12 px-4 rounded-lg bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20
@@ -329,7 +329,7 @@
                                     class="h-12 px-4 rounded-lg bg-white dark:bg-white/10 border border-gray-300 dark:border-white/20
                                         text-gray-900 dark:text-white text-sm focus:ring-primary focus:border-primary"
                                     placeholder="Ej: 0.45">
-                                <p class="text-xs text-gray-500 mt-1">En algunos textos λ = β</p>
+                                <p class="text-xs text-gray-500 mt-1">λ = β/(2m)</p>
                             </div>
                         </div>
                     </div>

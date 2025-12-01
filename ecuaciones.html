@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Oscillation Classifier - Gallery of Equations</title>
+<title>Ecuaciones - Clasificador de Movimiento Oscilatorio</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -82,7 +82,6 @@
 <div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
 <div class="flex h-full grow flex-col">
 
-<!-- Top Navigation Bar -->
 <header class="w-full px-4 sm:px-6 lg:px-8 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm sticky top-0 z-50">
     <div class="container mx-auto flex items-center justify-between whitespace-nowrap border-b border-gray-200 dark:border-white/10 py-3">
         
@@ -124,7 +123,6 @@
 <main class="flex flex-1 justify-center py-5 sm:py-8 lg:py-12">
 <div class="flex w-full max-w-7xl flex-col px-4 sm:px-6 lg:px-8">
 
-<!-- PageHeading -->
 <div class="flex flex-wrap justify-between gap-4 py-4">
 <div class="flex min-w-72 flex-col gap-3">
 <h1 class="text-4xl font-black leading-tight tracking-[-0.033em] sm:text-5xl">Galería de Ecuaciones del Movimiento Oscilatorio</h1>
@@ -132,7 +130,6 @@
 </div>
 </div>
 
-<!-- FILTROS DE CATEGORÍAS -->
 <div class="flex flex-wrap gap-3 mb-8">
     <button class="filter-btn active px-4 py-2 rounded-lg bg-primary text-white font-semibold transition-all hover:bg-primary/90" data-filter="all">
         Todas
@@ -151,14 +148,31 @@
     </button>
 </div>
 
-<!-- GRID DE ECUACIONES -->
+<div class="w-full mb-8 p-6 rounded-xl bg-container-light dark:bg-container-dark border border-border-light dark:border-border-dark">
+    <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary">menu_book</span>
+        Glosario de Variables
+    </h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-sm">
+        <div class="flex items-center gap-2"><span class="font-mono font-bold text-primary">A:</span> Amplitud</div>
+        <div class="flex items-center gap-2"><span class="font-mono font-bold text-primary">x(t):</span> Posición en tiempo t</div>
+        <div class="flex items-center gap-2"><span class="font-mono font-bold text-primary">v(t):</span> Velocidad</div>
+        <div class="flex items-center gap-2"><span class="font-mono font-bold text-primary">a(t):</span> Aceleración</div>
+        <div class="flex items-center gap-2"><span class="font-mono font-bold text-primary">ω:</span> Frecuencia Angular Natural</div>
+        <div class="flex items-center gap-2"><span class="font-mono font-bold text-primary">ω':</span> Frecuencia Amortiguada</div>
+        <div class="flex items-center gap-2"><span class="font-mono font-bold text-primary">φ:</span> Ángulo de Fase Inicial</div>
+        <div class="flex items-center gap-2"><span class="font-mono font-bold text-primary">k:</span> Constante del Resorte</div>
+        <div class="flex items-center gap-2"><span class="font-mono font-bold text-primary">m:</span> Masa</div>
+        <div class="flex items-center gap-2"><span class="font-mono font-bold text-primary">b:</span> Cte. Amortiguamiento Viscoso</div>
+        <div class="flex items-center gap-2"><span class="font-mono font-bold text-primary">λ:</span> Factor de Amortiguamiento</div>
+        <div class="flex items-center gap-2"><span class="font-mono font-bold text-primary">T:</span> Periodo</div>
+        <div class="flex items-center gap-2"><span class="font-mono font-bold text-primary">f:</span> Frecuencia</div>
+        <div class="flex items-center gap-2"><span class="font-mono font-bold text-primary">E:</span> Energía Mecánica Total</div>
+    </div>
+</div>
+
 <div id="equations-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-6 py-4">
 
-    <!-- ========================= -->
-    <!-- MOVIMIENTO ARMÓNICO SIMPLE -->
-    <!-- ========================= -->
-    
-    <!-- Posición MAS -->
     <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="mas">
         <div class="flex items-start justify-between">
             <span class="category-badge bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300">MAS</span>
@@ -173,7 +187,6 @@
         </p>
     </div>
 
-    <!-- Velocidad MAS -->
     <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="mas">
         <div class="flex items-start justify-between">
             <span class="category-badge bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300">MAS</span>
@@ -188,7 +201,6 @@
         </p>
     </div>
 
-    <!-- Aceleración MAS -->
     <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="mas">
         <div class="flex items-start justify-between">
             <span class="category-badge bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300">MAS</span>
@@ -203,7 +215,6 @@
         </p>
     </div>
 
-    <!-- Relaciones temporales -->
     <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="relaciones">
         <div class="flex items-start justify-between">
             <span class="category-badge bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">Relaciones</span>
@@ -220,11 +231,6 @@
         </p>
     </div>
 
-    <!-- ========================= -->
-    <!-- ENERGÍA -->
-    <!-- ========================= -->
-
-    <!-- Energía Total -->
     <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="energia">
         <div class="flex items-start justify-between">
             <span class="category-badge bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300">Energía</span>
@@ -239,7 +245,6 @@
         </p>
     </div>
 
-    <!-- Energía Cinética -->
     <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="energia">
         <div class="flex items-start justify-between">
             <span class="category-badge bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300">Energía</span>
@@ -254,7 +259,6 @@
         </p>
     </div>
 
-    <!-- Energía Potencial -->
     <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="energia">
         <div class="flex items-start justify-between">
             <span class="category-badge bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300">Energía</span>
@@ -269,7 +273,6 @@
         </p>
     </div>
 
-    <!-- Constante de resorte -->
     <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="relaciones">
         <div class="flex items-start justify-between">
             <span class="category-badge bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">Relaciones</span>
@@ -285,11 +288,6 @@
         </p>
     </div>
 
-    <!-- ========================= -->
-    <!-- AMORTIGUADO SUBAMORTIGUADO -->
-    <!-- ========================= -->
-
-    <!-- Posición Subamortiguado -->
     <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="amortiguado">
         <div class="flex items-start justify-between">
             <span class="category-badge bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300">Amortiguado</span>
@@ -297,14 +295,13 @@
         </div>
         <h3 class="text-xl font-bold">Posición Subamortiguado</h3>
         <div class="formula-text">
-            x(t) = Ae^(-βt) · cos(ω't + φ)
+            x(t) = Ae^(-λt) · cos(ω't + φ)
         </div>
         <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
-            Oscilaciones con amplitud decreciente exponencialmente. <strong>β</strong> es el coeficiente de amortiguamiento y <strong>ω'</strong> la frecuencia amortiguada.
+            Oscilaciones con amplitud decreciente exponencialmente. <strong>λ</strong> es el factor de amortiguamiento y <strong>ω'</strong> la frecuencia amortiguada.
         </p>
     </div>
 
-    <!-- Frecuencia Amortiguada -->
     <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="amortiguado">
         <div class="flex items-start justify-between">
             <span class="category-badge bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300">Amortiguado</span>
@@ -312,15 +309,14 @@
         </div>
         <h3 class="text-xl font-bold">Frecuencia Amortiguada</h3>
         <div class="formula-text">
-            ω' = √(ω₀² - β²)<br>
-            Condición: β < ω₀
+            ω' = √(ω₀² - λ²)<br>
+            Condición: λ < ω₀
         </div>
         <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
             Frecuencia de oscilación reducida por el amortiguamiento. <strong>ω₀</strong> es la frecuencia natural sin amortiguamiento.
         </p>
     </div>
 
-    <!-- Envolvente de Decaimiento -->
     <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="amortiguado">
         <div class="flex items-start justify-between">
             <span class="category-badge bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300">Amortiguado</span>
@@ -328,63 +324,13 @@
         </div>
         <h3 class="text-xl font-bold">Envolvente de Decaimiento</h3>
         <div class="formula-text">
-            A(t) = A₀e^(-βt)
+            A(t) = A₀e^(-λt)
         </div>
         <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
             La amplitud disminuye exponencialmente con el tiempo, definiendo los límites superior e inferior de las oscilaciones.
         </p>
     </div>
 
-    <!-- Decremento Logarítmico -->
-    <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="amortiguado">
-        <div class="flex items-start justify-between">
-            <span class="category-badge bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300">Amortiguado</span>
-            <span class="material-symbols-outlined text-primary text-3xl">functions</span>
-        </div>
-        <h3 class="text-xl font-bold">Decremento Logarítmico</h3>
-        <div class="formula-text">
-            δ = ln(A_n / A_{n+1}) = 2πβ/ω'
-        </div>
-        <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
-            Mide la tasa de decaimiento de amplitud entre oscilaciones consecutivas. Útil para determinar el amortiguamiento experimentalmente.
-        </p>
-    </div>
-
-    <!-- Factor de Calidad Q -->
-    <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="amortiguado">
-        <div class="flex items-start justify-between">
-            <span class="category-badge bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300">Amortiguado</span>
-            <span class="material-symbols-outlined text-primary text-3xl">grade</span>
-        </div>
-        <h3 class="text-xl font-bold">Factor de Calidad (Q)</h3>
-        <div class="formula-text">
-            Q = ω₀/(2β) = π/δ
-        </div>
-        <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
-            Indica cuántas oscilaciones ocurren antes de que la amplitud decaiga significativamente. Mayor Q = menor amortiguamiento.
-        </p>
-    </div>
-
-    <!-- Tiempo de Relajación -->
-    <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="amortiguado">
-        <div class="flex items-start justify-between">
-            <span class="category-badge bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300">Amortiguado</span>
-            <span class="material-symbols-outlined text-primary text-3xl">timer</span>
-        </div>
-        <h3 class="text-xl font-bold">Tiempo de Relajación</h3>
-        <div class="formula-text">
-            τ = 1/β
-        </div>
-        <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
-            Tiempo característico en el que la amplitud se reduce a 1/e (≈37%) de su valor inicial.
-        </p>
-    </div>
-
-    <!-- ========================= -->
-    <!-- AMORTIGUADO CRÍTICO -->
-    <!-- ========================= -->
-
-    <!-- Posición Críticamente Amortiguado -->
     <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="amortiguado">
         <div class="flex items-start justify-between">
             <span class="category-badge bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300">Crítico</span>
@@ -392,34 +338,28 @@
         </div>
         <h3 class="text-xl font-bold">Posición Críticamente Amortiguado</h3>
         <div class="formula-text">
-            x(t) = (C₁ + C₂t)e^(-βt)<br>
-            Condición: β = ω₀
+            x(t) = (C₁ + C₂t)e^(-λt)<br>
+            Condición: λ = ω₀
         </div>
         <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
             El sistema retorna al equilibrio lo más rápido posible sin oscilar. Caso límite entre subamortiguado y sobreamortiguado.
         </p>
     </div>
 
-    <!-- Coeficiente Crítico -->
     <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="amortiguado">
         <div class="flex items-start justify-between">
             <span class="category-badge bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300">Crítico</span>
             <span class="material-symbols-outlined text-primary text-3xl">balance</span>
         </div>
-        <h3 class="text-xl font-bold">Coeficiente de Amortiguamiento Crítico</h3>
+        <h3 class="text-xl font-bold">Amortiguamiento Crítico</h3>
         <div class="formula-text">
-            c_crítico = 2√(km) = 2mω₀
+            b_crítico = 2√(km) = 2mω₀
         </div>
         <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
-            Valor del coeficiente de amortiguamiento que separa el régimen subamortiguado del sobreamortiguado.
+            Valor del coeficiente de amortiguamiento viscoso que separa el régimen subamortiguado del sobreamortiguado.
         </p>
     </div>
 
-    <!-- ========================= -->
-    <!-- SOBREAMORTIGUADO -->
-    <!-- ========================= -->
-
-    <!-- Posición Sobreamortiguado -->
     <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="amortiguado">
         <div class="flex items-start justify-between">
             <span class="category-badge bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300">Sobreamortiguado</span>
@@ -428,14 +368,13 @@
         <h3 class="text-xl font-bold">Posición Sobreamortiguado</h3>
         <div class="formula-text">
             x(t) = C₁e^(-γ₁t) + C₂e^(-γ₂t)<br>
-            Condición: β > ω₀
+            Condición: λ > ω₀
         </div>
         <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
             El sistema retorna al equilibrio lentamente sin oscilar. Ambos términos decaen exponencialmente.
         </p>
     </div>
 
-    <!-- Constantes Gamma -->
     <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="amortiguado">
         <div class="flex items-start justify-between">
             <span class="category-badge bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300">Sobreamortiguado</span>
@@ -443,19 +382,14 @@
         </div>
         <h3 class="text-xl font-bold">Constantes de Decaimiento</h3>
         <div class="formula-text">
-            γ₁ = β + √(β² - ω₀²)<br>
-            γ₂ = β - √(β² - ω₀²)
+            γ₁ = λ + √(λ² - ω₀²)<br>
+            γ₂ = λ - √(λ² - ω₀²)
         </div>
         <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
             Tasas de decaimiento exponencial para el régimen sobreamortiguado. Ambas son reales y positivas.
         </p>
     </div>
 
-    <!-- ========================= -->
-    <!-- RELACIONES ADICIONALES -->
-    <!-- ========================= -->
-
-    <!-- Péndulo Simple -->
     <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="relaciones">
         <div class="flex items-start justify-between">
             <span class="category-badge bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">Relaciones</span>
@@ -471,23 +405,20 @@
         </p>
     </div>
 
-    <!-- Relación Beta-Lambda -->
     <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="relaciones">
         <div class="flex items-start justify-between">
             <span class="category-badge bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">Relaciones</span>
             <span class="material-symbols-outlined text-primary text-3xl">link</span>
         </div>
-        <h3 class="text-xl font-bold">Coeficiente de Amortiguamiento</h3>
+        <h3 class="text-xl font-bold">Factor de Amortiguamiento</h3>
         <div class="formula-text">
-            β = c/(2m) = λ<br>
-            c = 2mβ
+            λ = b/(2m)
         </div>
         <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
-            Relación entre el coeficiente de amortiguamiento viscoso <strong>c</strong>, la masa <strong>m</strong> y el parámetro de amortiguamiento <strong>β</strong> (también llamado <strong>λ</strong>).
+            Relación entre el coeficiente de amortiguamiento viscoso <strong>b</strong>, la masa <strong>m</strong> y el factor de amortiguamiento <strong>λ</strong>.
         </p>
     </div>
 
-    <!-- Energía Amortiguado -->
     <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="energia">
         <div class="flex items-start justify-between">
             <span class="category-badge bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300">Energía</span>
@@ -495,29 +426,13 @@
         </div>
         <h3 class="text-xl font-bold">Energía en Sistema Amortiguado</h3>
         <div class="formula-text">
-            E(t) = E₀e^(-2βt)
+            E(t) = E₀e^(-2λt)
         </div>
         <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
             La energía mecánica total disminuye exponencialmente con el tiempo debido a la disipación por fricción.
         </p>
     </div>
 
-    <!-- Número de Oscilaciones -->
-    <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="amortiguado">
-        <div class="flex items-start justify-between">
-            <span class="category-badge bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300">Amortiguado</span>
-            <span class="material-symbols-outlined text-primary text-3xl">counter_1</span>
-        </div>
-        <h3 class="text-xl font-bold">Número de Oscilaciones</h3>
-        <div class="formula-text">
-            N ≈ 1/δ = Q/π
-        </div>
-        <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
-            Número aproximado de oscilaciones antes de que la amplitud decaiga significativamente (a ~37% del valor inicial).
-        </p>
-    </div>
-
-    <!-- Periodo Amortiguado -->
     <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="amortiguado">
         <div class="flex items-start justify-between">
             <span class="category-badge bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300">Amortiguado</span>
@@ -525,14 +440,13 @@
         </div>
         <h3 class="text-xl font-bold">Periodo Amortiguado</h3>
         <div class="formula-text">
-            T' = 2π/ω' = 2π/√(ω₀² - β²)
+            T' = 2π/ω' = 2π/√(ω₀² - λ²)
         </div>
         <p class="text-sm text-text-secondary-light dark:text-text-secondary-dark">
             Periodo de oscilación en presencia de amortiguamiento. Siempre mayor que el periodo natural T₀ = 2π/ω₀.
         </p>
     </div>
 
-    <!-- Condiciones Iniciales -->
     <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="relaciones">
         <div class="flex items-start justify-between">
             <span class="category-badge bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">Relaciones</span>
@@ -548,7 +462,6 @@
         </p>
     </div>
 
-    <!-- Velocidad Máxima -->
     <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="mas">
         <div class="flex items-start justify-between">
             <span class="category-badge bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300">MAS</span>
@@ -563,7 +476,6 @@
         </p>
     </div>
 
-    <!-- Aceleración Máxima -->
     <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="mas">
         <div class="flex items-start justify-between">
             <span class="category-badge bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300">MAS</span>
@@ -578,7 +490,6 @@
         </p>
     </div>
 
-    <!-- Fuerza Restauradora -->
     <div class="equation-card flex flex-col gap-4 rounded-xl bg-container-light dark:bg-container-dark p-6 border border-border-light dark:border-border-dark" data-category="relaciones">
         <div class="flex items-start justify-between">
             <span class="category-badge bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">Relaciones</span>
@@ -598,7 +509,6 @@
 </div>
 </main>
 
-<!-- Footer -->
 <footer class="bg-background-light dark:bg-background-dark border-t border-gray-200/50 dark:border-white/10">
     <div class="max-w-6xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500 dark:text-gray-400">
         © 2025 Sistema de Clasificación Automática de Tipos de Movimiento Oscilatorio Simple y Amortiguado Mediante Reconocimiento de Imágenes con Deep Learning, Como Apoyo al Aprendizaje | Por:

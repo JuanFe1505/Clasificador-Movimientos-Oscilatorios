@@ -372,7 +372,6 @@ function renderizarParametrosPrincipales(p) {
         { label: 'Frecuencia (f)', valor: p.frecuencia, unidad: 'Hz', icono: '~' },
         { label: 'Periodo (T)', valor: p.periodo, unidad: 's', icono: '⟳' },
         { label: 'Frecuencia Angular (ω)', valor: p.omega, unidad: 'rad/s', icono: '⊛' },
-        { label: 'Frecuencia Angular Natural (ω₀)', valor: p.omega0, unidad: 'rad/s', icono: '⊙' },
     ];
     
     if (p.fase !== undefined && p.fase !== null) {
@@ -384,7 +383,7 @@ function renderizarParametrosPrincipales(p) {
     }
     
     if (p.velocidadInicial !== undefined && p.velocidadInicial !== null) {
-        params.push({ label: 'Velocidad Inicial (v₀)', valor: p.velocidadInicial, unidad: 'm/s', icono: '➔' });
+        params.push({ label: 'Velocidad Inicial (v₀)', valor: p.velocidadInicial, unidad: 'm/s', icono: '➜' });
     }
     
     if (p.rapidezInicial !== undefined && p.rapidezInicial !== null) {
@@ -395,38 +394,26 @@ function renderizarParametrosPrincipales(p) {
     if (p.constanteResorte) params.push({ label: 'Constante Resorte (k)', valor: p.constanteResorte, unidad: 'N/m', icono: '≋' });
     if (p.longitudPendulo) params.push({ label: 'Longitud Péndulo Equiv. (L)', valor: p.longitudPendulo, unidad: 'm', icono: '⌇' });
     
-    if (p.beta) params.push({ label: 'Amortiguamiento (β)', valor: p.beta, unidad: '1/s', icono: '↓' });
-    
-    if (p.omegaAmortiguado !== undefined && p.omegaAmortiguado !== null) {
-        params.push({ label: 'Frecuencia Amortiguada (ω\')', valor: p.omegaAmortiguado, unidad: 'rad/s', icono: '⊚' });
-    }
-    
-    if (p.frecuenciaAmortiguada !== undefined && p.frecuenciaAmortiguada !== null) {
-        params.push({ label: 'Frecuencia Amortiguada (f\')', valor: p.frecuenciaAmortiguada, unidad: 'Hz', icono: '≈' });
-    }
-    
-    if (p.periodoAmortiguado !== undefined && p.periodoAmortiguado !== null) {
-        params.push({ label: 'Periodo Amortiguado (T\')', valor: p.periodoAmortiguado, unidad: 's', icono: '⟲' });
-    }
-    
-    if (p.decrementoLogaritmico !== undefined && p.decrementoLogaritmico !== null) {
-        params.push({ label: 'Decremento Logarítmico (δ)', valor: p.decrementoLogaritmico, unidad: '', icono: 'δ' });
-    }
-    
-    if (p.factorCalidad !== undefined && p.factorCalidad !== null) {
-        params.push({ label: 'Factor de Calidad (Q)', valor: p.factorCalidad, unidad: '', icono: 'Q' });
-    }
-    
-    if (p.tiempoRelajacion !== undefined && p.tiempoRelajacion !== null) {
-        params.push({ label: 'Tiempo de Relajación (τ)', valor: p.tiempoRelajacion, unidad: 's', icono: '⏱' });
-    }
-    
-    if (p.numeroOscilaciones !== undefined && p.numeroOscilaciones !== null) {
-        params.push({ label: 'Número de Oscilaciones', valor: p.numeroOscilaciones, unidad: '', icono: '#' });
-    }
-    
-    if (p.coeficienteAmortiguamiento !== undefined && p.coeficienteAmortiguamiento !== null) {
-        params.push({ label: 'Coef. Amortiguamiento (c)', valor: p.coeficienteAmortiguamiento, unidad: 'kg/s', icono: '∿' });
+    // SOLO PARA AMORTIGUADO: mostrar beta y lambda
+    if (p.esAmortiguado) {
+        if (p.beta) params.push({ label: 'Amortiguamiento (β)', valor: p.beta, unidad: '1/s', icono: '↓' });
+        if (p.lambda) params.push({ label: 'Factor de Amortiguamiento (λ)', valor: p.lambda, unidad: '1/s', icono: 'λ' });
+        
+        if (p.omegaAmortiguado !== undefined && p.omegaAmortiguado !== null) {
+            params.push({ label: 'Frecuencia Amortiguada (ω\')', valor: p.omegaAmortiguado, unidad: 'rad/s', icono: '⊚' });
+        }
+        
+        if (p.frecuenciaAmortiguada !== undefined && p.frecuenciaAmortiguada !== null) {
+            params.push({ label: 'Frecuencia Amortiguada (f\')', valor: p.frecuenciaAmortiguada, unidad: 'Hz', icono: '≈' });
+        }
+        
+        if (p.periodoAmortiguado !== undefined && p.periodoAmortiguado !== null) {
+            params.push({ label: 'Periodo Amortiguado (T\')', valor: p.periodoAmortiguado, unidad: 's', icono: '⟲' });
+        }
+        
+        if (p.coeficienteAmortiguamiento !== undefined && p.coeficienteAmortiguamiento !== null) {
+            params.push({ label: 'Coef. Amortiguamiento (c)', valor: p.coeficienteAmortiguamiento, unidad: 'kg/s', icono: '∿' });
+        }
     }
     
     if (p.energiaTotal !== undefined && p.energiaTotal !== null) {
