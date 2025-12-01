@@ -255,14 +255,40 @@
 </div>
 
 <script>
-// =========================================================
-// ANÁLISIS MEJORADO CON TABS Y MÚLTIPLES GRÁFICAS
-// =========================================================
 
 let datosGlobales = null;
 
 document.addEventListener('DOMContentLoaded', function() {
     
+
+    document.addEventListener('DOMContentLoaded', () => {
+    // --- Lógica del Menú Móvil ---
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (menuToggle && mobileMenu) {
+        // Alternar visibilidad al hacer clic en el botón
+        menuToggle.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+            
+            // Cambiar el icono (menu <-> close)
+            const icon = menuToggle.querySelector('.material-symbols-outlined');
+            if (icon) {
+                icon.textContent = mobileMenu.classList.contains('hidden') ? 'menu' : 'close';
+            }
+        });
+
+        // Cerrar el menú automáticamente al hacer clic en un enlace
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                const icon = menuToggle.querySelector('.material-symbols-outlined');
+                if (icon) icon.textContent = 'menu';
+            });
+        });
+    }
+});
+
     // Recuperar datos
     const datosJSON = localStorage.getItem('datosAnalisis');
     
@@ -804,16 +830,6 @@ function dibujarGrafica(canvasId, p, tipo) {
     }
 }
 
-// Menú móvil
-const menuToggle = document.getElementById('menu-toggle');
-const mobileMenu = document.getElementById('mobile-menu');
-
-if (menuToggle && mobileMenu) {
-    menuToggle.addEventListener('click', function() {
-        // Alternar la clase 'hidden' para mostrar u ocultar el menú
-        mobileMenu.classList.toggle('hidden');
-    });
-}
 
 </script>
 <script src="script.js"></script> 
