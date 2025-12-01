@@ -806,12 +806,16 @@ function dibujarGrafica(canvasId, p, tipo) {
 
 // Menú móvil
 const menuToggle = document.getElementById('menu-toggle');
-if (menuToggle) {
+const mobileMenu = document.getElementById('mobile-menu');
+
+if (menuToggle && mobileMenu) {
     menuToggle.addEventListener('click', function() {
-        // Implementar según necesidad
+        // Alternar la clase 'hidden' para mostrar u ocultar el menú
+        mobileMenu.classList.toggle('hidden');
     });
 }
 
 </script>
+<script src="script.js"></script> 
 </body>
 </html>
